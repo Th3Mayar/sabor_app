@@ -5,7 +5,7 @@ import {
   registerUser,
   modifyUser,
   removeUser,
-} from "../services/userService";
+} from "../services/userService.js";
 
 export async function getAllUsers(req: Request, res: Response): Promise<void> {
   try {

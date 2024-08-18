@@ -9,8 +9,10 @@
   "scripts": {
     "dev:frontend": "bun --cwd FRONTEND dev",
     "dev:backend": "bun --cwd BACKEND dev",
+    "build:frontend": "bun --cwd FRONTEND build",
+    "build:backend": "bun --cwd BACKEND build",
     "dev": "concurrently \"bun run dev:frontend\" \"bun run dev:backend\"",
-    "build": "concurrently \"bun --cwd FRONTEND build\" \"bun --cwd BACKEND build\"",
+    "build": "bun run build:frontend && bun run build:backend && cp -r FRONTEND/.output/* output/ && cp -r BACKEND/dist/* output/",
     "start": "concurrently \"bun --cwd FRONTEND start\" \"bun --cwd BACKEND start\""
   },
   "peerDependencies": {

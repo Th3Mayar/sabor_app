@@ -5,7 +5,7 @@ import {
   createState,
   updateState,
   deleteState,
-} from "../repositories/stateRepository";
+} from "../repositories/stateRepository.js";
 
 export async function findAllStates(): Promise<State[]> {
   return getAllStates();

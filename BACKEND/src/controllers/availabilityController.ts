@@ -5,7 +5,7 @@ import {
   addAvailability,
   modifyAvailability,
   removeAvailability,
-} from "../services/availabilityService";
+} from "../services/availabilityService.js";
 
 export async function getAllAvailability(
   req: Request,

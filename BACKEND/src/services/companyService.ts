@@ -5,7 +5,7 @@ import {
   createCompany,
   updateCompany,
   deleteCompany,
-} from "../repositories/companyRepository";
+} from "../repositories/companyRepository.js";
 
 export async function findAllCompanies(): Promise<Company[]> {
   return getAllCompanies();

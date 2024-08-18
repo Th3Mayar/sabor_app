@@ -1,4 +1,4 @@
-import * as menuRepository from '../repositories/menuRepository';
+import * as menuRepository from '../repositories/menuRepository.js';
 
 export const createMenuWithDishes = async (
   name: string,

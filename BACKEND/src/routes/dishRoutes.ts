@@ -5,7 +5,7 @@ import {
   createDish,
   updateDish,
   deleteDish,
-} from "../controllers/dishController";
+} from "../controllers/dishController.js";
 
 const router = Router();
 

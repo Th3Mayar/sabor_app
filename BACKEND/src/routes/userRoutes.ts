@@ -5,8 +5,8 @@ import {
   createUser,
   updateUser,
   deleteUser,
-} from "../controllers/userController";
-import { authenticateJWT } from "../middlewares/authMiddleware";
+} from "../controllers/userController.js";
+import { authenticateJWT } from "../middlewares/authMiddleware.js";
 
 const router = Router();
 

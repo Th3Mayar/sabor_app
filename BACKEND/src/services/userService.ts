@@ -5,7 +5,7 @@ import {
   updateUser,
   deleteUser,
   getAllUsers,
-} from "../repositories/userRepository";
+} from "../repositories/userRepository.js";
 
 export async function registerUser(user: Omit<User, "user_id">): Promise<User> {
   return createUser(user);

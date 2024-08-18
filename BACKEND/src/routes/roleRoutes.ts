@@ -5,7 +5,7 @@ import {
   createRole,
   updateRole,
   deleteRole,
-} from "../controllers/roleController";
+} from "../controllers/roleController.js";
 
 const router = Router();
 

@@ -5,7 +5,7 @@ import {
   createState,
   updateState,
   deleteState,
-} from "../controllers/stateController";
+} from "../controllers/stateController.js";
 
 const router = Router();
 

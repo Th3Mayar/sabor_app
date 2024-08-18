@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import * as authService from "../services/authService";
-import * as userRepository from "../repositories/userRepository";
+import * as authService from "../services/authService.js";
+import * as userRepository from "../repositories/userRepository.js";
 
 export const loginUser = async (req: Request, res: Response) => {
   // console.log("loginUser");

@@ -5,7 +5,7 @@ import {
   createReservation,
   updateReservation,
   deleteReservation,
-} from "../repositories/reservationRepository";
+} from "../repositories/reservationRepository.js";
 
 export async function findAllReservations(): Promise<Reservation[]> {
   return getAllReservations();

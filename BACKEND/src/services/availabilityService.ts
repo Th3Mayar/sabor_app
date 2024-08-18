@@ -5,7 +5,7 @@ import {
   createAvailability,
   updateAvailability,
   deleteAvailability,
-} from "../repositories/availabilityRepository";
+} from "../repositories/availabilityRepository.js";
 
 export async function findAllAvailability(): Promise<Availability[]> {
   return getAllAvailability();

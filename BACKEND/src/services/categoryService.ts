@@ -1,4 +1,4 @@
-import * as categoryRepository from '../repositories/categoryRepository';
+import * as categoryRepository from '../repositories/categoryRepository.js';
 
 export const getAllCategories = async () => {
   return await categoryRepository.getAllCategories();

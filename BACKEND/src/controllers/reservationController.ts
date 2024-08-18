@@ -5,7 +5,7 @@ import {
   addReservation,
   modifyReservation,
   removeReservation,
-} from "../services/reservationService";
+} from "../services/reservationService.js";
 
 export async function getAllReservations(
   req: Request,

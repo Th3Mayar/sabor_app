@@ -5,7 +5,7 @@ import {
   addRole,
   modifyRole,
   removeRole,
-} from "../services/roleService";
+} from "../services/roleService.js";
 
 export async function getAllRoles(req: Request, res: Response): Promise<void> {
   try {

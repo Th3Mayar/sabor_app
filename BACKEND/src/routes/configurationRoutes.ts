@@ -5,7 +5,7 @@ import {
   createConfiguration,
   updateConfiguration,
   deleteConfiguration,
-} from "../controllers/configurationController";
+} from "../controllers/configurationController.js";
 
 const router = Router();
 

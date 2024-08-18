@@ -1,6 +1,6 @@
 {
   "name": "backend",
-  "module": "app.ts",
+  "module": "src/app.ts",
   "type": "module",
   "scripts": {
     "dev": "bun run --watch src/app.ts",

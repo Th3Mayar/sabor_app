@@ -5,7 +5,7 @@ import {
   createConfiguration,
   updateConfiguration,
   deleteConfiguration,
-} from "../repositories/configurationRepository";
+} from "../repositories/configurationRepository.js";
 
 export async function findAllConfigurations(): Promise<Configuration[]> {
   return getAllConfigurations();

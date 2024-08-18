@@ -5,7 +5,7 @@ import {
   createRole,
   updateRole,
   deleteRole,
-} from "../repositories/roleRepository";
+} from "../repositories/roleRepository.js";
 
 export async function findAllRoles(): Promise<Role[]> {
   return getAllRoles();

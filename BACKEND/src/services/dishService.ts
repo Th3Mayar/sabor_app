@@ -5,7 +5,7 @@ import {
   createDish,
   updateDish,
   deleteDish,
-} from "../repositories/dishRepository";
+} from "../repositories/dishRepository.js";
 
 export async function findAllDishes(): Promise<Dish[]> {
   return getAllDishes();

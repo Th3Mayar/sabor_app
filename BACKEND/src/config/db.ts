@@ -1,5 +1,6 @@
-import { Pool } from "pg";
-import { config } from "./env";
+import pkg from 'pg';
+const { Pool } = pkg;
+import { config } from "./env.js";
 
 const pool = new Pool({
   user: config.useRemoteDb ? config.dbUserRemote : config.dbUserLocal,
