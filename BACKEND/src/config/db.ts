@@ -7,7 +7,7 @@ const pool = new Pool({
   host: config.useRemoteDb ? config.dbHostRemote : config.dbHostLocal,
   database: config.useRemoteDb ? config.dbNameRemote : config.dbNameLocal,
   password: config.useRemoteDb ? config.dbPasswordRemote : config.dbPasswordLocal,
-  port: config.useRemoteDb ? config.dbPortRemote : config.dbPortLocal,
+  port: config.useRemoteDb ? Number(config.dbPortRemote) : Number(config.dbPortLocal),
   ssl: config.useRemoteDb ? { rejectUnauthorized: false } : undefined,
 });
 
