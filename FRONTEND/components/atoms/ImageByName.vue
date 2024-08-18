@@ -25,12 +25,14 @@ const imageSrc = computed(() => {
 </script>
 
 <template>
-  <img
+  <nuxt-img
     :src="imageSrc"
     :alt="props.name"
     :width="props.size"
     :height="props.size"
     :class="props.className"
+    loading="lazy"
+    rel="prefetch"
     :style="{
       'stroke-width': props.strokeWidth ? props.strokeWidth + 'px' : undefined,
     }"
