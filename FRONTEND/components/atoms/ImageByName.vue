@@ -25,7 +25,7 @@ const imageSrc = computed(() => {
 </script>
 
 <template>
-  <nuxt-img
+  <img
     :src="imageSrc"
     :alt="props.name"
     :width="props.size"
