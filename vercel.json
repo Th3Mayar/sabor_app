@@ -19,5 +19,7 @@
       "dest": "/FRONTEND/$1"
     }
   ],
-  "buildCommand": "npm run build --prefix BACKEND && npm run build --prefix FRONTEND"
+  "buildCommand": "npm run build --prefix BACKEND && npm run build --prefix FRONTEND",
+  "installCommand": "npm install --prefix BACKEND && npm install --prefix FRONTEND",
+  "outputDirectory": "FRONTEND/.output/public"
 }
