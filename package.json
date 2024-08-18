@@ -9,11 +9,11 @@
   "scripts": {
     "dev:frontend": "bun --cwd FRONTEND dev",
     "dev:backend": "bun --cwd BACKEND dev",
-    "build:frontend": "bun --cwd FRONTEND build",
-    "build:backend": "bun --cwd BACKEND build",
+    "build:frontend": "npm --prefix FRONTEND run build",
+    "build:backend": "npm --prefix BACKEND run build",
     "dev": "concurrently \"bun run dev:frontend\" \"bun run dev:backend\"",
-    "build": "bun run build:frontend && bun run build:backend && cp -r FRONTEND/.output/* output/ && cp -r BACKEND/dist/* output/",
-    "start": "concurrently \"bun --cwd FRONTEND start\" \"bun --cwd BACKEND start\""
+    "build": "npm run build:frontend && npm run build:backend && cp -r FRONTEND/.output/* output/ && cp -r BACKEND/dist/* output/",
+    "start": "concurrently \"npm --prefix FRONTEND start\" \"npm --prefix BACKEND start\""
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
