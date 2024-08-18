@@ -1,10 +1,23 @@
 {
   "builds": [
-    { "src": "FRONTEND/**", "use": "@vercel/node" },
-    { "src": "BACKEND/**", "use": "@vercel/node" }
+    {
+      "src": "FRONTEND/**",
+      "use": "@vercel/static-build"
+    },
+    {
+      "src": "BACKEND/src/app.ts",
+      "use": "@vercel/node"
+    }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "/FRONTEND/$1" },
-    { "src": "/api/(.*)", "dest": "/BACKEND/dist/app.js" }
-  ]
+    {
+      "src": "/api/(.*)",
+      "dest": "/BACKEND/dist/app.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/FRONTEND/$1"
+    }
+  ],
+  "buildCommand": "npm run build --prefix BACKEND && npm run build --prefix FRONTEND"
 }

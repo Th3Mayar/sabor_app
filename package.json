@@ -12,7 +12,7 @@
     "build:frontend": "npm --prefix FRONTEND run build",
     "build:backend": "npm --prefix BACKEND run build",
     "dev": "concurrently \"bun run dev:frontend\" \"bun run dev:backend\"",
-    "build": "npm run build:frontend && npm run build:backend && cp -r FRONTEND/.output/* output/ && cp -r BACKEND/dist/* output/",
+    "build": "npm run build:frontend && npm run build:backend",
     "start": "concurrently \"npm --prefix FRONTEND start\" \"npm --prefix BACKEND start\""
   },
   "peerDependencies": {
