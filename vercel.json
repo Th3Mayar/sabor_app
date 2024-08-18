@@ -9,6 +9,6 @@
     }
   ],
   "scripts": {
-    "build": "bun run build"
+     "buildCommand" : "bun run build"
   }
 }
