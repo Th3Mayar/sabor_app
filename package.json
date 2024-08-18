@@ -9,7 +9,9 @@
   "scripts": {
     "dev:frontend": "bun --cwd FRONTEND dev",
     "dev:backend": "bun --cwd BACKEND dev",
-    "dev": "concurrently \"bun run dev:frontend\" \"bun run dev:backend\""
+    "dev": "concurrently \"bun run dev:frontend\" \"bun run dev:backend\"",
+    "build": "concurrently \"bun --cwd FRONTEND build\" \"bun --cwd BACKEND build\"",
+    "start": "concurrently \"bun --cwd FRONTEND start\" \"bun --cwd BACKEND start\""
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

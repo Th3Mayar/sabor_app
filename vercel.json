@@ -1,0 +1,7 @@
+{
+  "builds": [
+    { "src": "FRONTEND/**", "use": "@vercel/node" },
+    { "src": "BACKEND/**", "use": "@vercel/node" }
+  ],
+  "routes": [{ "src": "/(.*)", "dest": "/FRONTEND/$1" }]
+}
