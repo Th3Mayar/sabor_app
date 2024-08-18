@@ -1,0 +1,7 @@
+{
+  "build": {
+    "env": {
+      "VERCEL_BUILDER_PACKAGE_MANAGER": "bun"
+    }
+  }
+}
