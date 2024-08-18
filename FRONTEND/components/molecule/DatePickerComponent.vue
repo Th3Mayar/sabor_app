@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { defineProps, defineEmits, computed } from "vue";
 import SelectComponent from "@/components/atoms/SelectComponent.vue";
 import OptionComponent from "@/components/atoms/OptionComponent.vue";
 
@@ -32,6 +32,7 @@ interface DatePickerProps {
 }
 
 const props = defineProps<DatePickerProps>();
+const emit = defineEmits<{ (e: "input", value: string): void }>();
 
 const model = computed({
   get() {

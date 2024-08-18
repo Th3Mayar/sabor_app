@@ -132,8 +132,9 @@ import TextareaComponent from "@/components/atoms/TextareaComponent.vue";
 import Typography from "@/components/atoms/Typography.vue";
 import Table from "@/components/template/Table.vue";
 import { ref } from "vue";
+import type { LocalTableColumn } from "@/types/Table";
 
-const columns = ref([
+const columns = ref<LocalTableColumn[]>([
   { headerName: "ID Ticket", field: "id", type: "text", filterable: true },
   { headerName: "Fecha", field: "fecha", type: "text", filterable: true },
   { headerName: "Horario", field: "horario", type: "text", filterable: true },

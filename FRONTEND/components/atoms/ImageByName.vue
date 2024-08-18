@@ -5,7 +5,7 @@ import { routes } from "@/public/routeImg";
 interface ImageProps {
   name: string;
   size?: number | string;
-  strokeWidth?: number;
+  strokeWidth?: number | string;
   className?: string;
 }
 

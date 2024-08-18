@@ -18,7 +18,10 @@
               <Icon name="Move" size="16" color="white" />
               <span>{{ column.headerName }}</span>
             </div>
-            <div v-if="showFilterIndex === index" class="absolute top-full left-0 w-full bg-white p-2 shadow-lg">
+            <div
+              v-if="showFilterIndex === index"
+              class="absolute top-full left-0 w-full bg-white p-2 shadow-lg"
+            >
               <input
                 v-if="column.type === 'text'"
                 v-model="filters[column.field]"
@@ -96,22 +99,16 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
 import Button from "@/components/atoms/Button.vue";
 import Icon from "@/components/atoms/IconByName.vue";
+import type { LocalTableColumn, LocalTableRow } from "@/types/Table";
 
-const props = defineProps({
-  columns: {
-    type: Array,
-    required: true,
-  },
-  rows: {
-    type: Array,
-    required: true,
-  },
-});
+const props = defineProps<{
+  columns?: LocalTableColumn[];
+  rows: LocalTableRow[];
+}>();
 
 let draggedColumnIndex = ref<number | null>(null);
 const filters = ref<{ [key: string]: any }>({});
@@ -167,17 +164,21 @@ const getStatusClass = (status: string) => {
   }
 };
 
-const editRow = (row: any) => {
+const editRow = (row: LocalTableRow) => {
   console.log("Editando fila:", row);
 };
 
-const confirmRow = (row: any) => {
+const confirmRow = (row: LocalTableRow) => {
   console.log("Confirmando fila:", row);
 };
 
 const filteredRows = computed(() => {
+  if (!props.columns) return props.rows; // Check if columns are undefined and return all rows
+
   return props.rows.filter((row) => {
-    return props.columns.every((column) => {
+    return props.columns!.every((column) => {
+      if (!column) return true; // Add a check to ensure column is not undefined
+
       const filterValue = filters.value[column.field];
       if (!filterValue) return true;
 
@@ -196,7 +197,6 @@ const filteredRows = computed(() => {
   });
 });
 </script>
-
 
 <style scoped>
 .overflow-x-auto {
