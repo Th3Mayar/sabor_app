@@ -32,16 +32,16 @@
       </div>
     </div>
 
-    <!-- Logo at the bottom right -->
-    <div class="absolute bottom-4 right-4 z-50">
-      <ImageComponent name="saborApp2" size="100" class="hover:bg-background "/>
+    <div
+      class="absolute bottom-4 right-4 z-50 transition-all duration-300 ease-in-out hover:brightness-0 hover:invert"
+    >
+      <ImageComponent name="saborApp2" size="250" />
     </div>
   </div>
 </template>
 
 <script setup>
 import Button from "@/components/atoms/Button.vue";
-import Icon from "@/components/atoms/IconByName.vue";
 import ImageComponent from "@/components/atoms/ImageByName.vue";
 import Typography from "@/components/atoms/Typography.vue";
 import { ref } from "vue";
