@@ -1,14 +1,10 @@
 {
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
-  "scripts": {
-     "buildCommand" : "bun run build"
+    "builds": [
+      { "src": "FRONTEND/**", "use": "@vercel/node" },
+      { "src": "BACKEND/**", "use": "@vercel/node" }
+    ],
+    "routes": [
+      { "src": "/(.*)", "dest": "/FRONTEND/$1" }
+    ]
   }
-}
+  
