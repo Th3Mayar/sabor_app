@@ -1,11 +1,11 @@
 {
   "builds": [
     {
-      "src": "FRONTEND/**",
+      "src": "FRONTEND/package.json",
       "use": "@vercel/static-build"
     },
     {
-      "src": "BACKEND/src/app.ts",
+      "src": "BACKEND/package.json",
       "use": "@vercel/node"
     }
   ],
