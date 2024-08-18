@@ -3,10 +3,13 @@
     { "src": "FRONTEND/**", "use": "@vercel/node" },
     { "src": "BACKEND/**", "use": "@vercel/node" }
   ],
-  "routes": [{ "src": "/(.*)", "dest": "/FRONTEND/$1" }],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/BACKEND/$1" },
+    { "src": "/(.*)", "dest": "/FRONTEND/$1" }
+  ],
   "headers": [
     {
-      "source": "/FRONTEND/_nuxt/(.*)",
+      "source": "/_nuxt/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -15,7 +18,7 @@
       ]
     },
     {
-      "source": "/FRONTEND/public/images/(.*)",
+      "source": "/public/images/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -24,7 +27,7 @@
       ]
     },
     {
-      "source": "/FRONTEND/public/logos/(.*)",
+      "source": "/public/logos/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
