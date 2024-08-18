@@ -11,4 +11,7 @@ export default defineNuxtConfig({
     provider: 'ipx',
     ipx: {},
   },
+  typescript: {
+    strict: false
+  },
 });
