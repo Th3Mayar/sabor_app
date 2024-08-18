@@ -1,6 +1,12 @@
 {
   "rewrites": [{ "source": "/api/(.*)", "destination": "/api/" }],
-    "headers": [
-        { "source": "/api/(.*)", "headers": [{ "key": "Access-Control-Allow-Origin", "value": "*" }] }
-    ]
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [{ "key": "Access-Control-Allow-Origin", "value": "*" }]
+    }
+  ],
+  "env": {
+    "PORT": "3000"
+  }
 }
