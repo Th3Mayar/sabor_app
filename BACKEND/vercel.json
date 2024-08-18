@@ -1,6 +1,4 @@
 {
-  "builds": [{ "src": "./app.ts", "use": "@vercel/node" }],
-  "installCommand": "bundle install",
   "redirects": [
     { "source": "/api/(.*)", "destination": "/api/$1", "statusCode": 200 }
   ]
