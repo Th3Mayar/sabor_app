@@ -3,5 +3,43 @@
     { "src": "FRONTEND/**", "use": "@vercel/node" },
     { "src": "BACKEND/**", "use": "@vercel/node" }
   ],
-  "routes": [{ "src": "/(.*)", "dest": "/FRONTEND/$1" }]
+  "routes": [{ "src": "/(.*)", "dest": "/FRONTEND/$1" }],
+  "headers": [
+    {
+      "source": "/FRONTEND/_nuxt/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/FRONTEND/public/images/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/FRONTEND/public/logos/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    }
+  ]
 }
