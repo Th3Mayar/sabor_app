@@ -27,35 +27,20 @@ const env = envSchema.parse(process.env);
 
 export const config = {
   // Local DB configuration
-  dbNameLocal: () => env.DB_NAME_LOCAL,
-  dbUserLocal: () => env.DB_USER_LOCAL,
-  dbPasswordLocal: () => env.DB_PASSWORD_LOCAL,
-  dbHostLocal: () => env.DB_HOST_LOCAL,
-  dbPortLocal: () => env.DB_PORT_LOCAL ? Number(env.DB_PORT_LOCAL) : 5432,
+  dbNameLocal: env.DB_NAME_LOCAL || "",
+  dbUserLocal: env.DB_USER_LOCAL || "",
+  dbPasswordLocal: env.DB_PASSWORD_LOCAL || "",
+  dbHostLocal: env.DB_HOST_LOCAL || "",
+  dbPortLocal: env.DB_PORT_LOCAL ? Number(env.DB_PORT_LOCAL) : 5432,
 
   // Remote DB configuration
-  dbNameRemote: () => env.DB_NAME_REMOTE,
-  dbUserRemote: () => env.DB_USER_REMOTE,
-  dbPasswordRemote: () => env.DB_PASSWORD_REMOTE,
-  dbHostRemote: () => env.DB_HOST_REMOTE,
-  dbPortRemote: () => env.DB_PORT_REMOTE ? Number(env.DB_PORT_REMOTE) : 5432,
+  dbNameRemote: env.DB_NAME_REMOTE || "",
+  dbUserRemote: env.DB_USER_REMOTE || "",
+  dbPasswordRemote: env.DB_PASSWORD_REMOTE || "",
+  dbHostRemote: env.DB_HOST_REMOTE || "",
+  dbPortRemote: env.DB_PORT_REMOTE ? Number(env.DB_PORT_REMOTE) : 5432,
 
   // Other settings
-  port: () => env.PORT ? Number(env.PORT) : 3000,
-  useRemoteDb: () => env.USE_REMOTE_DB === "true",
+  port: env.PORT ? Number(env.PORT) : 3000,
+  useRemoteDb: env.USE_REMOTE_DB === "true",
 };
-
-console.log({
-  dbNameLocal: config.dbNameLocal(),
-  dbUserLocal: config.dbUserLocal(),
-  dbPasswordLocal: config.dbPasswordLocal(),
-  dbHostLocal: config.dbHostLocal(),
-  dbPortLocal: config.dbPortLocal(),
-  dbNameRemote: config.dbNameRemote(),
-  dbUserRemote: config.dbUserRemote(),
-  dbPasswordRemote: config.dbPasswordRemote(),
-  dbHostRemote: config.dbHostRemote(),
-  dbPortRemote: config.dbPortRemote(),
-  port: config.port(),
-  useRemoteDb: config.useRemoteDb(),
-});
