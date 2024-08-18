@@ -2,10 +2,9 @@
   "builds": [{ "src": "./app.ts", "use": "@vercel/node" }],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "/",
+      "source": "/(.*)",
+      "destination": "/",
       "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
     }
-  ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  ]
 }
