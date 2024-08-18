@@ -1,9 +1,9 @@
 {
   "name": "backend",
-  "module": "src/app.ts",
+  "module": "app.ts",
   "type": "module",
   "scripts": {
-    "dev": "bun run --watch src/app.ts",
+    "dev": "bun run --watch app.ts",
     "build": "tsc -p . && node dist/app.js",
     "start": "node dist/app.js"
   },
