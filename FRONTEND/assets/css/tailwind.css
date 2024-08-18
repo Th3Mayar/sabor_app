@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --theme-color: #282866;
+  --background: #ffffff;
+  --main-content: #d9d9d9;
+  --button-primary: #ef6c00;
+  --button-secondary: #ffa000;
+  --dropdown-button: #888888;
+  --content-background: #f6f4f4;
+  --button-variant: #282866;
+  --button-success: #49b555;
+  --button-danger: #fa3636;
+  --text-variant-1: #aeadad;
+  --text-variant-2: #797c82;
+  --text-primary: #000000;
+  --alert-success-bg: #4e8d7c;
+  --alert-success-effect: #045762;
+  --alert-error-bg: #f64b3c;
+  --alert-error-effect: #c81912;
+  --alert-info-bg: #3282b8;
+  --alert-info-effect: #0f4c75;
+  --alert-warning-bg: #ef8d32;
+  --alert-warning-effect: #cc561e;
+  --shadow: #000000;
+  --list-option: #f7941d;
+  --list-option-effect: #464646;
+  --order-success-bg: #49b555;
+  --table-cell-bg: #e6e7e9;
+  --state-option-bg: #4bb356;
+  --table-action-bg: #333333;
+  --button-variant-secondary: #f4d221;
+  --text-variant-3: #344767;
+  --text-variant-4: #040000;
+  --state-variant: #a9a696;
+  --button-variant-tertiary: #152c70;
+
+  /* Dark mode colors */
+  --dark-background: #1a202c;
+  --dark-main-content: #2d3748;
+  --dark-button-primary: #dd6b20;
+  --dark-button-secondary: #ed8936;
+  --dark-dropdown-button: #a0aec0;
+  --dark-content-background: #2c303a;
+  --dark-text-primary: #e2e8f0;
+  --dark-alert-success-bg: #38a169;
+  --dark-alert-error-bg: #e53e3e;
+  --dark-alert-info-bg: #3182ce;
+  --dark-alert-warning-bg: #dd6b20;
+  --dark-shadow: #2d3748;
+}
+
+.bg-theme {
+  background-color: var(--theme-color);
+}
+
+.text-theme {
+  color: var(--theme-color);
+}
+
+/* #FFFFFF -> Color del fondo de la pagina y/o texto
+#D9D9D9 -> Color de la region del main (donde se encuentra el contenido) o fondo de los inputs
+#EF6C00 -> Uno de los colores de botones u opcion de estado
+#FFA000 -> Otro color de botones
+#888888 -> color de menu button dropdown
+#F6F4F4 -> color para contenido del contenido de la pagina
+#282866 -> otro color de variante de boton
+#49B555 -> color de boton de guardar o aceptar o enviar o descargar etc etc
+#FA3636 -> color de boton de eliminar o cancelar u opcion de estado o color danger
+#AEADAD -> color de variante de texto 
+#797C82 -> color de variante de texto
+#000000 -> color de texto
+#4E8D7C -> Color de contenedor de alerta success
+#045762 -> color de efecto para alertas success
+#F64B3C -> Color de contenedor de alerta error
+#C81912 -> color de efecto para alertas error
+#3282B8 -> color de contenedor de alerta info
+#0F4C75 -> color de efecto para alertas info
+#EF8D32 -> color de contenedor de alerta warning
+#CC561E -> color de efecto para alertas warning
+#000000 -> color de sombra
+#F7941D -> variante de listas de opciones y/o bordes o active o header de tablas o divider o tambien puede ser una variante de boton
+#464646 efecto para listas de opciones
+#49B555 -> fondo para orden realizada con exito
+#E6E7E9 -> fondo de las celdas de las tablas
+#4BB356 -> color de fondo para opcion de estado
+##333333 -> color de fondo para las acciones de las tablas
+#F4D221 -> variante de boton
+#344767 -> variante de texto
+#040000 -> variante de texto
+#A9A696 -> variante de estado
+#152C70 -> variante de boton */

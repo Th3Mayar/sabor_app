@@ -1,0 +1,106 @@
+<template>
+  <div>
+    <div
+      class="absolute left-4 z-50 cursor-pointer text-background ml-5 top-7"
+      @click="toggleMenu"
+    >
+      <Icon name="Menu" size="24" color="black" class="icon-menu"/>
+    </div>
+
+    <transition name="slide">
+      <nav
+        v-if="isMenuVisible"
+        class="w-60 bg-dark-background text-background flex flex-col justify-start items-center h-screen py-8 relative"
+      >
+        <span class="border border-background w-[100%] top-3"></span>
+
+        <!-- Logo -->
+        <div class="mb-10 top-5">
+          <ImageComponent name="saborApp2" size="200" />
+        </div>
+
+        <!-- Navigation Items -->
+        <div class="flex flex-col space-y-4 w-full px-4">
+          <List variant="default" :active="false">
+            <Icon name="PlusCircle" size="24" color="white" class="mr-2" />
+            <span>Crear Reserva</span>
+          </List>
+          <List variant="default" :active="false">
+            <Icon name="Search" size="24" color="white" class="mr-2" />
+            <span>Mis Reservas</span>
+          </List>
+          <List variant="default" :active="false">
+            <Icon name="BookOpen" size="24" color="white" class="mr-2" />
+            <span>Ver Carta</span>
+          </List>
+          <List variant="default" :active="true">
+            <Icon name="LogOut" size="24" color="white" class="mr-2" />
+            <span>Cerrar Sesión</span>
+          </List>
+        </div>
+      </nav>
+    </transition>
+  </div>
+</template>
+
+<script setup>
+import { ref } from "vue";
+import Icon from "@/components/atoms/IconByName.vue";
+import ImageComponent from "@/components/atoms/ImageByName.vue";
+import List from "@/components/molecule/List.vue";
+
+const isMenuVisible = ref(true);
+
+const toggleMenu = () => {
+  isMenuVisible.value = !isMenuVisible.value;
+  if (!isMenuVisible.value) {
+    document.querySelector(".icon-menu").style.color = "black";
+  } else {
+    document.querySelector(".icon-menu").style.color = "white";
+  }
+};
+</script>
+
+<style scoped>
+nav {
+  background-image: url("../../public/images/dropDownMenu.svg");
+  backdrop-filter: blur(10px);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  transform: translateX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+nav::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  border-radius: 20px;
+  z-index: 1;
+}
+
+nav > * {
+  position: relative;
+  z-index: 2;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.3s ease-in-out;
+}
+
+.slide-enter,
+.slide-leave-to {
+  transform: translateX(-100%);
+}
+</style>

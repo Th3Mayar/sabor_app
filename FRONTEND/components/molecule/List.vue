@@ -1,0 +1,70 @@
+<template>
+  <div :class="listClasses" @click="handleClick">
+    <slot />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed } from "vue";
+
+interface ListProps {
+  variant?:
+    | "default"
+    | "secondary"
+    | "success"
+    | "danger"
+    | "variant"
+    | "outline"
+    | "ghost"
+    | "link"
+    | "none"
+    | "variantSecondary"
+    | "variantTertiary"
+    | "orange"
+    | "tableActionBg";
+  active?: boolean;
+  disabled?: boolean;
+  onClick?: (event: MouseEvent) => void;
+}
+
+const props = defineProps<ListProps>();
+
+const listVariants = {
+  variant: {
+    default:
+      "bg-listOptionEffect/70 text-white hover:bg-listOption/50 border border-listOption/30 border-2",
+    secondary: "bg-buttonSecondary text-white hover:bg-buttonSecondary/90",
+    success: "bg-buttonSuccess text-white hover:bg-buttonSuccess/90",
+    danger: "bg-buttonDanger text-white hover:bg-buttonDanger/90",
+    variant: "bg-buttonVariant text-white hover:bg-buttonVariant/90",
+    outline: "border-2 border-gray-300 text-gray-800 hover:border-gray-400",
+    ghost: "bg-transparent text-textPrimary hover:bg-mainContent",
+    link: "text-buttonPrimary underline-offset-4 hover:underline",
+    none: "bg-transparent border-none p-0",
+    variantSecondary:
+      "bg-buttonVariantSecondary text-white hover:bg-buttonVariantSecondary/90",
+    variantTertiary:
+      "bg-buttonVariantTertiary text-white hover:bg-buttonVariantTertiary/90",
+    orange: "bg-listOption text-white hover:bg-orange/90",
+    tableActionBg: "bg-tableActionBg text-white hover:bg-tableActionBg/90",
+  },
+};
+
+const listClasses = computed(() => {
+  const variantClass = listVariants.variant[props.variant || "default"];
+  const activeClass = props.active ? "bg-listOption/70" : "";
+  //
+  return [
+    "flex items-center p-4 rounded-lg cursor-pointer transition-colors focus:outline-none",
+    variantClass,
+    activeClass,
+    props.disabled ? "opacity-50 cursor-not-allowed" : "",
+  ].join(" ");
+});
+
+const handleClick = (event: MouseEvent) => {
+  if (!props.disabled && props.onClick) {
+    props.onClick(event);
+  }
+};
+</script>

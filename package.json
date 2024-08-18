@@ -1,0 +1,22 @@
+{
+  "name": "sabor_app",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "concurrently": "^8.2.2"
+  },
+  "scripts": {
+    "dev:frontend": "bun --cwd FRONTEND dev",
+    "dev:backend": "bun --cwd BACKEND dev",
+    "dev": "concurrently \"bun run dev:frontend\" \"bun run dev:backend\""
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@types/morgan": "^1.9.9",
+    "@types/pg": "^8.11.6",
+    "morgan": "^1.10.0"
+  }
+}
