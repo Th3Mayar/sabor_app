@@ -27,20 +27,20 @@ const env = envSchema.parse(process.env);
 
 export const config = {
   // Local DB configuration
-  dbNameLocal: env.DB_NAME_LOCAL,
-  dbUserLocal: env.DB_USER_LOCAL,
-  dbPasswordLocal: env.DB_PASSWORD_LOCAL,
-  dbHostLocal: env.DB_HOST_LOCAL,
-  dbPortLocal: Number(env.DB_PORT_LOCAL),
+  dbNameLocal: env.DB_NAME_LOCAL || "",
+  dbUserLocal: env.DB_USER_LOCAL || "",
+  dbPasswordLocal: env.DB_PASSWORD_LOCAL || "",
+  dbHostLocal: env.DB_HOST_LOCAL || "",
+  dbPortLocal: Number(env.DB_PORT_LOCAL) || 5432,
 
   // Remote DB configuration
-  dbNameRemote: env.DB_NAME_REMOTE,
-  dbUserRemote: env.DB_USER_REMOTE,
-  dbPasswordRemote: env.DB_PASSWORD_REMOTE,
-  dbHostRemote: env.DB_HOST_REMOTE,
-  dbPortRemote: Number(env.DB_PORT_REMOTE),
+  dbNameRemote: env.DB_NAME_REMOTE || "",
+  dbUserRemote: env.DB_USER_REMOTE || "",
+  dbPasswordRemote: env.DB_PASSWORD_REMOTE || "",
+  dbHostRemote: env.DB_HOST_REMOTE || "",
+  dbPortRemote: Number(env.DB_PORT_REMOTE) || 5432,
 
   // Other settings
-  port: Number(env.PORT),
+  port: Number(env.PORT) || 3000,
   useRemoteDb: env.USE_REMOTE_DB === "true",
 };
