@@ -1,11 +1,8 @@
 {
   "builds": [{ "src": "./app.ts", "use": "@vercel/node" }],
-  "routes": [
-    {
-      "source": "/(.*)",
-      "destination": "/",
-      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
-    }
-  ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  "installCommand": "",
+  "outputDirectory": "dist",
+  "redirects": [
+    { "source": "/api/(.*)", "destination": "/api/$1", "statusCode": 200 }
+  ]
 }
