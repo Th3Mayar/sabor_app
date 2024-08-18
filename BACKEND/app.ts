@@ -15,20 +15,18 @@ import errorHandler from "./src/middlewares/errorHandler.js";
 import authRoutes from "./src/routes/authRoutes.js";
 import { authenticateJWT } from "./src/middlewares/authenticateJWT.js";
 import dotenv from "dotenv";
+import { config } from "./src/config/db.js";
 
 dotenv.config();
 
 const app = express();
 
-app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
+app.use(cors());
 
-app.get("/api", (req, res) => {
-  res.send("Hello World from API");
+app.get("/", (req, res) => {
+  res.send("Hello from api");
 });
 
 // Routes not protected by authentication
@@ -50,8 +48,6 @@ app.use("/api", authenticateJWT, categoryRoutes);
 // Error handler middleware
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}/api`);
+app.listen(config.port, () => {
+  console.log(`Server running on port http://localhost:${config.port}`);
 });

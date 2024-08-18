@@ -1,17 +1,10 @@
 {
-  "version": 2,
-  "builds": [{ "src": "app.ts", "use": "@vercel/node" }],
+  "builds": [{ "src": "./app.ts", "use": "@vercel/node" }],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/"
+      "dest": "/",
+      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
     }
-  ],
-  "env": {
-    "PORT": "3000"
-  }
+  ]
 }
