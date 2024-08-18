@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
   modules: ["@nuxtjs/tailwindcss", '@nuxt/image'],
-  plugins: ["~/plugins/darkMode.ts"],
+  // plugins: ["~/plugins/darkMode.ts"],
   css: [
     "~/assets/css/tailwind.css",
   ],
