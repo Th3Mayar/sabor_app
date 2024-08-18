@@ -1,10 +1,14 @@
 {
-    "builds": [
-      { "src": "FRONTEND/**", "use": "@vercel/node" },
-      { "src": "BACKEND/**", "use": "@vercel/node" }
-    ],
-    "routes": [
-      { "src": "/(.*)", "dest": "/FRONTEND/$1" }
-    ]
+  "projects": {
+    "frontend": {
+      "root": "FRONTEND",
+      "buildCommand": "bun run build:frontend",
+      "outputDirectory": "FRONTEND/.output"
+    },
+    "backend": {
+      "root": "BACKEND",
+      "buildCommand": "bun run build:backend",
+      "outputDirectory": "BACKEND/dist"
+    }
   }
-  
+}
