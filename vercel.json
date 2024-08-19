@@ -2,11 +2,19 @@
   "builds": [
     {
       "src": "FRONTEND/package.json",
-      "use": "@vercel/static-build"
+      "use": "@vercel/static-build",
+      "config": {
+        "buildCommand": "npm run build",
+        "installCommand": "npm install"
+      }
     },
     {
       "src": "BACKEND/package.json",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "buildCommand": "npm run build",
+        "installCommand": "npm install"
+      }
     }
   ],
   "routes": [
@@ -19,7 +27,7 @@
       "dest": "/FRONTEND/$1"
     }
   ],
-  "buildCommand": "npm run build --prefix BACKEND && npm run build --prefix FRONTEND",
-  "installCommand": "npm install --prefix BACKEND && npm install --prefix FRONTEND",
-  "outputDirectory": "FRONTEND/.output/public"
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
