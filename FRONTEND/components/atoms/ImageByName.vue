@@ -17,6 +17,10 @@ const imageSrc = computed(() => {
 
   if (routes.logos[imageName as keyof typeof routes.logos]) {
     return modifyUrl + routes.logos[imageName as keyof typeof routes.logos];
+  } else if (routes.images[imageName as keyof typeof routes.images]) {
+    return (
+      modifyUrl + routes.images[imageName as keyof typeof routes.images]
+    );
   } else {
     console.error(`Image not found for name: ${imageName}`);
     return "";

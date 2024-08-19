@@ -6,7 +6,7 @@
           <th
             v-for="(column, index) in columns"
             :key="column.field"
-            class="relative px-6 py-3 bg-buttonSecondary text-left text-sm font-semibold text-white uppercase tracking-wider first:rounded-tl-2xl last:rounded-tr-lg cursor-pointer"
+            class="relative px-6 py-3 bg-buttonSecondary text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider first:rounded-tl-2xl last:rounded-tr-lg cursor-pointer"
             draggable="true"
             @click="toggleFilter(index)"
             @dragstart="dragStart($event, index)"
@@ -20,7 +20,7 @@
             </div>
             <div
               v-if="showFilterIndex === index"
-              class="absolute top-full left-0 w-full bg-white p-2 shadow-lg"
+              class="absolute top-full left-0 w-full bg-white p-2 shadow-lg z-10"
             >
               <input
                 v-if="column.type === 'text'"
@@ -52,7 +52,7 @@
             </div>
           </th>
           <th
-            class="px-6 py-3 bg-buttonSecondary text-left text-sm font-semibold text-white uppercase tracking-wider rounded-tr-lg"
+            class="px-6 py-3 bg-buttonSecondary text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider rounded-tr-lg"
           >
             Acción
           </th>
@@ -67,7 +67,7 @@
           <td
             v-for="column in columns"
             :key="column.field"
-            class="px-6 py-4 text-sm text-textPrimary whitespace-nowrap"
+            class="px-6 py-4 text-xs sm:text-sm text-textPrimary whitespace-nowrap"
           >
             <div
               v-if="column.field === 'status'"
@@ -80,7 +80,7 @@
             </div>
           </td>
           <td
-            class="px-6 py-4 text-sm text-textPrimary whitespace-nowrap flex justify-center items-center space-x-2"
+            class="px-6 py-4 text-xs sm:text-sm text-textPrimary whitespace-nowrap flex justify-center items-center space-x-2"
           >
             <Button variant="tableActionBg" size="icon" @click="editRow(row)">
               <Icon name="Edit3" size="16" color="white" />
@@ -222,13 +222,11 @@ table {
   border-spacing: 0 10px;
 }
 
-th {
-  border-bottom: none;
+th,
+td {
+  padding: 8px 12px;
 }
 
-td {
-  border-bottom: none;
-}
 .cursor-dragging {
   cursor: crosshair !important;
 }

@@ -2,6 +2,27 @@
   <div
     class="relative w-full flex flex-col items-center justify-center bg-cover bgContent h-[100vh]"
   >
+    <!-- Top Right Buttons -->
+    <!-- <div class="absolute top-4 right-4 z-50 flex space-x-2">
+      <Button
+        variant="outline"
+        size="sm"
+        @click="login"
+        class="text-white border-white bg-opacity-30 backdrop-blur-md rounded-full px-4 py-2 transition-all duration-300 ease-in-out hover:bg-white hover:text-black animate-pulse hover:animate-none focus:outline-none focus:animate-pulse-active"
+      >
+        Login
+      </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        @click="register"
+        class="text-white border-buttonPrimary bg-opacity-30 backdrop-blur-md rounded-full px-4 py-2 transition-all duration-300 ease-in-out hover:bg-buttonPrimary hover:text-white animate-pulse hover:animate-none focus:outline-none focus:animate-pulse-active"
+      >
+        Register
+      </Button>
+    </div> -->
+
+    <!-- Center Content -->
     <div class="text-center z-50">
       <h1 class="text-background text-xl md:text-2xl">
         Restaurante de {{ country }}
@@ -11,7 +32,7 @@
         {{ name }}
       </h2>
 
-      <!-- Buttons -->
+      <!-- Main Buttons -->
       <div class="mt-8 flex justify-center space-x-4">
         <Button
           variant="default"
@@ -27,11 +48,13 @@
           size="xlWide"
           @click="viewletter"
           class="hover:scale-105 hover:shadow-lg transition-all duration-300"
-          >Ver Carta</Button
         >
+          Ver Carta
+        </Button>
       </div>
     </div>
 
+    <!-- Bottom Right Image -->
     <div
       class="absolute bottom-4 right-4 z-50 transition-all duration-300 ease-in-out hover:brightness-0 hover:invert"
     >
@@ -43,7 +66,6 @@
 <script setup>
 import Button from "@/components/atoms/Button.vue";
 import ImageComponent from "@/components/atoms/ImageByName.vue";
-import Typography from "@/components/atoms/Typography.vue";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
@@ -56,13 +78,19 @@ country.value = "Colombia";
 name.value = "SaborApp";
 
 const reservation = () => {
-  // console.log("View letter");
   router.push("/reservation");
 };
 
 const viewletter = () => {
-  // console.log("View letter");
   router.push("/letter");
+};
+
+const login = () => {
+  router.push("/login");
+};
+
+const register = () => {
+  router.push("/register");
 };
 
 definePageMeta({
@@ -102,6 +130,32 @@ definePageMeta({
   background-color: rgba(0, 0, 0, 0.6);
   pointer-events: none;
   z-index: 1;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes pulse-active {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+.focus\:animate-pulse-active {
+  animation: pulse-active 0.5s forwards;
 }
 
 h2 {
