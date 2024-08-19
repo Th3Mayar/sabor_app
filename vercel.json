@@ -1,22 +1,16 @@
 {
   "builds": [
     {
-      "src": "FRONTEND/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "buildCommand": "npm run build",
-        "installCommand": "npm install"
-      }
-    },
-    {
-      "src": "BACKEND/package.json",
+      "src": "package.json",
       "use": "@vercel/node",
       "config": {
-        "buildCommand": "npm run build",
-        "installCommand": "npm install"
+        "includeFiles": ["**/**"]
       }
     }
   ],
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "outputDirectory": "FRONTEND/.output/public",
   "routes": [
     {
       "src": "/api/(.*)",
@@ -26,8 +20,5 @@
       "src": "/(.*)",
       "dest": "/FRONTEND/$1"
     }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }
