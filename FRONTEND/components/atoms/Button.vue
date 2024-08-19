@@ -75,7 +75,7 @@ const buttonClasses = computed(() => {
 });
 
 const handleClick = (event: MouseEvent) => {
-  event.preventDefault();
+  // event.preventDefault();
   if (props.onClick) {
     props.onClick(event);
   }

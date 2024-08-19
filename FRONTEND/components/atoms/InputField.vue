@@ -1,19 +1,37 @@
 <template>
   <div class="flex flex-col">
-    <label :for="name" class="mb-2 font-medium text-textPrimary">{{ label }}</label>
-    <input
+    <label :for="name" class="mb-2 font-medium text-textPrimary">
+      {{ label }}
+    </label>
+    <Field
       :type="type"
       :name="name"
       v-bind="$attrs"
       v-on="$listeners"
       v-model="model"
-      :class="['input-field', 'px-4', 'py-3', 'rounded-[25px]', 'bg-background', 'shadow-md', 'border', 'border-mainContent', 'outline-none', 'transition-shadow', 'duration-300', 'placeholder-textVariant1', 'focus:shadow-lg']"
+      :class="[
+        'input-field',
+        'px-4',
+        'py-3',
+        'rounded-[25px]',
+        'bg-background',
+        'shadow-md',
+        'border',
+        'border-mainContent',
+        'outline-none',
+        'transition-shadow',
+        'duration-300',
+        'placeholder-textVariant1',
+        'focus:shadow-lg',
+      ]"
     />
+    <ErrorMessage :name="name" class="text-red-600 mt-1" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps, computed } from "vue";
+import { defineProps, defineEmits, computed } from "vue";
+import { Field, ErrorMessage } from "vee-validate";
 
 interface InputProps {
   name: string;
@@ -23,23 +41,24 @@ interface InputProps {
 }
 
 const props = defineProps<InputProps>();
+const emit = defineEmits(["update:modelValue"]);
 
 const model = computed({
   get() {
     return props.value;
   },
   set(value: string | number) {
-    emit("input", value);
+    emit("update:modelValue", value);
   },
 });
 </script>
 
 <style scoped>
 .input-field {
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Default shadow */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .input-field:focus {
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); /* Increased shadow on focus */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); 
 }
 </style>

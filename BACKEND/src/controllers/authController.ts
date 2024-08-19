@@ -3,18 +3,20 @@ import * as authService from "../services/authService.js";
 import * as userRepository from "../repositories/userRepository.js";
 
 export const loginUser = async (req: Request, res: Response) => {
-  // console.log("loginUser");
   try {
     const { email, password } = req.body;
-    console.log("Email:", email);
-    console.log("Password: ", password);
 
     const user = await userRepository.findUserByEmail(email);
-    const validation = user ? authService.comparePassword(password, user.password) : false;
-    
-    if (user && validation) {
+
+    if (!user) {
+      res.status(401).json({ message: "User not found with this email address" });
+      return;
+    }
+
+    if (user.password === password) {
+      console.log("User authenticated");
       const token = authService.generateToken(user);
-      console.log
+      console.log;
       res.status(200).json({ token });
     } else {
       res.status(401).json({ message: "Invalid credentials" });

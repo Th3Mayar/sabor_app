@@ -2,26 +2,6 @@
   <div
     class="relative w-full flex flex-col items-center justify-center bg-cover bgContent h-[100vh]"
   >
-    <!-- Top Right Buttons -->
-    <!-- <div class="absolute top-4 right-4 z-50 flex space-x-2">
-      <Button
-        variant="outline"
-        size="sm"
-        @click="login"
-        class="text-white border-white bg-opacity-30 backdrop-blur-md rounded-full px-4 py-2 transition-all duration-300 ease-in-out hover:bg-white hover:text-black animate-pulse hover:animate-none focus:outline-none focus:animate-pulse-active"
-      >
-        Login
-      </Button>
-      <Button
-        variant="outline"
-        size="sm"
-        @click="register"
-        class="text-white border-buttonPrimary bg-opacity-30 backdrop-blur-md rounded-full px-4 py-2 transition-all duration-300 ease-in-out hover:bg-buttonPrimary hover:text-white animate-pulse hover:animate-none focus:outline-none focus:animate-pulse-active"
-      >
-        Register
-      </Button>
-    </div> -->
-
     <!-- Center Content -->
     <div class="text-center z-50">
       <h1 class="text-background text-xl md:text-2xl">
@@ -56,7 +36,7 @@
 
     <!-- Bottom Right Image -->
     <div
-      class="absolute bottom-4 right-4 z-50 transition-all duration-300 ease-in-out hover:brightness-0 hover:invert"
+      class="absolute bottom-4 right-4 z-50 transition-all duration-300 transform hover:scale-105"
     >
       <ImageComponent name="saborApp2" size="250" />
     </div>
@@ -86,16 +66,17 @@ const viewletter = () => {
 };
 
 const login = () => {
-  router.push("/login");
+  router.push("/auth/login");
 };
 
 const register = () => {
-  router.push("/register");
+  router.push("/auth/register");
 };
 
 definePageMeta({
   layout: "homeLayout",
 });
+
 </script>
 
 <style scoped>
@@ -133,7 +114,8 @@ definePageMeta({
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {
@@ -142,7 +124,8 @@ definePageMeta({
 }
 
 @keyframes pulse-active {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {

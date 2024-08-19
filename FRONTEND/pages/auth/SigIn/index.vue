@@ -2,64 +2,68 @@
   <div
     class="min-h-screen flex items-center justify-center p-4 bg-cover bgContent"
   >
-    <div class="bg-background rounded-3xl shadow-lg p-8 w-full max-w-md z-50">
-      <div class="flex flex-col justify-center items-center text-center mb-6">
+    <div class="bg-background rounded-3xl shadow-lg w-full max-w-md z-50">
+      <div
+        class="flex flex-col justify-center items-center text-center mb-6 pl-8 pr-8"
+      >
         <ImageComponent name="saborApp2" size="150" />
         <h2 class="text-3xl font-bold mt-4">Iniciar Sesión</h2>
         <p class="mt-2 text-textVariant2">
           ¡Ingresa a nuestra ventana de login y déjanos llevarte a un viaje
-          gastronómico inolvidable en Restaurante {{ name }}!
+          gastronómico inolvidable en Restaurante <b>{{ name }}!</b>
         </p>
       </div>
-      <form>
-        <div class="mb-4">
-          <label for="username" class="block text-textVariant2"
-            >Nombre de Usuario</label
-          >
-          <div class="relative">
-            <Icon
-              name="User"
-              size="20"
-              color="gray"
-              class="absolute left-3 top-1/2 transform -translate-y-1/2"
-            />
-            <InputComponent
-              name="username"
-              id="username"
-              placeholder="Nombre de Usuario"
-              class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary border-textVariant1 rounded"
-            />
+      <section class="p-8">
+        <form>
+          <div class="mb-4">
+            <label for="username" class="block text-textVariant2"
+              >Nombre de Usuario</label
+            >
+            <div class="relative">
+              <Icon
+                name="User"
+                size="20"
+                color="gray"
+                class="absolute left-3 top-1/2 transform -translate-y-1/2"
+              />
+              <InputComponent
+                name="username"
+                id="username"
+                placeholder="Nombre de Usuario"
+                class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary border-textVariant1 rounded"
+              />
+            </div>
           </div>
-        </div>
-        <div class="mb-4">
-          <label for="password" class="block text-textVariant2"
-            >Contraseña</label
-          >
-          <div class="relative">
-            <Icon
-              name="Lock"
-              size="20"
-              color="gray"
-              class="absolute left-3 top-1/2 transform -translate-y-1/2"
-            />
-            <InputComponent
-              name="password"
-              id="password"
-              type="password"
-              placeholder="Contraseña"
-              class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary border-textVariant1 rounded"
-            />
+          <div class="mb-4">
+            <label for="password" class="block text-textVariant2"
+              >Contraseña</label
+            >
+            <div class="relative">
+              <Icon
+                name="Lock"
+                size="20"
+                color="gray"
+                class="absolute left-3 top-1/2 transform -translate-y-1/2"
+              />
+              <InputComponent
+                name="password"
+                id="password"
+                type="password"
+                placeholder="Contraseña"
+                class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary border-textVariant1 rounded"
+              />
+            </div>
           </div>
-        </div>
-        <Button
-          type="submit"
-          variant="default"
-          class="w-full mt-6 bg-buttonVariantTertiary text-background hover:bg-buttonPrimary py-2 rounded-lg"
-        >
-          Ingresar
-        </Button>
-      </form>
-      <div class="flex justify-between items-center mt-4 text-sm">
+          <Button
+            type="submit"
+            variant="default"
+            class="w-full mt-6 bg-buttonVariantTertiary text-background hover:bg-buttonPrimary py-2 rounded-lg"
+          >
+            Ingresar
+          </Button>
+        </form>
+      </section>
+      <div class="flex justify-end items-end text-sm pr-5">
         <Link
           href="/forgot-password"
           variant="default"
@@ -68,11 +72,13 @@
           ¿Olvidó su contraseña?
         </Link>
       </div>
-      <div class="flex justify-between items-center mt-6 border-t pt-4 text-sm">
+      <div
+        class="flex justify-between items-center mt-6 border-t p-3 text-sm bg-contentButton rounded-b-3xl"
+      >
         <Link
           href="/register"
           variant="default"
-          class="hover:underline flex items-center gap-2 text-textPrimary"
+          class="hover:underline flex items-center gap-2 text-textPrimary p-2"
         >
           Crea tu cuenta aquí
           <Icon name="ArrowRight" size="20" color="textPrimary" />

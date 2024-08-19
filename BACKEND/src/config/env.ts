@@ -28,6 +28,6 @@ export const config = {
   dbPortRemote: getEnvVariableAsNumber("DB_PORT_REMOTE", 5432),
 
   // Other settings
-  port: getEnvVariableAsNumber("PORT", 3000),
+  port: getEnvVariableAsNumber("PORT", 4001),
   useRemoteDb: process.env.USE_REMOTE_DB === "true",
 };

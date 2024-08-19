@@ -39,6 +39,7 @@ const config: Config = {
         textVariant4: '#040000',
         stateVariant: '#A9A696',
         buttonVariantTertiary: '#152C70',
+        contentButton: '#F4F4F4',
 
         // Dark mode colors
         'dark-background': '#1A202C',
