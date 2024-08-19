@@ -19,10 +19,5 @@
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
-  },
-  "dependencies": {
-    "@types/morgan": "^1.9.9",
-    "@types/pg": "^8.11.6",
-    "morgan": "^1.10.0"
   }
 }
