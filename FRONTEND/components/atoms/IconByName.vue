@@ -14,6 +14,7 @@ const colorClasses = {
   secondary: "text-secondary",
   neutral: "text-neutral-300",
   white: "text-white",  
+  red: "text-buttonDanger",
 };
 
 interface IconProps {

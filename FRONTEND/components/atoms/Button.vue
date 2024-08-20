@@ -71,6 +71,7 @@ const buttonClasses = computed(() => {
     "rounded-[30px]", // Corner radius de 30px
     variantClass,
     sizeClass,
+    'dark:bg-dark-buttonPrimary dark:text-dark-textPrimary',
   ];
 });
 

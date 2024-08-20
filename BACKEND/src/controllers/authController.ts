@@ -9,7 +9,7 @@ export const loginUser = async (req: Request, res: Response) => {
     const user = await userRepository.findUserByEmail(email);
 
     if (!user) {
-      res.status(401).json({ message: "User not found with this email address" });
+      res.status(401).json({ message: "Usuario no encontrado con este email" });
       return;
     }
 
@@ -19,7 +19,9 @@ export const loginUser = async (req: Request, res: Response) => {
       console.log;
       res.status(200).json({ token });
     } else {
-      res.status(401).json({ message: "Invalid credentials" });
+      res
+        .status(401)
+        .json({ message: "La contraseña proporcionada no es válida." });
     }
   } catch (error) {
     res.status(500).json({ message: "Failed to login", error });

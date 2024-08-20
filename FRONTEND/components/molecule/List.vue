@@ -32,7 +32,7 @@ const props = defineProps<ListProps>();
 const listVariants = {
   variant: {
     default:
-      "bg-listOptionEffect/70 text-white hover:bg-listOption/50 border border-listOption/30 border-2",
+      "bg-white/10 text-white hover:bg-white/20 border border-transparent rounded-xl backdrop-blur-md shadow-lg p-4 transition duration-300 ease-in-out transform hover:translate-y-[-2px] hover:shadow-2xl",
     secondary: "bg-buttonSecondary text-white hover:bg-buttonSecondary/90",
     success: "bg-buttonSuccess text-white hover:bg-buttonSuccess/90",
     danger: "bg-buttonDanger text-white hover:bg-buttonDanger/90",

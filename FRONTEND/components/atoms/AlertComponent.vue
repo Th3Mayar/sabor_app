@@ -1,10 +1,10 @@
 <template>
   <div
-    v-show="isAnimating && visible"
+    v-show="isAnimating"
     :class="[
       'fixed rounded-3xl bottom-[1rem] p-4 right-[1rem] m-4 overflow-hidden',
       typeClass,
-      { 'toast-animation': isAnimating && visible, disappear: !visible },
+      { 'toast-animation': visible && isAnimating, disappear: !visible }
     ]"
     role="alert"
   >
@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, computed } from "vue";
+import { ref, defineProps, computed, watch } from "vue";
 import Icon from "@/components/atoms/IconByName.vue";
 import Button from "@/components/atoms/Button.vue";
 
@@ -47,12 +47,16 @@ const props = defineProps({
   },
   isVisible: {
     type: Boolean,
-    default: false, // Por defecto oculto
+    default: false,
+  },
+  autoHideDuration: {
+    type: Number,
+    default: 3000,
   },
 });
 
-const visible = ref(props.isVisible);
-const isAnimating = ref(visible.value);
+const visible = ref(false);
+const isAnimating = ref(false);
 
 const typeClass = computed(() => {
   switch (props.type) {
@@ -87,8 +91,8 @@ const iconName = computed(() => {
 function closeAlert() {
   visible.value = false;
   setTimeout(() => {
-    isAnimating.value = false;
-  }, 400);
+    isAnimating.value = false; 
+  }, 400); 
 }
 
 watch(
@@ -97,8 +101,13 @@ watch(
     if (newVal) {
       visible.value = true;
       isAnimating.value = true;
+
+      setTimeout(() => {
+        closeAlert();
+      }, props.autoHideDuration);
     }
-  }
+  },
+  { immediate: true }
 );
 </script>
 

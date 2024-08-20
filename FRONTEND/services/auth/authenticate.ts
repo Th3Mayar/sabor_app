@@ -1,13 +1,15 @@
-// autenticate user with email and password and return user data and token on http://localhost:4001/api/login
+// services/auth/authenticate.ts
 
 import { urlAPI } from "@/composables/api/url";
 import User from "@/types/User";
 
-export const autenticate = async (user: User) => {
-  console.log("user: ", user);
+interface AuthResponse {
+  token: string;
+  user: User;
+}
 
-  const email = user.email;
-  const password = user.password;
+export const authenticate = async (user: User): Promise<AuthResponse> => {
+  console.log("user: ", user);
 
   const response = await fetch(`${urlAPI}/login`, {
     method: "POST",
@@ -16,14 +18,21 @@ export const autenticate = async (user: User) => {
       "Authorization": `Bearer ${process.env.VUE_APP_API_KEY}`,
       "x-api-key": `${process.env.VUE_APP_API_KEY}`,
     },
-     body: JSON.stringify({
-      email: email,
-      password: password,
+    body: JSON.stringify({
+      email: user.email,
+      password: user.password,
     }),
   });
+
   if (!response.ok) {
     const error = (await response.json()).message || response.status;
     return Promise.reject(error);
   }
-  return response.json();
+
+  const data: AuthResponse = await response.json();
+  const token = data.token;
+
+  sessionStorage.setItem("authToken", token);
+
+  return data;
 };

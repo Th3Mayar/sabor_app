@@ -3,6 +3,7 @@
     <div
       class="absolute left-4 z-50 cursor-pointer text-background ml-5 top-7"
       @click="toggleMenu"
+      :isDark="isDark ? 'dark' : 'light'"
     >
       <Icon name="Menu" size="24" color="black" class="icon-menu" />
     </div>
@@ -33,7 +34,11 @@
             <Icon name="BookOpen" size="24" color="white" class="mr-2" />
             <span>Ver Carta</span>
           </List>
-          <List variant="default" :active="true">
+          <List variant="default" :active="true" @click="logout">
+            <Icon name="Settings" size="24" color="white" class="mr-2" />
+            <span>Configuración</span>
+          </List>
+          <List variant="default" :active="true" @click="logout">
             <Icon name="LogOut" size="24" color="white" class="mr-2" />
             <span>Cerrar Sesión</span>
           </List>
@@ -43,21 +48,28 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import Icon from "@/components/atoms/IconByName.vue";
 import ImageComponent from "@/components/atoms/ImageByName.vue";
 import List from "@/components/molecule/List.vue";
 
 const isMenuVisible = ref(true);
+const router = useRouter();
 
 const toggleMenu = () => {
   isMenuVisible.value = !isMenuVisible.value;
   if (!isMenuVisible.value) {
-    document.querySelector(".icon-menu").style.color = "black";
+    document.querySelector(".icon-menu")!.style.color = "black";
   } else {
-    document.querySelector(".icon-menu").style.color = "white";
+    document.querySelector(".icon-menu")!.style.color = "white";
   }
+};
+
+const logout = () => {
+  sessionStorage.removeItem("authToken");
+  router.push("/auth/login");
 };
 </script>
 
@@ -71,8 +83,8 @@ nav {
   border-radius: 20px;
   position: relative;
   overflow: hidden;
-  height: calc(100vh - 40px); 
-  margin-bottom: 0; 
+  height: calc(100vh - 40px);
+  margin-bottom: 0;
   transform: translateX(0);
   transition: transform 0.3s ease-in-out;
 }

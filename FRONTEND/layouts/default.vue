@@ -1,8 +1,7 @@
 <template>
   <div class="flex flex-row">
     <NavBar />
-    <main class="bg-mainContent w-[100%] h-[89vh] mt-[54px] p-5">
-      <!-- <div class="bg-contentBackground rounded-3xl"> -->
+    <main class="bg-mainContent w-[98.5%] h-[89vh] mt-[54px] p-5">
       <div>
         <slot class="content" />
       </div>
@@ -12,6 +11,9 @@
 
 <script setup lang="ts">
 import NavBar from "@/components/template/Navbar.vue";
+definePageMeta({
+  middleware: "auth",
+});
 </script>
 
 <style scoped>
