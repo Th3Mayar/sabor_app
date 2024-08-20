@@ -15,7 +15,10 @@
     "build": "concurrently \"npm run build:frontend\" \"npm run build:backend\"",
     "start:frontend": "bun --cwd FRONTEND start",
     "start:backend": "bun --cwd BACKEND start",
-    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\""
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "install:frontend": "bun --prefix FRONTEND install",
+    "install:backend": "bun --prefix BACKEND install",
+    "install": "concurrently \"npm run install:frontend\" \"npm run install:backend\""
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

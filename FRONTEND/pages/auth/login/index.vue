@@ -39,7 +39,6 @@
               <Icon
                 name="User"
                 size="20"
-                color="gray"
                 class="absolute left-3"
               />
               <InputComponent
@@ -61,7 +60,6 @@
               <Icon
                 name="Lock"
                 size="20"
-                color="gray"
                 class="absolute left-3"
               />
               <InputComponent
@@ -100,6 +98,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useLoading } from "@/composables/useLoading";
 import * as yup from "yup";
 import ImageComponent from "@/components/atoms/ImageByName.vue";
 import InputComponent from "@/components/atoms/InputField.vue";
@@ -110,7 +109,6 @@ import { authenticate } from "~/services/auth/authenticate";
 import { Form } from "vee-validate";
 import Alert from "@/components/atoms/AlertComponent.vue";
 import User from "@/types/User";
-import { useLoading } from "@/composables/useLoading";
 
 const schema = yup.object({
   email: yup.string().required("El correo electrónico es obligatorio"),
@@ -122,6 +120,7 @@ const showAlert = ref(false);
 const alertMessage = ref("");
 
 const { isLoading, startLoading, stopLoading } = useLoading(); 
+const isAuthenticated = ref(false);
 
 async function handleSubmit(values: { email: string; password: string }) {
   const user: User = {
@@ -140,6 +139,7 @@ async function handleSubmit(values: { email: string; password: string }) {
     const [response] = await Promise.all([authenticate(user), minLoaderTime]);
 
     if (response) {
+      isAuthenticated.value = true;
       router.push("/reservation");
     }
   } catch (error) {
@@ -151,7 +151,7 @@ async function handleSubmit(values: { email: string; password: string }) {
 }
 
 definePageMeta({
-  layout: "authLayout",
+  layout: "auth-layout",
   middleware: 'auth'
 });
 </script>

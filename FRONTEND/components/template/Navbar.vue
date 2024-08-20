@@ -5,7 +5,7 @@
       @click="toggleMenu"
       :isDark="isDark ? 'dark' : 'light'"
     >
-      <Icon name="Menu" size="24" color="black" class="icon-menu" />
+      <Icon name="Menu" size="24" class="icon-menu" />
     </div>
 
     <transition name="slide">
@@ -22,23 +22,23 @@
 
         <!-- Navigation Items -->
         <div class="flex flex-col space-y-4 w-full px-4">
-          <List variant="default" :active="false">
+          <List variant="default" route="/reservation" @click="reservation">
             <Icon name="PlusCircle" size="24" color="white" class="mr-2" />
             <span>Crear Reserva</span>
           </List>
-          <List variant="default" :active="false">
+          <List variant="default" route="/reservations">
             <Icon name="Search" size="24" color="white" class="mr-2" />
             <span>Mis Reservas</span>
           </List>
-          <List variant="default" :active="false">
+          <List variant="default" route="/letter" @click="letter">
             <Icon name="BookOpen" size="24" color="white" class="mr-2" />
             <span>Ver Carta</span>
           </List>
-          <List variant="default" :active="true" @click="logout">
+          <List variant="default" route="/settings">
             <Icon name="Settings" size="24" color="white" class="mr-2" />
             <span>Configuración</span>
           </List>
-          <List variant="default" :active="true" @click="logout">
+          <List variant="default" route="/auth/login" @click="logout">
             <Icon name="LogOut" size="24" color="white" class="mr-2" />
             <span>Cerrar Sesión</span>
           </List>
@@ -56,20 +56,30 @@ import ImageComponent from "@/components/atoms/ImageByName.vue";
 import List from "@/components/molecule/List.vue";
 
 const isMenuVisible = ref(true);
+const isDark = ref(false); // Declare the 'isDark' property
 const router = useRouter();
 
 const toggleMenu = () => {
   isMenuVisible.value = !isMenuVisible.value;
+  const iconMenu = document.querySelector(".icon-menu") as HTMLElement;
   if (!isMenuVisible.value) {
-    document.querySelector(".icon-menu")!.style.color = "black";
+    iconMenu.style.color = "black";
   } else {
-    document.querySelector(".icon-menu")!.style.color = "white";
+    iconMenu.style.color = "white";
   }
 };
 
 const logout = () => {
   sessionStorage.removeItem("authToken");
   router.push("/auth/login");
+};
+
+const reservation = () => {
+  router.push("/reservation");
+};
+
+const letter = () => {
+  router.push("/letter");
 };
 </script>
 

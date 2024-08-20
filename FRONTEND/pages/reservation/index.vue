@@ -95,4 +95,8 @@ import DatePickerComponent from "@/components/molecule/DatePickerComponent.vue";
 import TextareaComponent from "@/components/atoms/TextareaComponent.vue";
 import Typography from "@/components/atoms/Typography.vue";
 import Option from "@/components/atoms/OptionComponent.vue";
+
+definePageMeta({
+  middleware: 'auth'
+});
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row">
+  <div v-if="isAuthenticated">
     <NavBar />
     <main class="bg-mainContent w-[98.5%] h-[89vh] mt-[54px] p-5">
       <div>
@@ -7,13 +7,27 @@
       </div>
     </main>
   </div>
+  <div v-else>
+    <AccessForbidden
+      error=404
+      title="Access Forbidden"
+      message="You don't have permission to access this page."
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
+import { useRouter } from "vue-router";
+import { useAuth } from "@/composables/useAuth";
 import NavBar from "@/components/template/Navbar.vue";
-definePageMeta({
-  middleware: "auth",
-});
+import AccessForbidden from "@/components/molecule/errors/AccessForbidden.vue";
+
+const { isAuthenticated } = useAuth();
+const router = useRouter();
+
+if (!isAuthenticated.value) {
+  router.push("/error");
+}
 </script>
 
 <style scoped>

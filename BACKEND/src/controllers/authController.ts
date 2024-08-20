@@ -9,8 +9,13 @@ export const loginUser = async (req: Request, res: Response) => {
     const user = await userRepository.findUserByEmail(email);
 
     if (!user) {
-      res.status(401).json({ message: "Usuario no encontrado con este email" });
+      if (!email.includes("@") || !email.includes(".com")) {
+        res.status(401).json({ message: "El email no es válido" });
+        return;
+      } else {
+        res.status(401).json({ message: "Usuario no encontrado con este email" });
       return;
+      }
     }
 
     if (user.password === password) {

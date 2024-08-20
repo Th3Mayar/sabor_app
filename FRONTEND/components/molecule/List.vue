@@ -24,10 +24,13 @@ interface ListProps {
     | "tableActionBg";
   active?: boolean;
   disabled?: boolean;
+  route?: string;
   onClick?: (event: MouseEvent) => void;
 }
 
 const props = defineProps<ListProps>();
+
+const route = useRoute();
 
 const listVariants = {
   variant: {
@@ -52,8 +55,11 @@ const listVariants = {
 
 const listClasses = computed(() => {
   const variantClass = listVariants.variant[props.variant || "default"];
-  const activeClass = props.active ? "bg-listOption/70" : "";
-  //
+  const isActiveRoute = route.path === props.route;
+  const activeClass = props.active || isActiveRoute
+    ? "bg-buttonPrimary/40 hover:bg-buttonPrimary/50"
+    : "";
+
   return [
     "flex items-center p-4 rounded-lg cursor-pointer transition-colors focus:outline-none",
     variantClass,
@@ -62,8 +68,10 @@ const listClasses = computed(() => {
   ].join(" ");
 });
 
+
 const handleClick = (event: MouseEvent) => {
   if (!props.disabled && props.onClick) {
+    const path = event.view.location.pathname;
     props.onClick(event);
   }
 };

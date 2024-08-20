@@ -1,15 +1,15 @@
-import { defineNuxtRouteMiddleware, navigateTo } from "nuxt/app";
+import { defineNuxtRouteMiddleware, navigateTo } from 'nuxt/app'
 
-export default defineNuxtRouteMiddleware((to) => {
+export default defineNuxtRouteMiddleware((to, from) => {
   if (process.client) {
-    const token = sessionStorage.getItem("authToken");
+    const token = sessionStorage.getItem('authToken')
 
-    if (token && to.path === "/auth/login") {
-      return navigateTo("/reservation");
+    if (!token && to.path !== '/auth/login') {
+      return navigateTo('/error')
     }
 
-    if (!token && to.path !== "/auth/login") {
-      return navigateTo("/auth/login");
+    if (token && to.path === '/auth/login') {
+      return navigateTo('/reservation')
     }
   }
-});
+})

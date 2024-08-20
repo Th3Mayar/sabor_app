@@ -36,4 +36,15 @@ import { useDarkMode } from "@/composables/useDarkMode";
 import Icon from "@/components/atoms/IconByName.vue";
 
 const { isDark, toggleDarkMode } = useDarkMode();
+const themeColor = ref("#000000"); // Add this line to declare the themeColor property
+
+const updateThemeColor = (e: any) => {
+  const target = e.target as HTMLInputElement;
+  document.documentElement.style.setProperty("--primary", target.value);
+  themeColor.value = target.value;
+};
+
+definePageMeta({
+  middleware: "auth",
+});
 </script>
