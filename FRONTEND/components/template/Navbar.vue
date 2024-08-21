@@ -26,7 +26,7 @@
             <Icon name="PlusCircle" size="24" color="white" class="mr-2" />
             <span>Crear Reserva</span>
           </List>
-          <List variant="default" route="/reservations">
+          <List variant="default" route="/reservation/list" @click="reservationList">
             <Icon name="Search" size="24" color="white" class="mr-2" />
             <span>Mis Reservas</span>
           </List>
@@ -80,6 +80,10 @@ const reservation = () => {
 
 const letter = () => {
   router.push("/letter");
+};
+
+const reservationList = () => {
+  router.push("/reservation/list");
 };
 </script>
 

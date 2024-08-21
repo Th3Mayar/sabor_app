@@ -29,6 +29,16 @@ const itemsData = [
     description: "Arroz blanco, donkasu, chapche, bulgogui, kimbab, keranmari",
     price: "S/. 19.00",
   },
+  {
+    name: "DORISAK SAMYUPSAL",
+    description: "Arroz blanco, donkasu, chapche, bulgogui, kimbab, keranmari",
+    price: "S/. 19.00",
+  },
+  {
+    name: "DORISAK SAMYUPSAL",
+    description: "Arroz blanco, donkasu, chapche, bulgogui, kimbab, keranmari",
+    price: "S/. 19.00",
+  },
 ];
 
 const categoriesData = [
@@ -36,7 +46,7 @@ const categoriesData = [
     name: "PARA PICAR",
     items: [
       {
-        name: "Item 1", 
+        name: "Item 1",
         icon: "Fire",
         description: "Kimbab, keranmari, camote frito, pollo dulce y ensalada",
         price: "S/. 14.00",
@@ -47,7 +57,7 @@ const categoriesData = [
     name: "BEBIDAS",
     items: [
       {
-        name: "Item 2", 
+        name: "Item 2",
         icon: "Fire",
         description: "Kimbab, keranmari, camote frito, pollo dulce y ensalada",
         price: "S/. 14.00",

@@ -3,7 +3,7 @@
       class="menu-container bg-contentBackground p-6 rounded-lg shadow-lg h-[max-content]"
     >
       <!-- Título de la Carta -->
-      <h1 class="text-3xl font-bold mb-4 text-textPrimary">{{ title }}</h1>
+      <h1 class="text-3xl font-bold mb-4 text-textPrimary font-poppins">{{ title }}</h1>
   
       <!-- Sección de Especialidad -->
       <div
@@ -67,7 +67,6 @@
   </template>
   
   <script setup lang="ts">
-  import { PropType } from 'vue';
   import Icon from "@/components/atoms/IconByName.vue";
   import ImageComponent from "@/components/atoms/ImageByName.vue";
   import Button from "@/components/atoms/Button.vue"; // Assuming you have a Button component

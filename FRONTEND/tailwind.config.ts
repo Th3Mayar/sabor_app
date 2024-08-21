@@ -5,6 +5,10 @@ const config: Config = {
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
+      fontFamily: {
+        // Add fonts to the project on tailwind.config.js
+        poppins: ['Poppins', 'cursive'],
+    },
       colors: {
         // Colors to use in the app
         background: '#FFFFFF',

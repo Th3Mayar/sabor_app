@@ -6,7 +6,7 @@
           <th
             v-for="(column, index) in columns"
             :key="column.field"
-            class="relative px-6 py-3 bg-buttonSecondary text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider first:rounded-tl-2xl last:rounded-tr-lg cursor-pointer"
+            class="relative px-6 py-3 bg-buttonSecondary text-left text-xs sm:text-sm font-semibold text-background uppercase tracking-wider first:rounded-tl-2xl last:rounded-tr-lg cursor-pointer"
             draggable="true"
             @click="toggleFilter(index)"
             @dragstart="dragStart($event, index)"
@@ -20,7 +20,7 @@
             </div>
             <div
               v-if="showFilterIndex === index"
-              class="absolute top-full left-0 w-full bg-white p-2 shadow-lg z-10"
+              class="absolute top-full left-0 w-full bg-background p-2 shadow-lg z-10"
             >
               <input
                 v-if="column.type === 'text'"
@@ -52,7 +52,7 @@
             </div>
           </th>
           <th
-            class="px-6 py-3 bg-buttonSecondary text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider rounded-tr-lg"
+            class="px-6 py-3 bg-buttonSecondary text-left text-xs sm:text-sm font-semibold text-background uppercase tracking-wider rounded-tr-lg"
           >
             Acción
           </th>
@@ -62,7 +62,7 @@
         <tr
           v-for="(row, rowIndex) in filteredRows"
           :key="rowIndex"
-          class="bg-white border-b border-gray-200 hover:bg-gray-100"
+          class="bg-background border-b border-mainContent hover:mainContent"
         >
           <td
             v-for="column in columns"
@@ -121,6 +121,10 @@ const toggleFilter = (index: number) => {
 const dragStart = (event: DragEvent, index: number) => {
   draggedColumnIndex.value = index;
   document.body.classList.add("cursor-dragging");
+  event.dataTransfer!.dropEffect = "move";
+  // add background color to the dragged column
+  const th = event.target as HTMLElement;
+  th.style.backgroundColor = 'var(--button-primary)';
 };
 
 const dragEnd = () => {
@@ -138,6 +142,11 @@ const drop = (index: number) => {
 
 const saveColumnOrder = () => {
   localStorage.setItem("tableColumnOrder", JSON.stringify(props.columns));
+  // remove background color from all columns
+  const ths = document.querySelectorAll("th");
+  ths.forEach((th) => {
+    (th as HTMLElement).style.backgroundColor = '';
+  });
 };
 
 const loadColumnOrder = () => {
@@ -160,7 +169,7 @@ const getStatusClass = (status: string) => {
     case "Cancelado":
       return "bg-buttonDanger text-white px-4 py-2 rounded-[30px] text-center";
     default:
-      return "";
+      return "bg-mainContent text-dark-background px-4 py-2 rounded-[30px] text-center";
   }
 };
 
@@ -225,6 +234,7 @@ table {
 th,
 td {
   padding: 8px 12px;
+  text-align: center;
 }
 
 .cursor-dragging {
