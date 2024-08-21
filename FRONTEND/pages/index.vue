@@ -18,7 +18,7 @@
           variant="default"
           size="xlWide"
           @click="reservation"
-          class="bg-gradient-to-r from-buttonVariantSecondary to-buttonPrimary text-background hover:from-buttonPrimary hover:to-buttonVariantSecondary hover:scale-105 hover:shadow-lg transition-all duration-300"
+          class="bg-gradient-to-r from-buttonVariantSecondary/60 to-buttonPrimary text-background hover:from-buttonPrimary hover:to-buttonVariantSecondary hover:scale-105 hover:shadow-lg transition-all duration-300"
         >
           Reservar
         </Button>

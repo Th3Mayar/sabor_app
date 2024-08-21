@@ -9,7 +9,7 @@
       class="mt-5 w-32 animationReboot"
       @click="loginPage"
     >
-      Go Back <Icon name="ArrowLeft" size="24" />
+      Go Back <Icon name="ArrowLeft" size="24" class="ml-2"/>
     </Button>
   </div>
 </template>

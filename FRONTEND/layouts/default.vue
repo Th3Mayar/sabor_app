@@ -7,21 +7,23 @@
       </div>
     </main>
   </div>
-  <div v-else>
-  </div>
 </template>
 
 <script setup lang="ts">
 import { useRouter } from "vue-router";
+import { onMounted } from "vue";
 import { useAuth } from "@/composables/useAuth";
 import NavBar from "@/components/template/Navbar.vue";
 
 const { isAuthenticated } = useAuth();
 const router = useRouter();
 
-if (!isAuthenticated.value) {
-  router.push("/error");
-}
+onMounted(() => {
+  if (!isAuthenticated.value) {
+    console.log("User is not authenticated");
+    router.push("/error");
+  }
+});
 </script>
 
 <style scoped>
