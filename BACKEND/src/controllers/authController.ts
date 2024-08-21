@@ -29,7 +29,7 @@ export const loginUser = async (req: Request, res: Response) => {
         .json({ message: "La contraseña proporcionada no es válida." });
     }
   } catch (error) {
-    res.status(500).json({ message: "Failed to login", error });
+    res.status(500).json({ message: "Se produjo un error inesperado al intentar iniciar sesión", error });
   }
 };
 
