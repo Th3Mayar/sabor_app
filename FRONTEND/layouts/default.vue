@@ -8,11 +8,6 @@
     </main>
   </div>
   <div v-else>
-    <AccessForbidden
-      error=404
-      title="Access Forbidden"
-      message="You don't have permission to access this page."
-    />
   </div>
 </template>
 
@@ -20,7 +15,6 @@
 import { useRouter } from "vue-router";
 import { useAuth } from "@/composables/useAuth";
 import NavBar from "@/components/template/Navbar.vue";
-import AccessForbidden from "@/components/molecule/errors/AccessForbidden.vue";
 
 const { isAuthenticated } = useAuth();
 const router = useRouter();

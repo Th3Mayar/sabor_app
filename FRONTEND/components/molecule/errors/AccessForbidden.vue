@@ -3,24 +3,41 @@
     <h1>{{ error }}</h1>
     <h2>{{ title }}</h2>
     <h5>{{ message }}</h5>
+    <Button
+      type="submit"
+      variant="whiteWithOrange"
+      class="mt-5 w-32 animationReboot"
+      @click="loginPage"
+    >
+      Go Back <Icon name="ArrowLeft" size="24" />
+    </Button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { defineProps } from "vue";
+import Button from "@/components/atoms/Button.vue";
+import Icon from "@/components/atoms/IconByName.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const props = defineProps<{
-  error: number;
+  error: string;
   title: string;
   message: string;
 }>();
+
+const loginPage = () => {
+  router.push("auth/login");
+};
 </script>
 
 <style scoped>
 body {
   .base {
     width: 100%;
-    height: 100vh;
+    height: 90vh;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -46,11 +63,11 @@ body {
       &:before {
         content: "U";
         position: absolute;
-        top: -10%;
+        top: -15%;
         right: 34%;
         transform: rotate(180deg);
-        font-size: 15vw;
-        color: var(--button-primary);
+        font-size: 15.05vw;
+        color: var(--alertWarningBg);
         z-index: -1;
         text-align: center;
         animation: lock 0.2s ease-in-out forwards;
@@ -61,7 +78,7 @@ body {
       font-family: "Cabin", sans-serif;
       color: var(--button-primary);
       font-size: 5vw;
-      margin: 0;
+      margin-top: -100px;
       text-transform: uppercase;
       text-align: center;
       animation: colors 0.4s ease-in-out forwards;
@@ -76,8 +93,8 @@ body {
       text-align: center;
       opacity: 0;
       animation: show 2s ease-in-out forwards;
-      color: var(--text-variant-3);
-      animation-delay: 3s;
+      color: var(--state-variant);
+      animation-delay: 2s;
       -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     }
   }
@@ -104,6 +121,22 @@ body {
 @keyframes show {
   100% {
     opacity: 1;
+  }
+}
+
+.animationReboot {
+  animation: reboot 1s ease-in-out infinite;
+}
+
+@keyframes reboot {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 </style>

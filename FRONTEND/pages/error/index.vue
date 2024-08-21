@@ -1,6 +1,6 @@
 <template>
   <AccessForbidden
-    error=404
+    error="404"
     title="Access Forbidden"
     message="You don't have permission to access this page."
   />
