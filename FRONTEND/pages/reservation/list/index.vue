@@ -17,30 +17,10 @@
 <script setup lang="ts">
 import Table from "@/components/template/Table.vue";
 import { ref, onMounted } from "vue";
-import type { LocalTableColumn } from "@/types/Table";
 import { urlAPI } from "~/composables/api/url";
 
-// Definir columnas de la tabla en el formato especificado
-const columns = ref<LocalTableColumn[]>([
-  { headerName: "ID Ticket", field: "id", type: "text", filterable: true },
-  { headerName: "Fecha", field: "fecha", type: "text", filterable: true },
-  { headerName: "Horario", field: "horario", type: "text", filterable: true },
-  {
-    headerName: "N° Personas",
-    field: "numPersonas",
-    type: "text",
-    filterable: true,
-  },
-  {
-    headerName: "Estado",
-    field: "status",
-    type: "select",
-    filterable: true,
-    options: ["Pendiente", "Asistio", "Cancelado"],
-  },
-]);
-
 // Definir filas de la tabla
+const columns = ref([]);
 const rows = ref([]);
 
 // Obtener data del backend cuando el componente se monta
@@ -58,14 +38,9 @@ onMounted(async () => {
     if (response.ok) {
       const data = await response.json();
 
-      // Mapear la data para estructurarla en filas
-      rows.value = data.map((item: any) => ({
-        id: item.reservation_id,
-        fecha: item.reservation_details.reservation_date || item.reservation_details.date,
-        horario: item.reservation_details.time,
-        numPersonas: item.reservation_details.people_count || item.reservation_details.guest_count,
-        status: mapStatus(item.state_id),
-      }));
+      // Asignar las columnas y las filas recibidas del backend
+      columns.value = data.columns;
+      rows.value = data.rows;
     } else {
       console.error("Error en la respuesta del servidor:", response.statusText);
     }
@@ -73,18 +48,4 @@ onMounted(async () => {
     console.error("Error al obtener las reservas:", error);
   }
 });
-
-// Función para mapear el estado según state_id
-function mapStatus(state_id: number): string {
-  switch (state_id) {
-    case 1:
-      return "Pendiente";
-    case 2:
-      return "Asistio";
-    case 3:
-      return "Cancelado";
-    default:
-      return "Desconocido";
-  }
-}
 </script>
