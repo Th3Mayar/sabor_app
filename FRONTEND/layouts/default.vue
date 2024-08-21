@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isAuthenticated">
+  <div v-if="isAuthenticated" class="flex flex-row">
     <NavBar />
     <main class="bg-mainContent w-[98.5%] h-[89vh] mt-[54px] p-5">
       <div>

@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
+import { useRoute } from "vue-router";
 
 interface ListProps {
   variant?:
@@ -29,13 +30,12 @@ interface ListProps {
 }
 
 const props = defineProps<ListProps>();
-
 const route = useRoute();
 
 const listVariants = {
   variant: {
     default:
-      "bg-white/10 text-white hover:bg-white/20 border border-transparent rounded-xl backdrop-blur-md shadow-lg p-4 transition duration-300 ease-in-out transform hover:translate-y-[-2px] hover:shadow-2xl",
+      "bg-white/10 text-background hover:bg-white/20 border border-transparent rounded-xl backdrop-blur-md shadow-lg p-4 transition duration-300 ease-in-out transform hover:translate-y-[-2px] hover:shadow-2xl",
     secondary: "bg-buttonSecondary text-white hover:bg-buttonSecondary/90",
     success: "bg-buttonSuccess text-white hover:bg-buttonSuccess/90",
     danger: "bg-buttonDanger text-white hover:bg-buttonDanger/90",
@@ -56,23 +56,29 @@ const listVariants = {
 const listClasses = computed(() => {
   const variantClass = listVariants.variant[props.variant || "default"];
   const isActiveRoute = route.path === props.route;
-  const activeClass = props.active || isActiveRoute
+
+  const activeClass = isActiveRoute
     ? "bg-buttonPrimary/40 hover:bg-buttonPrimary/50"
     : "";
 
   return [
     "flex items-center p-4 rounded-lg cursor-pointer transition-colors focus:outline-none",
-    variantClass,
-    activeClass,
+    activeClass || variantClass,
+    "border border-transparent rounded-xl backdrop-blur-md shadow-lg p-4 transition duration-300 ease-in-out transform hover:translate-y-[-2px] hover:shadow-2xl",
     props.disabled ? "opacity-50 cursor-not-allowed" : "",
   ].join(" ");
 });
 
-
 const handleClick = (event: MouseEvent) => {
   if (!props.disabled && props.onClick) {
-    const path = event.view.location.pathname;
     props.onClick(event);
   }
 };
+
+watch(
+  () => route.path,
+  () => {
+    // console.log(`Route changed to: ${route.path}`);
+  }
+);
 </script>
