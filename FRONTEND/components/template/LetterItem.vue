@@ -3,7 +3,7 @@
       class="menu-container bg-contentBackground p-6 rounded-lg shadow-lg h-[max-content]"
     >
       <!-- Título de la Carta -->
-      <h1 class="text-3xl font-bold mb-4 text-textPrimary font-poppins">{{ title }}</h1>
+      <h1 class="text-left font-bold text-2xl mb-5 pl-2 font-poppins text-textPrimary">{{ title }}</h1>
   
       <!-- Sección de Especialidad -->
       <div

@@ -34,7 +34,7 @@
             <Icon name="BookOpen" size="24" color="white" class="mr-2" />
             <span>Ver Carta</span>
           </List>
-          <List variant="default" route="/settings">
+          <List variant="default" route="/settings" @click="settings">
             <Icon name="Settings" size="24" color="white" class="mr-2" />
             <span>Configuración</span>
           </List>
@@ -85,6 +85,10 @@ const letter = () => {
 const reservationList = () => {
   router.push("/reservation/list");
 };
+
+const settings = () => {
+  router.push('/settings');
+}
 </script>
 
 <style scoped>
@@ -126,7 +130,18 @@ nav > * {
   transition: transform 0.3s ease-in-out;
 }
 
-.slide-enter,
+.slide-enter {
+  transform: translateX(-100%);
+}
+
+.slide-enter-to {
+  transform: translateX(0);
+}
+
+.slide-leave-active {
+  transition: transform 0.3s ease-in-out;
+}
+
 .slide-leave-to {
   transform: translateX(-100%);
 }
