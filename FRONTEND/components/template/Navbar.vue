@@ -22,19 +22,19 @@
 
         <!-- Navigation Items -->
         <div class="flex flex-col space-y-4 w-full px-4">
-          <List variant="default" route="/reservation" @click="reservation">
+          <List variant="default" route="/reservation" @click="() => router.push('/reservation')">
             <Icon name="PlusCircle" size="24" color="white" class="mr-2" />
             <span>Crear Reserva</span>
           </List>
-          <List variant="default" route="/reservation/list" @click="reservationList">
+          <List variant="default" route="/reservation/list" @click="() => router.push('/reservation/list')">
             <Icon name="Search" size="24" color="white" class="mr-2" />
             <span>Mis Reservas</span>
           </List>
-          <List variant="default" route="/letter" @click="letter">
+          <List variant="default" route="/letter" @click="() => router.push('/letter')">
             <Icon name="BookOpen" size="24" color="white" class="mr-2" />
             <span>Ver Carta</span>
           </List>
-          <List variant="default" route="/settings" @click="settings">
+          <List variant="default" route="/settings" @click="() => router.push('/settings')">
             <Icon name="Settings" size="24" color="white" class="mr-2" />
             <span>Configuración</span>
           </List>
@@ -56,7 +56,7 @@ import ImageComponent from "@/components/atoms/ImageByName.vue";
 import List from "@/components/molecule/List.vue";
 
 const isMenuVisible = ref(true);
-const isDark = ref(false); // Declare the 'isDark' property
+const isDark = ref(false); 
 const router = useRouter();
 
 const toggleMenu = () => {
@@ -74,21 +74,6 @@ const logout = () => {
   router.push("/auth/login");
 };
 
-const reservation = () => {
-  router.push("/reservation");
-};
-
-const letter = () => {
-  router.push("/letter");
-};
-
-const reservationList = () => {
-  router.push("/reservation/list");
-};
-
-const settings = () => {
-  router.push('/settings');
-}
 </script>
 
 <style scoped>

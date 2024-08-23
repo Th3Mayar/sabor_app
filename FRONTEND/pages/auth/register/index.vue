@@ -2,8 +2,11 @@
   <div
     class="min-h-screen flex items-center justify-center p-4 bg-cover bgContent"
   >
-    <div class="absolute inset-0 bg-black bg-opacity-60 rounded-3xl"></div>
-    <div class="bg-background rounded-3xl shadow-lg w-full max-w-max z-50">
+    <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+    <div
+      ref="container"
+      class="bg-background/80 rounded-3xl shadow-lg w-full max-w-max z-50 opacity-0"
+    >
       <div class="flex flex-col justify-center items-center text-center">
         <ImageComponent name="saborApp2" size="150" />
         <h2 class="text-3xl font-bold mt-4">Registro</h2>
@@ -114,7 +117,8 @@
         class="flex justify-end border-t pt-4 text-sm bg-contentButton p-5 rounded-b-3xl"
       >
         <Link
-          href="/login"
+          href="/auth/login"
+          @click="() => router.push('/auth/login')"
           variant="default"
           class="hover:underline flex gap-2 text-textPrimary"
         >
@@ -160,6 +164,14 @@ const registerUser = async (e) => {
   // }
 };
 
+const container = ref(null);
+
+onMounted(() => {
+  if (container.value) {
+    container.value.classList.add('fade-in-slide-down');
+  }
+});
+
 definePageMeta({
   layout: "authLayout",
 });
@@ -172,5 +184,73 @@ definePageMeta({
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
+  animation: moveBackground 15s infinite linear;
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: center top;
+  }
+  50% {
+    background-position: center bottom;
+  }
+  100% {
+    background-position: center top;
+  }
+}
+
+.bgContent::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes pulse-active {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+.focus\:animate-pulse-active {
+  animation: pulse-active 0.5s forwards;
+}
+
+@keyframes fadeInSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px)
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-slide-down {
+  animation: fadeInSlideDown 0.5s ease-out forwards;
 }
 </style>

@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 interface ListProps {
   variant?:
@@ -31,6 +31,7 @@ interface ListProps {
 
 const props = defineProps<ListProps>();
 const route = useRoute();
+const router = useRouter();
 
 const listVariants = {
   variant: {
@@ -70,15 +71,25 @@ const listClasses = computed(() => {
 });
 
 const handleClick = (event: MouseEvent) => {
-  if (!props.disabled && props.onClick) {
-    props.onClick(event);
+  if (!props.disabled) {
+    if (props.route) {
+      router.push(props.route); 
+    }
+    if (props.onClick) {
+      props.onClick(event);
+    }
   }
 };
 
 watch(
   () => route.path,
   () => {
-    // console.log(`Route changed to: ${route.path}`);
+    if (props.route) {
+      const isActiveRoute = route.path === props.route;
+      if (isActiveRoute) {
+        router.push(props.route);
+      }
+    }
   }
 );
 </script>

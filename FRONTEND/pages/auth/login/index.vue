@@ -6,11 +6,12 @@
     </div>
 
     <!-- Header -->
-    <header class="relative w-full">
+    <header class="relative w-full z-50">
       <div class="overflow-hidden rounded-t-3xl">
         <ImageComponent
+          ref="headerImage"
           name="welcome"
-          class="w-full h-44 object-cover rounded-t-3xl"
+          class="w-full h-40 object-cover rounded-t-3xl"
         />
       </div>
       <div class="absolute inset-0 bg-black bg-opacity-60 rounded-t-3xl"></div>
@@ -18,10 +19,11 @@
 
     <!-- Main Content -->
     <section
-      class="flex-grow flex items-center justify-center bg-mainContent py-12"
+      class="flex-grow flex items-center justify-center bg-mainContent py-12 opacity-0 z-0"
+      ref="mainSection"
     >
       <div class="bg-background rounded-3xl shadow-lg p-4 w-full max-w-md">
-        <div class="flex flex-col justify-center items-center text-center mb-6">
+        <div class="flex flex-col justify-center items-center text-center mb-5">
           <ImageComponent name="saborApp2" size="200" />
           <h2 class="text-2xl font-semibold mt-4">Bienvenido</h2>
         </div>
@@ -36,11 +38,7 @@
               <Icon name="Asterisk" size="15" color="red" />
             </label>
             <div class="relative flex justify-center items-center">
-              <Icon
-                name="User"
-                size="20"
-                class="absolute left-3"
-              />
+              <Icon name="User" size="20" class="absolute left-3" />
               <InputComponent
                 type="email"
                 name="email"
@@ -57,11 +55,7 @@
               <Icon name="Asterisk" size="15" color="red" />
             </label>
             <div class="relative flex justify-center items-center">
-              <Icon
-                name="Lock"
-                size="20"
-                class="absolute left-3"
-              />
+              <Icon name="Lock" size="20" class="absolute left-3" />
               <InputComponent
                 name="password"
                 id="password"
@@ -96,7 +90,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useLoading } from "@/composables/useLoading";
 import * as yup from "yup";
@@ -118,8 +112,9 @@ const schema = yup.object({
 const router = useRouter();
 const showAlert = ref(false);
 const alertMessage = ref("");
+const headerImage = ref(null);
 
-const { isLoading, startLoading, stopLoading } = useLoading(); 
+const { isLoading, startLoading, stopLoading } = useLoading();
 const isAuthenticated = ref(false);
 
 async function handleSubmit(values: { email: string; password: string }) {
@@ -150,8 +145,33 @@ async function handleSubmit(values: { email: string; password: string }) {
   }
 }
 
+const mainSection = ref(null);
+
+onMounted(() => {
+  if (mainSection.value) {
+    mainSection.value.classList.add("slide-down-fade-in");
+  }
+});
+
 definePageMeta({
   layout: "auth-layout",
-  middleware: 'auth'
+  middleware: "auth",
 });
 </script>
+
+<style scoped>
+@keyframes slideDownFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px); 
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-down-fade-in {
+  animation: slideDownFadeIn 0.6s ease-out forwards;
+}
+</style>

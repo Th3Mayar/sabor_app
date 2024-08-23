@@ -87,13 +87,13 @@ body {
     }
     h5 {
       font-family: "Cabin", sans-serif;
-      color: var(--button-primary);
+      color: var(--text-variant-1);
       font-size: 2vw;
       margin: 0;
       text-align: center;
       opacity: 0;
       animation: show 2s ease-in-out forwards;
-      color: var(--state-variant);
+      color: var( --table-action-bg);
       animation-delay: 2s;
       -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     }

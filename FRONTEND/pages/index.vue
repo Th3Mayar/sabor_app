@@ -4,11 +4,11 @@
   >
     <!-- Center Content -->
     <div class="text-center z-50">
-      <h1 class="text-background text-xl md:text-2xl">
+      <h1 ref="title" class="text-background text-xl md:text-2xl">
         Restaurante de {{ country }}
       </h1>
 
-      <h2 class="text-background md:text-6xl font-bold mt-2">
+      <h2 ref="subtitle" class="text-background md:text-6xl font-bold mt-2">
         {{ name }}
       </h2>
 
@@ -46,37 +46,49 @@
 <script setup>
 import Button from "@/components/atoms/Button.vue";
 import ImageComponent from "@/components/atoms/ImageByName.vue";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 
 const country = ref("Pais");
 const name = ref("Nombre");
+const validationToken = ref(false);
+
+onMounted(() => {
+  const token = localStorage.getItem("token");
+  validationToken.value = token !== null;
+
+  subtitle.value.classList.add('zoom-bounce');
+});
+
+const title = ref(null);
+const subtitle = ref(null);
 
 country.value = "Colombia";
 name.value = "SaborApp";
 
 const reservation = () => {
+  if (!validationToken.value) return router.push("/auth/register");
   router.push("/reservation");
 };
 
 const viewletter = () => {
+  if (!validationToken.value) return router.push("/auth/register");
   router.push("/letter");
 };
 
-const login = () => {
-  router.push("/auth/login");
-};
-
 const register = () => {
-  router.push("/auth/register");
+  if (localStorage.getItem("token") === null) {
+    router.push("/auth/register");
+  } else {
+    router.push("/auth/register");
+  }
 };
 
 definePageMeta({
   layout: "homeLayout",
 });
-
 </script>
 
 <style scoped>
@@ -140,6 +152,38 @@ definePageMeta({
 .focus\:animate-pulse-active {
   animation: pulse-active 0.5s forwards;
 }
+
+@keyframes zoomBounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  70% {
+    transform: scale(0.95); 
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px);
+  }
+}
+
+.zoom-bounce {
+  animation: zoomBounce 0.6s ease-out forwards, shake 0.6s ease-in-out 0.6s;
+}
+
 
 h2 {
   text-shadow: 5px 2px 20px rgba(255, 255, 255, 0.5);
