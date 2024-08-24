@@ -11,7 +11,12 @@
           <th
             v-for="(column, index) in columns"
             :key="column.field"
-            class="relative px-6 py-3 bg-buttonSecondary text-left text-xs sm:text-sm font-semibold text-background uppercase tracking-wider first:rounded-tl-2xl cursor-pointer"
+            :class="[
+              'relative px-6 py-3 bg-buttonSecondary text-left text-xs sm:text-sm font-semibold text-background uppercase tracking-wider first:rounded-tl-2xl cursor-pointer',
+              draggedColumnIndex === index ? 'bg-column-selected' : '',
+              savingColumnIndex === index ? 'bg-saving' : ''
+            ]"
+            v-if="column.field !== 'action'"
             draggable="true"
             @click="toggleFilter(index)"
             @dragstart="dragStart($event, index)"
@@ -23,23 +28,15 @@
               <Icon name="Move" size="16" color="white" />
               <span>{{ column.headerName }}</span>
             </div>
-            <div
-              v-if="showFilterIndex === index"
-              class="absolute top-full left-0 w-full bg-background p-2 shadow-lg z-10"
-            >
-            </div>
           </th>
           <th
-            v-if="!isLoading"
-            class="px-6 py-3 bg-buttonSecondary text-left text-xs sm:text-sm font-semibold text-background uppercase tracking-wider rounded-tr-lg cursor-pointer"
-            draggable="true"
-            @dragstart="dragStart($event, columns.length)"
-            @dragover.prevent
-            @drop="drop(columns.length)"
-            @dragend="dragEnd"
+            v-else
+            :class="[
+              'px-6 py-3 bg-buttonSecondary text-left text-xs sm:text-sm font-semibold text-background uppercase tracking-wider rounded-tr-lg cursor-pointer'
+            ]"
           >
             <div class="flex items-center space-x-2">
-              <Icon name="Move" size="16" color="white" />
+              <Icon name="Pin" size="16" color="white" />
               <span>Acción</span>
             </div>
           </th>
@@ -52,9 +49,12 @@
           class="bg-background border-b border-mainContent hover:mainContent"
         >
           <td
-            v-for="column in columns"
+            v-for="(column, colIndex) in columns"
             :key="column.field"
-            class="px-6 py-4 text-xs sm:text-sm text-textPrimary whitespace-nowrap"
+            :class="[
+              'px-6 py-4 text-xs sm:text-sm text-textPrimary whitespace-nowrap',
+              savingColumnIndex === colIndex && column.field !== 'action' ? 'bg-saving-cell' : ''
+            ]"
           >
             <div
               v-if="column.field === 'status'"
@@ -93,8 +93,10 @@ import Button from "@/components/atoms/Button.vue";
 import Icon from "@/components/atoms/IconByName.vue";
 import type { LocalTableColumn, LocalTableRow } from "@/types/Table";
 import TableSkeleton from "@/components/organism/TableSkeleton.vue";
+import { urlAPI } from "~/composables/api/url";
 
 const isLoading = ref(true);
+const savingColumnIndex = ref<number | null>(null); // Para controlar el índice de la columna que se está guardando
 
 const props = defineProps<{
   columns?: LocalTableColumn[];
@@ -113,59 +115,91 @@ const dragStart = (event: DragEvent, index: number) => {
   draggedColumnIndex.value = index;
   document.body.classList.add("cursor-dragging");
   event.dataTransfer!.dropEffect = "move";
-  const th = event.target as HTMLElement;
-  th.style.backgroundColor = "var(--button-primary)";
 };
 
 const dragEnd = () => {
   document.body.classList.remove("cursor-dragging");
-  saveColumnOrder();
+  draggedColumnIndex.value = null;
 };
 
 const drop = (index: number) => {
   if (draggedColumnIndex.value !== null) {
-    if (draggedColumnIndex.value >= props.columns.length) {
-      const actionColumn = "Acción";
-      const draggedColumn = props.columns.splice(draggedColumnIndex.value, 1)[0];
-      props.columns.splice(index, 0, draggedColumn);
-    } else {
-      const draggedColumn = props.columns.splice(draggedColumnIndex.value, 1)[0];
-      props.columns.splice(index, 0, draggedColumn);
-    }
+    const draggedColumn = props.columns.splice(draggedColumnIndex.value, 1)[0];
+    props.columns.splice(index, 0, draggedColumn);
     draggedColumnIndex.value = null;
+    saveColumnOrder(props.columns, index);
   }
 };
 
-const saveColumnOrder = () => {
-  localStorage.setItem("tableColumnOrder", JSON.stringify(props.columns));
-  const ths = document.querySelectorAll("th");
-  ths.forEach((th) => {
-    (th as HTMLElement).style.backgroundColor = "";
-  });
-};
+const saveColumnOrder = async (columns, index) => {
+  savingColumnIndex.value = index; // Marcar la columna que se está guardando
 
-const loadColumnOrder = () => {
-  const savedColumns = localStorage.getItem("tableColumnOrder");
-  if (savedColumns) {
-    props.columns.splice(0, props.columns.length, ...JSON.parse(savedColumns));
+  try {
+    const response = await fetch(`${urlAPI}/column-order`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
+      },
+      body: JSON.stringify({ columns }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to save column order");
+    }
+
+    const data = await response.json();
+    console.log("Column order saved successfully:", data);
+  } catch (error) {
+    console.error("Error:", error);
+  } finally {
+    savingColumnIndex.value = null; // Resetear el estado de la columna que se estaba guardando
   }
 };
 
-onMounted(() => {
-  loadColumnOrder();
-  setTimeout(() => {
-    isLoading.value = false;
-  }, 2000);
+const getColumnOrder = async () => {
+  try {
+    const response = await fetch(`${urlAPI}/column-order`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to load column order");
+    }
+
+    const columns = await response.json();
+    if (columns && props.columns) {
+      props.columns.splice(0, props.columns.length, ...columns);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+onMounted(async () => {
+  await getColumnOrder();
+  isLoading.value = false;
 });
 
 const getStatusClass = (status: string) => {
+  console.log("Status:", status);
   switch (status) {
     case "Pendiente":
       return "bg-alertWarningBg text-white px-4 py-2 rounded-[30px] text-center";
-    case "Asistio":
+    case "Atendido":
       return "bg-buttonSuccess text-white px-4 py-2 rounded-[30px] text-center";
     case "Cancelado":
       return "bg-buttonDanger text-white px-4 py-2 rounded-[30px] text-center";
+    case "Activo":
+      return "bg-buttonPrimary text-white px-4 py-2 rounded-[30px] text-center";
+    case "Inactivo":
+      return "bg-buttonSecondary text-white px-4 py-2 rounded-[30px] text-center";
+    case "En revision" || "En revisión":
+      return "bg-buttonWarning text-white px-4 py-2 rounded-[30px] text-center";
     default:
       return "bg-mainContent text-dark-background px-4 py-2 rounded-[30px] text-center";
   }
@@ -204,3 +238,26 @@ const filteredRows = computed(() => {
   });
 });
 </script>
+
+<style scoped>
+.bg-column-selected {
+  background-color: #ffb300 !important;
+}
+
+.bg-saving {
+  animation: savingAnimation 1s infinite alternate;
+}
+
+@keyframes savingAnimation {
+  0% {
+    background-color: #4caf50;
+  }
+  100% {
+    background-color: #388e3c;
+  }
+}
+
+.bg-saving-cell {
+  background-color: rgba(76, 175, 80, 0.2) !important;
+}
+</style>

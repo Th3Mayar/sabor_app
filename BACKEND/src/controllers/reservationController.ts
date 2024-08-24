@@ -17,7 +17,12 @@ export async function getAllReservations(
     const columns = [
       { headerName: "ID Ticket", field: "id", type: "text", filterable: true },
       { headerName: "Fecha", field: "fecha", type: "text", filterable: true },
-      { headerName: "Horario", field: "horario", type: "text", filterable: true },
+      {
+        headerName: "Horario",
+        field: "horario",
+        type: "text",
+        filterable: true,
+      },
       {
         headerName: "N° Personas",
         field: "numPersonas",
@@ -35,9 +40,13 @@ export async function getAllReservations(
 
     const rows = reservations.map((reservation: any) => ({
       id: reservation.reservation_id,
-      fecha: reservation.reservation_details.reservation_date || reservation.reservation_details.date,
+      fecha:
+        reservation.reservation_details.reservation_date ||
+        reservation.reservation_details.date,
       horario: reservation.reservation_details.time,
-      numPersonas: reservation.reservation_details.people_count || reservation.reservation_details.guest_count,
+      numPersonas:
+        reservation.reservation_details.people_count ||
+        reservation.reservation_details.guest_count,
       status: mapStatus(reservation.state_id),
     }));
 
@@ -52,9 +61,15 @@ function mapStatus(state_id: number): string {
     case 1:
       return "Pendiente";
     case 2:
-      return "Asistio";
+      return "Atendido";
     case 3:
       return "Cancelado";
+    case 4:
+      return "Activo";
+    case 5:
+      return "Inactivo";
+    case 6:
+      "En revisión";
     default:
       return "Desconocido";
   }

@@ -5,6 +5,8 @@ import {
   createUser,
   updateUser,
   deleteUser,
+  saveColumnOrder,
+  getColumnOrder,
 } from "../controllers/userController.js";
 import { authenticateJWT } from "../middlewares/authMiddleware.js";
 
@@ -15,5 +17,7 @@ router.get("/users/:id", authenticateJWT, getUser);
 router.post("/users", createUser);
 router.put("/users/:id", authenticateJWT, updateUser);
 router.delete("/users/:id", authenticateJWT, deleteUser);
+router.get('/column-order', authenticateJWT, getColumnOrder);
+router.post('/column-order', authenticateJWT, saveColumnOrder);
 
 export default router;

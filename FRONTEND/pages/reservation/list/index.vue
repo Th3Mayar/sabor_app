@@ -1,6 +1,6 @@
 <template>
   <div
-    class="menu-container bg-contentBackground p-6 rounded-lg shadow-lg h-[max-content]"
+    class="bg-contentBackground p-6 rounded-lg shadow-lg h-[max-content]"
   >
     <!-- Título -->
     <h1 class="text-left font-bold text-2xl mb-5 pl-2 font-poppins">
