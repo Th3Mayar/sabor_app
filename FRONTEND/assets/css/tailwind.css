@@ -3,102 +3,159 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Poppins';
-  src: url('/fonts/Poppins-Regular.woff2') format('woff2');
+  font-family: "Poppins";
+  src: url("/fonts/Poppins-Regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
-:root {
-  --theme-color: #ffffff; /* Cambiado a Indigo de Tailwind */
-  --background: #FFFFFF; /* Blanco */
-  --main-content: #F0F4F8; /* Light grayish blue */
-  --button-primary: #EF6C00; /* Original vibrant orange */
-  --button-secondary: #FFA000; /* Original bright yellow-orange */
-  --dropdown-button: #00BCD4; /* Cyan */
-  --content-background: #FAFAFA; /* Very light gray */
-  --button-variant: #5C6BC0; /* Indigo */
-  --button-success: #4CAF50; /* Green */
-  --button-danger: #F44336; /* Red */
-  --text-variant-1: #78909C; /* Cool gray */
-  --text-variant-2: #546E7A; /* Slate gray */
-  --text-primary: #212121; /* Almost black */
-  --alert-success-bg: #388E3C; /* Deep green */
-  --alert-success-effect: #2E7D32; /* Slightly darker green */
-  --alert-error-bg: #D32F2F; /* Dark red */
-  --alert-error-effect: #C62828; /* Even darker red */
-  --alert-info-bg: #1976D2; /* Blue */
-  --alert-info-effect: #1565C0; /* Darker blue */
-  --alert-warning-bg: #FBC02D; /* Yellow */
-  --alert-warning-effect: #F9A825; /* Darker yellow */
-  --shadow: #424242; /* Dark gray */
-  --list-option: #FF9800; /* Orange */
-  --list-option-effect: #FEA33B; /* Darker orange */
-  --order-success-bg: #43A047; /* Strong green */
-  --table-cell-bg: #E0E0E0; /* Light gray */
-  --state-option-bg: #388E3C; /* Green */
-  --table-action-bg: #455A64; /* Blue-gray */
-  --button-variant-secondary: #FFEB3B; /* Bright yellow */
-  --text-variant-3: #303F9F; /* Indigo */
-  --text-variant-4: #212121; /* Almost black */
-  --state-variant: #8E24AA; /* Purple */
-  --button-variant-tertiary: #0288D1; /* Light blue */
+@layer base {
+  :root {
+    /* --background-shadcn: 0 0% 100%; */
+    --foreground: 222.2 84% 4.9%;
 
-  /* Dark mode colors */
-  --dark-background: #121212; /* Dark gray */
-  --dark-main-content: #1C1C1C; /* Very dark gray */
-  --dark-button-primary: #DD6B20; /* Soft orange */
-  --dark-button-secondary: #ED8936; /* Yellow-orange */
-  --dark-dropdown-button: #26C6DA; /* Cyan */
-  --dark-content-background: #212121; /* Darker gray */
-  --dark-text-primary: #E0E0E0; /* Light gray */
-  --dark-alert-success-bg: #43A047; /* Green */
-  --dark-alert-error-bg: #EF5350; /* Soft red */
-  --dark-alert-info-bg: #42A5F5; /* Light blue */
-  --dark-alert-warning-bg: #FFA726; /* Light orange */
-  --dark-shadow: #000000; /* Black */
-}
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-.dark {
-  --theme-color: #9fa8da; /* Light Indigo, para un contraste más suave */
-  --background: #ffffff; /* Muy oscuro para el fondo principal */
-  --main-content: #1E1E1E; /* Gris oscuro para el contenido principal */
-  --button-primary: #ff9800; /* Naranja más suave para destacar en el fondo oscuro */
-  --button-secondary: #ffb74d; /* Amarillo-naranja suave */
-  --dropdown-button: #26c6da; /* Cyan claro para mayor contraste */
-  --content-background: #1a1a1a; /* Fondo de contenido más oscuro */
-  --button-variant: #7986cb; /* Indigo más claro para botones secundarios */
-  --button-success: #66bb6a; /* Verde más suave */
-  --button-danger: #e57373; /* Rojo más suave */
-  --text-variant-1: #b0bec5; /* Gris claro para texto secundario */
-  --text-variant-2: #90a4ae; /* Gris ligeramente más oscuro */
-  --text-primary: #e0e0e0; /* Blanco grisáceo para texto principal */
-  --alert-success-bg: #388e3c; /* Verde fuerte para alertas */
-  --alert-success-effect: #2e7d32; /* Verde un poco más oscuro */
-  --alert-error-bg: #d32f2f; /* Rojo fuerte para errores */
-  --alert-error-effect: #c62828; /* Rojo más oscuro */
-  --alert-info-bg: #1976d2; /* Azul fuerte para información */
-  --alert-info-effect: #1565c0; /* Azul un poco más oscuro */
-  --alert-warning-bg: #fbc02d; /* Amarillo fuerte para advertencias */
-  --alert-warning-effect: #f9a825; /* Amarillo más oscuro */
-  --shadow: #000000; /* Sombra completamente negra */
-  --list-option: #ffa726; /* Naranja suave para listas */
-  --list-option-effect: #fb8c00; /* Naranja más oscuro para efecto */
-  --order-success-bg: #43a047; /* Verde fuerte para confirmación de orden */
-  --table-cell-bg: #37474f; /* Gris oscuro para celdas de tabla */
-  --state-option-bg: #388e3c; /* Verde fuerte para opciones de estado */
-  --table-action-bg: #546e7a; /* Azul grisáceo oscuro para acciones de tabla */
-  --button-variant-secondary: #ffd54f; /* Amarillo suave para botones secundarios */
-  --text-variant-3: #7986cb; /* Indigo más claro para textos secundarios */
-  --text-variant-4: #ffffff; /* Blanco para textos más destacados */
-  --state-variant: #ba68c8; /* Púrpura suave para variantes de estado */
-  --button-variant-tertiary: #29b6f6; /* Azul más claro para botones terciarios */
-}
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
 
-body {
-  background-color: var(--background);
-  color: var(--text-primary);
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+
+    --theme-color: #ffffff; /* Cambiado a Indigo de Tailwind */
+    --background: #ffffff; /* Blanco */
+    --main-content: #f0f4f8; /* Light grayish blue */
+    --button-primary: #ef6c00; /* Original vibrant orange */
+    --button-secondary: #ffa000; /* Original bright yellow-orange */
+    --dropdown-button: #00bcd4; /* Cyan */
+    --content-background: #fafafa; /* Very light gray */
+    --button-variant: #5c6bc0; /* Indigo */
+    --button-success: #4caf50; /* Green */
+    --button-danger: #f44336; /* Red */
+    --text-variant-1: #78909c; /* Cool gray */
+    --text-variant-2: #546e7a; /* Slate gray */
+    --text-primary: #212121; /* Almost black */
+    --alert-success-bg: #388e3c; /* Deep green */
+    --alert-success-effect: #2e7d32; /* Slightly darker green */
+    --alert-error-bg: #d32f2f; /* Dark red */
+    --alert-error-effect: #c62828; /* Even darker red */
+    --alert-info-bg: #1976d2; /* Blue */
+    --alert-info-effect: #1565c0; /* Darker blue */
+    --alert-warning-bg: #fbc02d; /* Yellow */
+    --alert-warning-effect: #f9a825; /* Darker yellow */
+    --shadow: #424242; /* Dark gray */
+    --list-option: #ff9800; /* Orange */
+    --list-option-effect: #fea33b; /* Darker orange */
+    --order-success-bg: #43a047; /* Strong green */
+    --table-cell-bg: #e0e0e0; /* Light gray */
+    --state-option-bg: #388e3c; /* Green */
+    --table-action-bg: #455a64; /* Blue-gray */
+    --button-variant-secondary: #ffeb3b; /* Bright yellow */
+    --text-variant-3: #303f9f; /* Indigo */
+    --text-variant-4: #212121; /* Almost black */
+    --state-variant: #8e24aa; /* Purple */
+    --button-variant-tertiary: #0288d1; /* Light blue */
+
+    /* Dark mode colors */
+    --dark-background: #121212; /* Dark gray */
+    --dark-main-content: #1c1c1c; /* Very dark gray */
+    --dark-button-primary: #dd6b20; /* Soft orange */
+    --dark-button-secondary: #ed8936; /* Yellow-orange */
+    --dark-dropdown-button: #26c6da; /* Cyan */
+    --dark-content-background: #212121; /* Darker gray */
+    --dark-text-primary: #e0e0e0; /* Light gray */
+    --dark-alert-success-bg: #43a047; /* Green */
+    --dark-alert-error-bg: #ef5350; /* Soft red */
+    --dark-alert-info-bg: #42a5f5; /* Light blue */
+    --dark-alert-warning-bg: #ffa726; /* Light orange */
+    --dark-shadow: #000000; /* Black */
+  }
+
+  .dark {
+    /* --background-shadcn: 222.2 84% 4.9%; */
+    --foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --ring: 212.7 26.8% 83.9%;
+
+    --theme-color: #9fa8da; /* Light Indigo, para un contraste más suave */
+    --background: #ffffff; /* Muy oscuro para el fondo principal */
+    --main-content: #1e1e1e; /* Gris oscuro para el contenido principal */
+    --button-primary: #ff9800; /* Naranja más suave para destacar en el fondo oscuro */
+    --button-secondary: #ffb74d; /* Amarillo-naranja suave */
+    --dropdown-button: #26c6da; /* Cyan claro para mayor contraste */
+    --content-background: #1a1a1a; /* Fondo de contenido más oscuro */
+    --button-variant: #7986cb; /* Indigo más claro para botones secundarios */
+    --button-success: #66bb6a; /* Verde más suave */
+    --button-danger: #e57373; /* Rojo más suave */
+    --text-variant-1: #b0bec5; /* Gris claro para texto secundario */
+    --text-variant-2: #90a4ae; /* Gris ligeramente más oscuro */
+    --text-primary: #e0e0e0; /* Blanco grisáceo para texto principal */
+    --alert-success-bg: #388e3c; /* Verde fuerte para alertas */
+    --alert-success-effect: #2e7d32; /* Verde un poco más oscuro */
+    --alert-error-bg: #d32f2f; /* Rojo fuerte para errores */
+    --alert-error-effect: #c62828; /* Rojo más oscuro */
+    --alert-info-bg: #1976d2; /* Azul fuerte para información */
+    --alert-info-effect: #1565c0; /* Azul un poco más oscuro */
+    --alert-warning-bg: #fbc02d; /* Amarillo fuerte para advertencias */
+    --alert-warning-effect: #f9a825; /* Amarillo más oscuro */
+    --shadow: #000000; /* Sombra completamente negra */
+    --list-option: #ffa726; /* Naranja suave para listas */
+    --list-option-effect: #fb8c00; /* Naranja más oscuro para efecto */
+    --order-success-bg: #43a047; /* Verde fuerte para confirmación de orden */
+    --table-cell-bg: #37474f; /* Gris oscuro para celdas de tabla */
+    --state-option-bg: #388e3c; /* Verde fuerte para opciones de estado */
+    --table-action-bg: #546e7a; /* Azul grisáceo oscuro para acciones de tabla */
+    --button-variant-secondary: #ffd54f; /* Amarillo suave para botones secundarios */
+    --text-variant-3: #7986cb; /* Indigo más claro para textos secundarios */
+    --text-variant-4: #ffffff; /* Blanco para textos más destacados */
+    --state-variant: #ba68c8; /* Púrpura suave para variantes de estado */
+    --button-variant-tertiary: #29b6f6; /* Azul más claro para botones terciarios */
+  }
 }
 
 .bg-theme {
@@ -109,35 +166,11 @@ body {
   color: var(--theme-color);
 }
 
-/* #FFFFFF -> Color del fondo de la pagina y/o texto
-#D9D9D9 -> Color de la region del main (donde se encuentra el contenido) o fondo de los inputs
-#EF6C00 -> Uno de los colores de botones u opcion de estado
-#FFA000 -> Otro color de botones
-#888888 -> color de menu button dropdown
-#F6F4F4 -> color para contenido del contenido de la pagina
-#282866 -> otro color de variante de boton
-#49B555 -> color de boton de guardar o aceptar o enviar o descargar etc etc
-#FA3636 -> color de boton de eliminar o cancelar u opcion de estado o color danger
-#AEADAD -> color de variante de texto 
-#797C82 -> color de variante de texto
-#000000 -> color de texto
-#4E8D7C -> Color de contenedor de alerta success
-#045762 -> color de efecto para alertas success
-#F64B3C -> Color de contenedor de alerta error
-#C81912 -> color de efecto para alertas error
-#3282B8 -> color de contenedor de alerta info
-#0F4C75 -> color de efecto para alertas info
-#EF8D32 -> color de contenedor de alerta warning
-#CC561E -> color de efecto para alertas warning
-#000000 -> color de sombra
-#F7941D -> variante de listas de opciones y/o bordes o active o header de tablas o divider o tambien puede ser una variante de boton
-#464646 efecto para listas de opciones
-#49B555 -> fondo para orden realizada con exito
-#E6E7E9 -> fondo de las celdas de las tablas
-#4BB356 -> color de fondo para opcion de estado
-##333333 -> color de fondo para las acciones de las tablas
-#F4D221 -> variante de boton
-#344767 -> variante de texto
-#040000 -> variante de texto
-#A9A696 -> variante de estado
-#152C70 -> variante de boton */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

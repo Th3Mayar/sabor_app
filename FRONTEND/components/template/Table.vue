@@ -13,16 +13,17 @@
             :key="column.field"
             :class="[
               'relative px-6 py-3 bg-buttonSecondary text-left text-xs sm:text-sm font-semibold text-background uppercase tracking-wider first:rounded-tl-2xl cursor-pointer',
-              draggedColumnIndex === index ? 'bg-column-selected' : '',
-              savingColumnIndex === index ? 'bg-saving' : ''
+              draggedColumnIndex === index ? 'bg-listOptionEffect' : '',
+              selectedColumnIndex === index ? 'bg-buttonPrimary' : '',
             ]"
-            v-if="column.field !== 'action'"
             draggable="true"
             @click="toggleFilter(index)"
             @dragstart="dragStart($event, index)"
             @dragover.prevent
             @drop="drop(index)"
             @dragend="dragEnd"
+            @mouseenter="selectColumn(index)"
+            @mouseleave="deselectColumn"
           >
             <div class="flex items-center space-x-2">
               <Icon name="Move" size="16" color="white" />
@@ -30,10 +31,7 @@
             </div>
           </th>
           <th
-            v-else
-            :class="[
-              'px-6 py-3 bg-buttonSecondary text-left text-xs sm:text-sm font-semibold text-background uppercase tracking-wider rounded-tr-lg cursor-pointer'
-            ]"
+            class="px-6 py-3 bg-buttonSecondary text-left text-xs sm:text-sm font-semibold text-background uppercase tracking-wider rounded-tr-lg"
           >
             <div class="flex items-center space-x-2">
               <Icon name="Pin" size="16" color="white" />
@@ -46,15 +44,12 @@
         <tr
           v-for="(row, rowIndex) in filteredRows"
           :key="rowIndex"
-          class="bg-background border-b border-mainContent hover:mainContent"
+          class="bg-background border-b border-mainContent hover:bg-textPrimary hover:bg-opacity-10"
         >
           <td
             v-for="(column, colIndex) in columns"
             :key="column.field"
-            :class="[
-              'px-6 py-4 text-xs sm:text-sm text-textPrimary whitespace-nowrap',
-              savingColumnIndex === colIndex && column.field !== 'action' ? 'bg-saving-cell' : ''
-            ]"
+            class="px-6 py-4 text-xs sm:text-sm text-textPrimary whitespace-nowrap"
           >
             <div
               v-if="column.field === 'status'"
@@ -67,7 +62,6 @@
             </div>
           </td>
           <td
-            v-if="!isLoading"
             class="px-6 py-4 text-xs sm:text-sm text-textPrimary whitespace-nowrap flex justify-center items-center space-x-2"
           >
             <Button variant="tableActionBg" size="icon" @click="editRow(row)">
@@ -96,7 +90,7 @@ import TableSkeleton from "@/components/organism/TableSkeleton.vue";
 import { urlAPI } from "~/composables/api/url";
 
 const isLoading = ref(true);
-const savingColumnIndex = ref<number | null>(null); // Para controlar el índice de la columna que se está guardando
+const selectedColumnIndex = ref<number | null>(null); // Para rastrear la columna seleccionada
 
 const props = defineProps<{
   columns?: LocalTableColumn[];
@@ -109,6 +103,14 @@ const showFilterIndex = ref<number | null>(null);
 
 const toggleFilter = (index: number) => {
   showFilterIndex.value = showFilterIndex.value === index ? null : index;
+};
+
+const selectColumn = (index: number) => {
+  selectedColumnIndex.value = index; // Columna seleccionada
+};
+
+const deselectColumn = () => {
+  selectedColumnIndex.value = null; // Des-seleccionar columna
 };
 
 const dragStart = (event: DragEvent, index: number) => {
@@ -132,8 +134,6 @@ const drop = (index: number) => {
 };
 
 const saveColumnOrder = async (columns, index) => {
-  savingColumnIndex.value = index; // Marcar la columna que se está guardando
-
   try {
     const response = await fetch(`${urlAPI}/column-order`, {
       method: "POST",
@@ -152,41 +152,15 @@ const saveColumnOrder = async (columns, index) => {
     console.log("Column order saved successfully:", data);
   } catch (error) {
     console.error("Error:", error);
-  } finally {
-    savingColumnIndex.value = null; // Resetear el estado de la columna que se estaba guardando
-  }
-};
-
-const getColumnOrder = async () => {
-  try {
-    const response = await fetch(`${urlAPI}/column-order`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to load column order");
-    }
-
-    const columns = await response.json();
-    if (columns && props.columns) {
-      props.columns.splice(0, props.columns.length, ...columns);
-    }
-  } catch (error) {
-    console.error("Error:", error);
   }
 };
 
 onMounted(async () => {
-  await getColumnOrder();
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   isLoading.value = false;
 });
 
 const getStatusClass = (status: string) => {
-  console.log("Status:", status);
   switch (status) {
     case "Pendiente":
       return "bg-alertWarningBg text-white px-4 py-2 rounded-[30px] text-center";
@@ -198,7 +172,8 @@ const getStatusClass = (status: string) => {
       return "bg-buttonPrimary text-white px-4 py-2 rounded-[30px] text-center";
     case "Inactivo":
       return "bg-buttonSecondary text-white px-4 py-2 rounded-[30px] text-center";
-    case "En revision" || "En revisión":
+    case "En revision":
+    case "En revisión":
       return "bg-buttonWarning text-white px-4 py-2 rounded-[30px] text-center";
     default:
       return "bg-mainContent text-dark-background px-4 py-2 rounded-[30px] text-center";
@@ -238,26 +213,3 @@ const filteredRows = computed(() => {
   });
 });
 </script>
-
-<style scoped>
-.bg-column-selected {
-  background-color: #ffb300 !important;
-}
-
-.bg-saving {
-  animation: savingAnimation 1s infinite alternate;
-}
-
-@keyframes savingAnimation {
-  0% {
-    background-color: #4caf50;
-  }
-  100% {
-    background-color: #388e3c;
-  }
-}
-
-.bg-saving-cell {
-  background-color: rgba(76, 175, 80, 0.2) !important;
-}
-</style>

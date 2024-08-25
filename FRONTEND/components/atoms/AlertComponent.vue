@@ -10,7 +10,7 @@
   >
     <div class="flex items-center justify-between">
       <div class="flex items-center">
-        <Icon :name="iconName" size="40" :color="iconColor" class="mr-2" />
+        <Icon :name="iconName" size="40" class="mr-2" />
         <div>
           <strong>{{ title }}</strong>
           <p>{{ content }}</p>

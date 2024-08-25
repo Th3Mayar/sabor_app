@@ -2,17 +2,22 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
-  modules: ["@nuxtjs/tailwindcss", "@nuxt/image", '@vee-validate/nuxt', '@nuxtjs/color-mode'],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@nuxt/image",
+    "@vee-validate/nuxt",
+    "@nuxtjs/color-mode",
+  ],
   plugins: [{ src: "~/plugins/darkMode.ts", mode: "client" }],
   veeValidate: {
     // disable or enable auto imports
     autoImports: true,
     // Use different names for components
     componentNames: {
-      Form: 'VeeForm',
-      Field: 'VeeField',
-      FieldArray: 'VeeFieldArray',
-      ErrorMessage: 'VeeErrorMessage',
+      Form: "VeeForm",
+      Field: "VeeField",
+      FieldArray: "VeeFieldArray",
+      ErrorMessage: "VeeErrorMessage",
     },
   },
   css: ["~/assets/css/tailwind.css"],
@@ -23,6 +28,17 @@ export default defineNuxtConfig({
   typescript: {
     strict: false,
   },
+  shadcn: {
+    /**
+     * Prefix for all the imported component
+     */
+    prefix: '',
+    /**
+     * Directory that the component lives in.
+     * @default "./components/ui"
+     */
+    componentDir: './components/ui'
+  }
   // colorMode: {
   //   classSuffix: '',
   //   preference: 'system', // default value of $colorMode.preference

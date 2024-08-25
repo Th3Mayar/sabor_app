@@ -9,7 +9,8 @@ import { computed } from "vue";
 
 const variantClasses = {
   Arial: "font-sans",
-  default: "",
+  poppins: "poppins",
+  default: "poppins",
 };
 
 const colorClasses = {

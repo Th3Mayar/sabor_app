@@ -1,6 +1,10 @@
 import pool from "../config/db.js";
 
 export interface Reservation {
+  client_id: any;
+  table_id: any;
+  time: any;
+  date: any;
   reservation_id: number;
   user_id: number;
   reservation_details: object;

@@ -6,6 +6,7 @@ import {
   modifyReservation,
   removeReservation,
 } from "../services/reservationService.js";
+import { getUserColumnOrder } from "../repositories/columnOrderRepository.js";
 
 export async function getAllReservations(
   req: Request,
@@ -14,29 +15,10 @@ export async function getAllReservations(
   try {
     const reservations = await findAllReservations();
 
-    const columns = [
-      { headerName: "ID Ticket", field: "id", type: "text", filterable: true },
-      { headerName: "Fecha", field: "fecha", type: "text", filterable: true },
-      {
-        headerName: "Horario",
-        field: "horario",
-        type: "text",
-        filterable: true,
-      },
-      {
-        headerName: "N° Personas",
-        field: "numPersonas",
-        type: "text",
-        filterable: true,
-      },
-      {
-        headerName: "Estado",
-        field: "status",
-        type: "select",
-        filterable: true,
-        options: ["Pendiente", "Asistio", "Cancelado"],
-      },
-    ];
+    //  form a table with the data
+    const columns = await getUserColumnOrder(
+      Number(req.user ? req.user.id : 0)
+    );
 
     const rows = reservations.map((reservation: any) => ({
       id: reservation.reservation_id,
