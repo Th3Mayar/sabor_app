@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="absolute left-4 z-50 cursor-pointer text-background ml-5 top-7"
+      class="absolute left-4 z-50 cursor-pointer text-background ml-5 top-5"
       @click="toggleMenu"
       :isDark="isDark ? 'dark' : 'light'"
     >

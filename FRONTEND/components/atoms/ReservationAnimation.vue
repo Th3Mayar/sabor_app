@@ -2,7 +2,7 @@
   <div
     class="relative flex items-center justify-center w-full h-full p-5 bg-contentBackground"
   >
-    <div class="bg-white rounded-2xl p-8 shadow-lg w-full max-w-lg relative">
+    <div class="bg-white rounded-2xl p-8 shadow-lg w-full max-w-xl relative">
       <div class="absolute top-4 right-4">
         <ImageComponent name="saborApp2" size="70" />
       </div>
