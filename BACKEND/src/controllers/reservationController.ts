@@ -15,22 +15,26 @@ export async function getAllReservations(
   try {
     const reservations = await findAllReservations();
 
-    //  form a table with the data
     const columns = await getUserColumnOrder(
       Number(req.user ? req.user.id : 0)
     );
 
-    const rows = reservations.map((reservation: any) => ({
-      id: reservation.reservation_id,
-      fecha:
-        reservation.reservation_details.reservation_date ||
-        reservation.reservation_details.date,
-      horario: reservation.reservation_details.time,
-      numPersonas:
-        reservation.reservation_details.people_count ||
-        reservation.reservation_details.guest_count,
-      status: mapStatus(reservation.state_id),
-    }));
+    const rows = reservations.map((reservation: any) => {
+      const { reservation_details } = reservation;
+
+      return {
+        id: reservation.reservation_id,
+        fecha: reservation_details.reservation_date || reservation_details.date,
+        horario: reservation_details.time,
+        numPersonas:
+          reservation_details.people_count || reservation_details.guest_count,
+        status: mapStatus(reservation.state_id),
+        email: reservation_details.email,
+        phone: reservation_details.phone,
+        fullName: reservation_details.fullName,
+        additional_comments: reservation_details.additional_comments,
+      };
+    });
 
     res.status(200).json({ columns, rows });
   } catch (error) {

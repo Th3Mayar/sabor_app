@@ -7,7 +7,7 @@
       Mis Reservas
     </h1>
 
-    <section class="ml-40 mr-40 mt-12">
+    <section class="">
       <!-- Table para ver las reservas -->
       <Table :columns="columns" :rows="rows" />
     </section>

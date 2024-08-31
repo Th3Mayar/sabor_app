@@ -26,9 +26,11 @@
           />
           <InputComponent
             v-model="form.phone"
+            mask="'# (###) ###-####'"
             label="Teléfono de Contacto:"
             placeholder="Teléfono"
             name="phone"
+            type="text"
           />
           <div>
             <label for="email" class="font-medium text-textPrimary">
@@ -151,7 +153,7 @@ import { urlAPI } from "~/composables/api/url";
 // Estado para manejar el formulario y la alerta
 const form = ref({
   fullName: "",
-  phone: "",
+  phone: "+1",
   email: "",
   reservationDate: null,
   reservationTime: null ?? "08:00 AM",
