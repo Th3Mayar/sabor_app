@@ -11,7 +11,7 @@
         <ImageComponent
           ref="headerImage"
           name="welcome"
-          class="w-full h-40 sm:h-48 md:h-56 object-cover rounded-t-3xl"
+          class="w-full h-40 sm:h-48 md:h-40 object-cover rounded-t-3xl"
         />
       </div>
       <div class="absolute inset-0 bg-black bg-opacity-60 rounded-t-3xl"></div>
@@ -22,7 +22,7 @@
       class="flex-grow flex items-center justify-center bg-mainContent py-12 sm:py-10 md:py-16 opacity-0 z-0 text-sm"
       ref="mainSection"
     >
-      <div class="bg-background rounded-3xl shadow-lg p-4 w-full max-w-xs sm:max-w-md md:max-w-lg sm:text-base">
+      <div class="bg-background rounded-3xl shadow-lg p-4 w-full max-w-xs sm:max-w-md md:max-w-md sm:text-base">
         <div class="flex flex-col justify-center items-center text-center mb-5">
           <ImageComponent name="saborApp2" size="150" class="sm:size-200" />
           <h2 class="text-xl sm:text-2xl font-semibold mt-4">Bienvenido</h2>
