@@ -23,7 +23,7 @@ interface ButtonProps {
     | "orange"
     | "tableActionBg"
     | "whiteWithOrange";
-  size?: "default" | "sm" | "lg" | "icon";
+  size?: "default" | "sm" | "lg" | "icon" | "xl" | "xlWide" | "full" | "wide";
   disabled?: boolean;
   onClick?: (event: MouseEvent) => void;
 }

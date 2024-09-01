@@ -22,7 +22,9 @@
       class="flex-grow flex items-center justify-center bg-mainContent py-12 sm:py-10 md:py-16 opacity-0 z-0 text-sm"
       ref="mainSection"
     >
-      <div class="bg-background rounded-3xl shadow-lg p-4 w-full max-w-xs sm:max-w-md md:max-w-md sm:text-base">
+      <div
+        class="bg-background rounded-3xl shadow-lg p-4 w-full max-w-xs sm:max-w-md md:max-w-md sm:text-base"
+      >
         <div class="flex flex-col justify-center items-center text-center mb-5">
           <ImageComponent name="saborApp2" size="150" class="sm:size-200" />
           <h2 class="text-xl sm:text-2xl font-semibold mt-4">Bienvenido</h2>
@@ -33,7 +35,10 @@
           v-slot="{ values, errors }"
         >
           <div class="mb-4">
-            <label for="email" class="flex items-center text-xs sm:text-sm md:text-base">
+            <label
+              for="email"
+              class="flex items-center text-xs sm:text-sm md:text-base"
+            >
               Correo electrónico
               <Icon name="Asterisk" size="15" color="red" />
             </label>
@@ -50,7 +55,10 @@
             </div>
           </div>
           <div class="mb-4">
-            <label for="password" class="block flex items-center text-xs sm:text-sm md:text-base">
+            <label
+              for="password"
+              class="block flex items-center text-xs sm:text-sm md:text-base"
+            >
               Contraseña
               <Icon name="Asterisk" size="15" color="red" />
             </label>
@@ -66,13 +74,42 @@
               />
             </div>
           </div>
-          <Button type="submit" variant="default" class="w-full mt-4 py-2 text-xs sm:text-sm md:text-base">
-            Ingresar
+          <Button
+            type="submit"
+            variant="default"
+            size="full"
+            class="max-w-[500px] flex items-center justify-center space-x-2 group relative overflow-hidden"
+          >
+            <Icon
+              name="LogIn"
+              size="23"
+              color="white"
+              class="transform transition-transform duration-500 ease-in-out mr-4"
+              :class="{
+                'translate-x-full': iconMove,
+                '-translate-x-0': !iconMove,
+              }"
+            />
+            <span class="transition duration-300 ease-in-out ml-8">
+              Ingresar
+            </span>
           </Button>
         </Form>
-        <div class="flex flex-col sm:flex-row text-center mt-4 gap-2 justify-center">
-          <Link href="/home" variant="default" class="text-xs sm:text-sm md:text-base">¿Olvidó Contraseña?</Link>
-          <Link href="/home" variant="primary" class="text-xs sm:text-sm md:text-base">Recuperar</Link>
+        <div
+          class="flex flex-col sm:flex-row text-center mt-4 gap-2 justify-center"
+        >
+          <Link
+            href="/home"
+            variant="default"
+            class="text-xs sm:text-sm md:text-base"
+            >¿Olvidó Contraseña?</Link
+          >
+          <Link
+            href="/home"
+            variant="primary"
+            class="text-xs sm:text-sm md:text-base"
+            >Recuperar</Link
+          >
         </div>
       </div>
     </section>
@@ -88,7 +125,6 @@
     />
   </div>
 </template>
-
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
@@ -114,6 +150,7 @@ const router = useRouter();
 const showAlert = ref(false);
 const alertMessage = ref("");
 const headerImage = ref(null);
+const iconMove = ref(false);
 
 const { isLoading, startLoading, stopLoading } = useLoading();
 const isAuthenticated = ref(false);
@@ -125,6 +162,7 @@ async function handleSubmit(values: { email: string; password: string }) {
   };
 
   try {
+    iconMove.value = true;
     startLoading();
     showAlert.value = false;
 
@@ -141,6 +179,7 @@ async function handleSubmit(values: { email: string; password: string }) {
   } catch (error) {
     alertMessage.value = error as string;
     showAlert.value = true;
+    iconMove.value = false;
   } finally {
     stopLoading();
   }
@@ -164,7 +203,7 @@ definePageMeta({
 @keyframes slideDownFadeIn {
   0% {
     opacity: 0;
-    transform: translateY(-50px); 
+    transform: translateY(-50px);
   }
   100% {
     opacity: 1;
@@ -175,4 +214,74 @@ definePageMeta({
 .slide-down-fade-in {
   animation: slideDownFadeIn 0.6s ease-out forwards;
 }
+
+/* BEGIN ANIMATION TO BUTTON LOGIN */
+@keyframes moveRight {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes rotateIcon {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.group:hover .absolute {
+  animation: moveRight 0.5s ease-in-out infinite;
+}
+
+.group:active .absolute {
+  animation: rotateIcon 0.5s ease-in-out;
+  color: var(--theme-color);
+}
+/* END ANIMATION */
+
+/* ANIMATION TO SUCCESS REQUEST */
+
+.translate-x-full {
+  transform: translateX(100%);
+}
+
+.-translate-x-0 {
+  transform: translateX(0);
+}
+
+@keyframes moveRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(10%);
+  }
+}
+
+@keyframes moveLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.group:active .translate-x-full {
+  animation: moveRight 0.5s ease-in-out forwards;
+}
+
+.group.error .translate-x-full {
+  animation: moveLeft 0.5s ease-in-out forwards;
+}
+
+/* END ANIMATION */
 </style>

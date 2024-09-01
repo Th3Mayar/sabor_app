@@ -150,7 +150,7 @@ import { useForm } from "vee-validate";
 import * as Yup from "yup";
 import { urlAPI } from "~/composables/api/url";
 
-// Estado para manejar el formulario y la alerta
+// State for management form
 const form = ref({
   fullName: "",
   phone: "+1",
@@ -163,7 +163,7 @@ const form = ref({
 
 const showAlert = ref(false);
 const alertMessage = ref("");
-const isSubmitting = ref(false); // Estado para manejar si la petición está en progreso
+const isSubmitting = ref(false); // State for management request
 
 const currentDate = new Date();
 
@@ -244,9 +244,9 @@ function formatDate(dateInput) {
 }
 
 const submitForm = async () => {
-  if (isSubmitting.value) return; // Evita múltiples envíos
+  if (isSubmitting.value) return; // No send multi-request
 
-  isSubmitting.value = true; // Marca como en progreso
+  isSubmitting.value = true; // Mark in progress
   console.log("submitForm triggered");
   try {
     const userId = getUserIdFromToken();
@@ -279,7 +279,7 @@ const submitForm = async () => {
     if (response.ok) {
       const data = await response.json();
       resetForm();
-      isSubmitting.value = false; // Marca como no en progreso
+      isSubmitting.value = false; // Mark is not progress
     } else {
       const errorText = await response.text();
       throw new Error(`Error al crear la reserva: ${errorText}`);
@@ -287,7 +287,7 @@ const submitForm = async () => {
   } catch (error) {
     alertMessage.value = error.message;
     showAlert.value = true;
-    isSubmitting.value = false; // Marca como no en progreso
+    isSubmitting.value = false; // Mark is not progress
   }
 };
 </script>

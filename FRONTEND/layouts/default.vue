@@ -1,14 +1,19 @@
 <template>
   <div
-    v-if="isAuthenticated"
+    :class="{ 'overlay-active': isMenuVisible }"
     class="flex flex-col lg:flex-row h-screen overflow-hidden navbar"
+    v-if="isAuthenticated"
   >
     <NavBar />
     <main
-      :class="{ 'opacity-50 pointer-events-none': isMenuVisible }"
-      class="bg-mainContent flex-1 mt-14 lg:mt-0 p-5 transition-opacity duration-300 ease-in-out"
+      class="relative bg-mainContent flex-1 mt-14 lg:mt-0 p-5 transition-opacity duration-300 ease-in-out"
     >
-      <ScrollArea class="flex-1 h-full w-full">
+      <!-- Overlay -->
+      <div
+        class="overlay absolute inset-0 pointer-events-none transition-opacity duration-300"
+      ></div>
+
+      <ScrollArea class="flex-1 h-full w-full relative z-20">
         <div class="content-container">
           <slot class="content" />
         </div>
@@ -18,16 +23,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useAuth } from "@/composables/useAuth";
+import { useMenuVisibility } from "@/composables/useMenuVisibility";
 import NavBar from "@/components/template/Navbar.vue";
 import ScrollArea from "@/components/ui/scroll-area/ScrollArea.vue";
 
 const { isAuthenticated } = useAuth();
+const { isMenuVisible } = useMenuVisibility();
 const router = useRouter();
-const isMenuVisible = ref(false); 
 
 onMounted(() => {
   if (!isAuthenticated.value) {
@@ -38,6 +43,21 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.overlay {
+  z-index: 999;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.overlay-active main {
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.overlay-active .overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+}
+
 html,
 body {
   overflow: hidden;

@@ -12,9 +12,9 @@
     <!-- Navigation Menu -->
     <transition name="slide">
       <nav
-        v-if="isMenuVisible"
+        v-if="isMenuVisible || isDesktop"
         ref="menu"
-        class="w-60 bg-dark-background text-background flex flex-col justify-start items-center h-screen py-8 fixed top-0 left-0 lg:relative"
+        class="w-60 bg-dark-background text-background flex flex-col justify-start items-center h-screen py-8 fixed lg:relative top-0 left-0 lg:left-auto"
       >
         <span class="border border-background top-5 w-full"></span>
 
@@ -68,31 +68,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref, onMounted, onBeforeUnmount, computed } from "vue";
 import { useRouter } from "vue-router";
 import Icon from "@/components/atoms/IconByName.vue";
 import ImageComponent from "@/components/atoms/ImageByName.vue";
 import List from "@/components/molecule/List.vue";
+import { useMenuVisibility } from "@/composables/useMenuVisibility";
 
-const isMenuVisible = ref(window.innerWidth >= 1024); // Initialized when is mobile
-const isDark = ref(false);
+const { isMenuVisible, toggleMenu, closeMenu } = useMenuVisibility();
 const router = useRouter();
-
-const toggleMenu = () => {
-  isMenuVisible.value = !isMenuVisible.value;
-  const iconMenu = document.querySelector(".icon-menu") as HTMLElement;
-  if (!isMenuVisible.value) {
-    iconMenu.style.color = "black";
-  } else {
-    iconMenu.style.color = "white";
-  }
-};
+const isDark = ref(false);
+const windowWidth = ref(window.innerWidth);
 
 const handleResize = () => {
-  if (window.innerWidth >= 1024) {
-    isMenuVisible.value = true; // Allays visible on desktop
-  } else {
-    isMenuVisible.value = false; // Hidden on mobile
+  windowWidth.value = window.innerWidth;
+  if (windowWidth.value >= 1024) {
+    closeMenu(); // Always hide menu on desktop when resizing
   }
 };
 
@@ -106,8 +97,8 @@ onBeforeUnmount(() => {
 });
 
 const navigateTo = (route: string) => {
-  if (window.innerWidth < 1024) {
-    isMenuVisible.value = false; // Close the menu on mobile
+  if (windowWidth.value < 1024) {
+    closeMenu(); // Close the menu on mobile
   }
   router.push(route);
 };
@@ -116,6 +107,9 @@ const logout = () => {
   sessionStorage.removeItem("authToken");
   router.push("/auth/login");
 };
+
+// Computed property to check if it's desktop view
+const isDesktop = computed(() => windowWidth.value >= 1024);
 </script>
 
 <style scoped>
