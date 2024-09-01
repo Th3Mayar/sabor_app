@@ -189,7 +189,8 @@ const openFilterModal = (column) => {
   console.log("Opening filter modal for column:", column);
   selectedColumnHeader.value = column.headerName;
   selectedColumnField.value = column.field;
-  isModalOpen.value = true;
+  isModalOpen.value = true; 
+  console.log("isModalOpen set to true:", isModalOpen.value);
 };
 
 const closeFilterModal = () => {

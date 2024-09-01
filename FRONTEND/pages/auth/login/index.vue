@@ -11,7 +11,7 @@
         <ImageComponent
           ref="headerImage"
           name="welcome"
-          class="w-full h-40 object-cover rounded-t-3xl"
+          class="w-full h-40 sm:h-48 md:h-56 object-cover rounded-t-3xl"
         />
       </div>
       <div class="absolute inset-0 bg-black bg-opacity-60 rounded-t-3xl"></div>
@@ -19,13 +19,13 @@
 
     <!-- Main Content -->
     <section
-      class="flex-grow flex items-center justify-center bg-mainContent py-12 opacity-0 z-0"
+      class="flex-grow flex items-center justify-center bg-mainContent py-12 sm:py-10 md:py-16 opacity-0 z-0 text-sm"
       ref="mainSection"
     >
-      <div class="bg-background rounded-3xl shadow-lg p-4 w-full max-w-md">
+      <div class="bg-background rounded-3xl shadow-lg p-4 w-full max-w-xs sm:max-w-md md:max-w-lg sm:text-base">
         <div class="flex flex-col justify-center items-center text-center mb-5">
-          <ImageComponent name="saborApp2" size="200" />
-          <h2 class="text-2xl font-semibold mt-4">Bienvenido</h2>
+          <ImageComponent name="saborApp2" size="150" class="sm:size-200" />
+          <h2 class="text-xl sm:text-2xl font-semibold mt-4">Bienvenido</h2>
         </div>
         <Form
           @submit="handleSubmit"
@@ -33,7 +33,7 @@
           v-slot="{ values, errors }"
         >
           <div class="mb-4">
-            <label for="email" class="block flex items-center">
+            <label for="email" class="flex items-center text-xs sm:text-sm md:text-base">
               Correo electrónico
               <Icon name="Asterisk" size="15" color="red" />
             </label>
@@ -44,13 +44,13 @@
                 name="email"
                 id="email"
                 placeholder="Correo electrónico"
-                class="w-full pl-10"
+                class="w-full pl-10 py-2 text-xs sm:text-sm md:text-base"
                 v-model="values.email"
               />
             </div>
           </div>
           <div class="mb-4">
-            <label for="password" class="block flex items-center">
+            <label for="password" class="block flex items-center text-xs sm:text-sm md:text-base">
               Contraseña
               <Icon name="Asterisk" size="15" color="red" />
             </label>
@@ -61,18 +61,18 @@
                 id="password"
                 type="password"
                 placeholder="Contraseña"
-                class="w-full pl-10"
+                class="w-full pl-10 py-2 text-xs sm:text-sm md:text-base"
                 v-model="values.password"
               />
             </div>
           </div>
-          <Button type="submit" variant="default" class="w-full mt-4">
+          <Button type="submit" variant="default" class="w-full mt-4 py-2 text-xs sm:text-sm md:text-base">
             Ingresar
           </Button>
         </Form>
-        <div class="flex flex-row text-center mt-4 gap-2 justify-center">
-          <Link href="/home" variant="default">¿Olvidó Contraseña?</Link>
-          <Link href="/home" variant="primary">Recuperar</Link>
+        <div class="flex flex-col sm:flex-row text-center mt-4 gap-2 justify-center">
+          <Link href="/home" variant="default" class="text-xs sm:text-sm md:text-base">¿Olvidó Contraseña?</Link>
+          <Link href="/home" variant="primary" class="text-xs sm:text-sm md:text-base">Recuperar</Link>
         </div>
       </div>
     </section>
@@ -88,6 +88,7 @@
     />
   </div>
 </template>
+
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";

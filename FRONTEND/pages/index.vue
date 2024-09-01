@@ -1,19 +1,27 @@
 <template>
   <div
-    class="relative w-full flex flex-col items-center justify-center bg-cover bgContent h-[100vh]"
+    class="relative w-full flex flex-col items-center justify-center bg-cover bgContent min-h-screen"
   >
     <!-- Center Content -->
-    <div class="text-center z-50">
-      <h1 ref="title" class="text-background text-xl md:text-2xl">
+    <div class="text-center z-50 p-4">
+      <h1
+        ref="title"
+        class="text-background text-xl sm:text-2xl md:text-3xl lg:text-4xl"
+      >
         Restaurante de {{ country }}
       </h1>
 
-      <h2 ref="subtitle" class="text-background md:text-6xl font-bold mt-2">
+      <h2
+        ref="subtitle"
+        class="text-background text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mt-2"
+      >
         {{ name }}
       </h2>
 
       <!-- Main Buttons -->
-      <div class="mt-8 flex justify-center space-x-4">
+      <div
+        class="mt-8 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4"
+      >
         <Button
           variant="default"
           size="xlWide"
@@ -36,9 +44,9 @@
 
     <!-- Bottom Right Image -->
     <div
-      class="absolute bottom-4 right-4 z-50 transition-all duration-300 transform hover:scale-105"
+      class="absolute bottom-4 right-4 z-50 transition-all duration-300 transform hover:scale-105 w-[150px] sm:w-[200px] md:w-[250px]"
     >
-      <ImageComponent name="saborApp2" size="250" />
+      <ImageComponent name="saborApp2" />
     </div>
   </div>
 </template>
@@ -59,7 +67,7 @@ onMounted(() => {
   const token = localStorage.getItem("token");
   validationToken.value = token !== null;
 
-  subtitle.value.classList.add('zoom-bounce');
+  subtitle.value.classList.add("zoom-bounce");
 });
 
 const title = ref(null);
@@ -97,7 +105,7 @@ definePageMeta({
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 100vh;
+  min-height: 100vh;
   animation: moveBackground 15s infinite linear;
 }
 
@@ -161,7 +169,7 @@ definePageMeta({
     transform: scale(1.2);
   }
   70% {
-    transform: scale(0.95); 
+    transform: scale(0.95);
   }
   100% {
     transform: scale(1);
@@ -169,13 +177,21 @@ definePageMeta({
 }
 
 @keyframes shake {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateX(0);
   }
-  10%, 30%, 50%, 70%, 90% {
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
     transform: translateX(-5px);
   }
-  20%, 40%, 60%, 80% {
+  20%,
+  40%,
+  60%,
+  80% {
     transform: translateX(5px);
   }
 }
@@ -184,11 +200,10 @@ definePageMeta({
   animation: zoomBounce 0.6s ease-out forwards, shake 0.6s ease-in-out 0.6s;
 }
 
-
 h2 {
   text-shadow: 5px 2px 20px rgba(255, 255, 255, 0.5);
   font-weight: bolder;
-  font-size: 150px;
+  font-size: 10vw;
   box-shadow: rgba(0, 0, 0, 0.5) inset;
 }
 </style>

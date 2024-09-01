@@ -1,10 +1,13 @@
 <template>
   <div
     v-if="isAuthenticated"
-    class="flex flex-col lg:flex-row h-[98vh] overflow-hidden navbar"
+    class="flex flex-col lg:flex-row h-screen overflow-hidden navbar"
   >
     <NavBar />
-    <main class="bg-mainContent flex-1 lg:h-[89vh] mt-[54px] p-5">
+    <main
+      :class="{ 'opacity-50 pointer-events-none': isMenuVisible }"
+      class="bg-mainContent flex-1 mt-14 lg:mt-0 p-5 transition-opacity duration-300 ease-in-out"
+    >
       <ScrollArea class="flex-1 h-full w-full">
         <div class="content-container">
           <slot class="content" />
@@ -15,14 +18,16 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from "vue-router";
+import { ref } from "vue";
 import { onMounted } from "vue";
+import { useRouter } from "vue-router";
 import { useAuth } from "@/composables/useAuth";
 import NavBar from "@/components/template/Navbar.vue";
 import ScrollArea from "@/components/ui/scroll-area/ScrollArea.vue";
 
 const { isAuthenticated } = useAuth();
 const router = useRouter();
+const isMenuVisible = ref(false); 
 
 onMounted(() => {
   if (!isAuthenticated.value) {
@@ -33,10 +38,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.navbar {
-  margin: 10px 0px 0px 10px;
-}
-
 html,
 body {
   overflow: hidden;
@@ -57,28 +58,5 @@ main {
   box-sizing: border-box;
   max-width: 100%;
   max-height: 100%;
-}
-
-/* Responsiveness adjustments */
-@media (max-width: 1024px) {
-  main {
-    width: 100%;
-    height: auto;
-    margin-top: 0;
-  }
-}
-
-@media (max-width: 768px) {
-  main {
-    padding: 3%;
-    margin-top: 0;
-  }
-}
-
-@media (max-width: 640px) {
-  main {
-    padding: 2%;
-    margin-top: 0;
-  }
 }
 </style>

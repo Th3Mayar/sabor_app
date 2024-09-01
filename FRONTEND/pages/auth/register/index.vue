@@ -1,26 +1,28 @@
 <template>
   <div
-    class="min-h-screen flex items-center justify-center p-4 bg-cover bgContent"
+    class="min-h-screen flex items-center justify-center p-4 bg-cover bgContent relative"
   >
     <div class="absolute inset-0 bg-black bg-opacity-60"></div>
     <div
       ref="container"
-      class="bg-background/80 rounded-3xl shadow-lg w-full max-w-max z-50 opacity-0"
+      class="bg-background/80 rounded-3xl shadow-lg w-full max-w-lg z-50 opacity-0"
     >
       <div class="flex flex-col justify-center items-center text-center">
-        <ImageComponent name="saborApp2" size="150" />
-        <h2 class="text-3xl font-bold mt-4">Registro</h2>
-        <p class="mt-2 text-textVariant2">
+        <ImageComponent name="saborApp2" size="100" class="sm:size-150" />
+        <h2 class="text-2xl sm:text-3xl font-bold mt-4">Registro</h2>
+        <p class="mt-2 text-sm sm:text-base text-textVariant2">
           Crea una cuenta en {{ appName }} y disfruta de nuestros servicios.
         </p>
       </div>
       <form
         @submit.prevent="registerUser"
-        class="flex flex-col items-center p-8"
+        class="flex flex-col items-center p-4 sm:mt-5"
       >
-        <section class="grid grid-cols-2 gap-3">
+        <section class="grid grid-cols-1 sm:grid-cols-2 w-full pl-4 pr-4">
           <div class="mb-4">
-            <label for="full_name" class="block text-textVariant2"
+            <label
+              for="full_name"
+              class="block text-textVariant2 text-sm sm:text-base"
               >Nombre Completo</label
             >
             <div class="relative">
@@ -34,14 +36,16 @@
                 name="full_name"
                 id="full_name"
                 v-model="user.full_name"
-                placeholder="Nombre Completo"
-                class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary border-textVariant1 rounded"
+                placeholder="Nombre"
+                class="w-[full] pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary border-textVariant1 rounded text-sm sm:text-base"
                 required
               />
             </div>
           </div>
           <div class="mb-4">
-            <label for="contact_phone" class="block text-textVariant2"
+            <label
+              for="contact_phone"
+              class="block text-textVariant2 text-sm sm:text-base"
               >Teléfono de Contacto</label
             >
             <div class="relative">
@@ -55,13 +59,15 @@
                 name="contact_phone"
                 id="contact_phone"
                 v-model="user.contact_phone"
-                placeholder="Teléfono de Contacto"
-                class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary border-textVariant1 rounded"
+                placeholder="Contacto"
+                class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary border-textVariant1 rounded text-sm sm:text-base"
               />
             </div>
           </div>
           <div class="mb-4">
-            <label for="email" class="block text-textVariant2"
+            <label
+              for="email"
+              class="block text-textVariant2 text-sm sm:text-base"
               >Correo Electrónico</label
             >
             <div class="relative">
@@ -75,15 +81,17 @@
                 name="email"
                 id="email"
                 v-model="user.email"
-                placeholder="Correo Electrónico"
+                placeholder="Correo"
                 type="email"
-                class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary border-textVariant1 rounded"
+                class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary border-textVariant1 rounded text-sm sm:text-base"
                 required
               />
             </div>
           </div>
           <div class="mb-4">
-            <label for="password" class="block text-textVariant2"
+            <label
+              for="password"
+              class="block text-textVariant2 text-sm sm:text-base"
               >Contraseña</label
             >
             <div class="relative">
@@ -99,7 +107,7 @@
                 v-model="user.password"
                 placeholder="Contraseña"
                 type="password"
-                class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary border-textVariant1 rounded"
+                class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary border-textVariant1 rounded text-sm sm:text-base"
                 required
               />
             </div>
@@ -108,13 +116,13 @@
         <Button
           type="submit"
           variant="default"
-          class="w-60 mt-3 bg-buttonVariantTertiary text-background hover:bg-buttonPrimary py-2 rounded-lg"
+          class="w-full sm:w-60 mt-3 bg-buttonVariantTertiary text-background hover:bg-buttonPrimary py-2 rounded-lg"
         >
           Registrarse
         </Button>
       </form>
       <div
-        class="flex justify-end border-t pt-4 text-sm bg-contentButton p-5 rounded-b-3xl"
+        class="flex justify-center sm:justify-end border-t pt-4 text-sm sm:text-base bg-contentButton p-5 rounded-b-3xl"
       >
         <Link
           href="/auth/login"
@@ -152,23 +160,13 @@ const user = ref({
 const registerUser = async (e) => {
   e.preventDefault();
   console.log(user.value);
-  // try {
-  //   const response = await axios.post("/api/register", user.value);
-  //   if (response.data.success) {
-  //     router.push("/login");
-  //   } else {
-  //     console.error(response.data.message);
-  //   }
-  // } catch (error) {
-  //   console.error("Error al registrar el usuario:", error);
-  // }
 };
 
 const container = ref(null);
 
 onMounted(() => {
   if (container.value) {
-    container.value.classList.add('fade-in-slide-down');
+    container.value.classList.add("fade-in-slide-down");
   }
 });
 
@@ -211,38 +209,10 @@ definePageMeta({
   z-index: 1;
 }
 
-@keyframes pulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-@keyframes pulse-active {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-}
-
-.animate-pulse {
-  animation: pulse 2s infinite;
-}
-
-.focus\:animate-pulse-active {
-  animation: pulse-active 0.5s forwards;
-}
-
 @keyframes fadeInSlideDown {
   0% {
     opacity: 0;
-    transform: translateY(-50px)
+    transform: translateY(-50px);
   }
   100% {
     opacity: 1;

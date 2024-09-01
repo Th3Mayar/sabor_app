@@ -1,40 +1,59 @@
 <template>
   <div>
+    <!-- Toggle button, visible only on mobile -->
     <div
-      class="absolute left-4 z-50 cursor-pointer text-background ml-5 top-5"
+      class="absolute left-4 z-50 cursor-pointer text-dark-background ml-5 top-5 lg:hidden toggle"
       @click="toggleMenu"
       :isDark="isDark ? 'dark' : 'light'"
     >
       <Icon name="Menu" size="24" class="icon-menu" />
     </div>
 
+    <!-- Navigation Menu -->
     <transition name="slide">
       <nav
         v-if="isMenuVisible"
-        class="w-60 bg-dark-background text-background flex flex-col justify-start items-center h-screen py-8 relative"
+        ref="menu"
+        class="w-60 bg-dark-background text-background flex flex-col justify-start items-center h-screen py-8 fixed top-0 left-0 lg:relative"
       >
-        <span class="border border-background w-[100%] top-3"></span>
+        <span class="border border-background top-5 w-full"></span>
 
         <!-- Logo -->
-        <div class="mb-10 top-5">
+        <div class="mb-10 top-5 justify-center flex">
           <ImageComponent name="saborApp2" size="200" />
         </div>
 
         <!-- Navigation Items -->
         <div class="flex flex-col space-y-4 w-full px-4">
-          <List variant="default" route="/reservation" @click="() => router.push('/reservation')">
+          <List
+            variant="default"
+            route="/reservation"
+            @click="navigateTo('/reservation')"
+          >
             <Icon name="PlusCircle" size="24" color="white" class="mr-2" />
             <span>Crear Reserva</span>
           </List>
-          <List variant="default" route="/reservation/list" @click="() => router.push('/reservation/list')">
+          <List
+            variant="default"
+            route="/reservation/list"
+            @click="navigateTo('/reservation/list')"
+          >
             <Icon name="Search" size="24" color="white" class="mr-2" />
             <span>Mis Reservas</span>
           </List>
-          <List variant="default" route="/letter" @click="() => router.push('/letter')">
+          <List
+            variant="default"
+            route="/letter"
+            @click="navigateTo('/letter')"
+          >
             <Icon name="BookOpen" size="24" color="white" class="mr-2" />
             <span>Ver Carta</span>
           </List>
-          <List variant="default" route="/settings" @click="() => router.push('/settings')">
+          <List
+            variant="default"
+            route="/settings"
+            @click="navigateTo('/settings')"
+          >
             <Icon name="Settings" size="24" color="white" class="mr-2" />
             <span>Configuración</span>
           </List>
@@ -49,14 +68,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
 import Icon from "@/components/atoms/IconByName.vue";
 import ImageComponent from "@/components/atoms/ImageByName.vue";
 import List from "@/components/molecule/List.vue";
 
-const isMenuVisible = ref(true);
-const isDark = ref(false); 
+const isMenuVisible = ref(window.innerWidth >= 1024); // Initialized when is mobile
+const isDark = ref(false);
 const router = useRouter();
 
 const toggleMenu = () => {
@@ -69,11 +88,34 @@ const toggleMenu = () => {
   }
 };
 
+const handleResize = () => {
+  if (window.innerWidth >= 1024) {
+    isMenuVisible.value = true; // Allays visible on desktop
+  } else {
+    isMenuVisible.value = false; // Hidden on mobile
+  }
+};
+
+onMounted(() => {
+  window.addEventListener("resize", handleResize);
+  handleResize(); // Initialize the menu visibility
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", handleResize);
+});
+
+const navigateTo = (route: string) => {
+  if (window.innerWidth < 1024) {
+    isMenuVisible.value = false; // Close the menu on mobile
+  }
+  router.push(route);
+};
+
 const logout = () => {
   sessionStorage.removeItem("authToken");
   router.push("/auth/login");
 };
-
 </script>
 
 <style scoped>
@@ -83,51 +125,48 @@ nav {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 20px;
-  position: relative;
-  overflow: hidden;
-  height: calc(100vh - 40px);
-  margin-bottom: 0;
-  transform: translateX(0);
-  transition: transform 0.3s ease-in-out;
+  border-radius: 0px 5% 5% 0px;
+  z-index: 9999;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    pointer-events: none;
+    border-radius: 20px;
+    z-index: 1;
+  }
+
+  & > * {
+    position: relative;
+    z-index: 2;
+  }
 }
 
-nav::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  pointer-events: none;
-  border-radius: 20px;
-  z-index: 1;
+.toggle {
+  z-index: 99999;
 }
 
-nav > * {
-  position: relative;
-  z-index: 2;
-}
-
+/* BEGIN TRANSITIONS */
 .slide-enter-active,
 .slide-leave-active {
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
-.slide-enter {
-  transform: translateX(-100%);
-}
-
-.slide-enter-to {
-  transform: translateX(0);
-}
-
-.slide-leave-active {
-  transition: transform 0.3s ease-in-out;
-}
-
+.slide-enter,
 .slide-leave-to {
   transform: translateX(-100%);
+  opacity: 0;
 }
+
+.slide-enter-to,
+.slide-leave {
+  transform: translateX(0);
+  opacity: 1;
+}
+/* END TRANSITIONS */
 </style>
