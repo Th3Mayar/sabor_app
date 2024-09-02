@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex flex-col p-4 content-alert">
+  <div class="min-h-screen flex flex-col p-4 content-alert dark:bg-dark-background/60">
     <!-- Loader Global -->
     <div v-if="authStore.isLoading" class="global-loader">
       <span></span>
@@ -19,11 +19,11 @@
 
     <!-- Main Content -->
     <section
-      class="flex-grow flex items-center justify-center bg-mainContent py-12 sm:py-10 md:py-16 opacity-0 z-0 text-sm"
+      class="flex-grow flex items-center justify-center bg-mainContent py-12 sm:py-10 md:py-16 opacity-0 z-0 text-sm dark:bg-dark-background/60 dark:bg-opacity-90"
       ref="mainSection"
     >
       <div
-        class="bg-background rounded-3xl shadow-lg p-4 w-full max-w-xs sm:max-w-md md:max-w-md sm:text-base"
+        class="bg-background rounded-3xl shadow-lg p-4 w-full max-w-xs sm:max-w-md md:max-w-md sm:text-base dark:bg-dark-background/70 dark:bg-opacity-90"
       >
         <div class="flex flex-col justify-center items-center text-center mb-5">
           <ImageComponent name="saborApp2" size="150" class="sm:size-200" />

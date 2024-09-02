@@ -48,7 +48,7 @@ const buttonVariants = {
     orange: "bg-orange text-white hover:bg-orange/90",
     tableActionBg: "bg-tableActionBg text-white hover:bg-tableActionBg/90",
     whiteWithOrange:
-      "bg-background text-buttonPrimary border border-orange hover:bg-tableActionBg/40 hover:text-white hover:border-background transition-all duration-300 ease-in-out",
+      "bg-background text-buttonPrimary border border-orange hover:bg-tableActionBg/40 hover:text-white hover:border-background transition-all duration-300 ease-in-out dark:bg-background dark:text-buttonPrimary dark:border-darkOrange dark:hover:bg-tableActionBg/40 dark:hover:text-white dark:hover:border-background",
   },
   size: {
     default: "h-10 px-4 py-2",

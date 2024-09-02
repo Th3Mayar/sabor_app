@@ -2,10 +2,10 @@
   <div
     class="min-h-screen flex items-center justify-center p-4 bg-cover bgContent relative"
   >
-    <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+    <div class="absolute inset-0 bg-dark-background bg-opacity-60 dark:bg-dark-background/40"></div>
     <div
       ref="container"
-      class="bg-background/80 rounded-3xl shadow-lg w-full max-w-[700px] z-50 opacity-0"
+      class="bg-background/80 rounded-3xl shadow-lg w-full max-w-[700px] z-50 opacity-0 dark:bg-dark-background dark:bg-opacity-90"
     >
       <div class="flex flex-col justify-center items-center text-center">
         <ImageComponent name="saborApp2" size="150" class="sm:size-150" />
@@ -133,7 +133,7 @@
         </Button>
       </form>
       <div
-        class="flex justify-center sm:justify-end border-t pt-4 text-sm sm:text-base bg-contentButton p-5 rounded-b-3xl"
+        class="flex justify-center sm:justify-end border-t pt-4 text-sm sm:text-base bg-contentButton p-5 rounded-b-3xl dark:bg-dark-background dark:bg-opacity-90"
       >
         <Link
           href="/auth/login"
