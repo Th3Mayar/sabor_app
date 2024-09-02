@@ -67,6 +67,7 @@ export default {
         "dark-mainContent": "#1C1C1C", // Very dark gray
         "dark-buttonPrimary": "#DD6B20", // Soft orange
         "dark-buttonSecondary": "#ED8936", // Yellow-orange
+        "dark-bg-primary": "#683615",
         "dark-dropdownButton": "#26C6DA", // Cyan
         "dark-contentBackground": "#212121", // Darker gray
         "dark-textPrimary": "#E0E0E0", // Light gray

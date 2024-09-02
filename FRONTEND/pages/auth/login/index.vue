@@ -1,5 +1,7 @@
 <template>
-  <div class="min-h-screen flex flex-col p-4 content-alert dark:bg-dark-background/60">
+  <div
+    class="min-h-screen flex flex-col p-4 content-alert dark:bg-dark-bg-primary/80"
+  >
     <!-- Loader Global -->
     <div v-if="authStore.isLoading" class="global-loader">
       <span></span>
@@ -14,16 +16,18 @@
           class="w-full h-40 sm:h-48 md:h-40 object-cover rounded-t-3xl"
         />
       </div>
-      <div class="absolute inset-0 bg-black bg-opacity-60 rounded-t-3xl"></div>
+      <div
+        class="absolute inset-0 bg-dark-background bg-opacity-70 rounded-t-3xl"
+      ></div>
     </header>
 
     <!-- Main Content -->
     <section
-      class="flex-grow flex items-center justify-center bg-mainContent py-12 sm:py-10 md:py-16 opacity-0 z-0 text-sm dark:bg-dark-background/60 dark:bg-opacity-90"
+      class="flex-grow flex items-center justify-center bg-mainContent py-12 sm:py-10 md:py-16 opacity-0 z-0 text-sm dark:bg-dark-background/50 dark:bg-opacity-90"
       ref="mainSection"
     >
       <div
-        class="bg-background rounded-3xl shadow-lg p-4 w-full max-w-xs sm:max-w-md md:max-w-md sm:text-base dark:bg-dark-background/70 dark:bg-opacity-90"
+        class="bg-background rounded-3xl shadow-lg p-4 w-full max-w-xs sm:max-w-md md:max-w-md sm:text-base dark:bg-dark-background/70 dark:bg-opacity-90 dark:shadow-inner dark:shadow-background/30"
       >
         <div class="flex flex-col justify-center items-center text-center mb-5">
           <ImageComponent name="saborApp2" size="150" class="sm:size-200" />

@@ -2,10 +2,10 @@
   <div
     class="min-h-screen flex items-center justify-center p-4 bg-cover bgContent relative"
   >
-    <div class="absolute inset-0 bg-dark-background bg-opacity-60 dark:bg-dark-background/40"></div>
+    <div class="absolute inset-0 bg-dark-background bg-opacity-60 dark:bg-dark-background/20"></div>
     <div
       ref="container"
-      class="bg-background/80 rounded-3xl shadow-lg w-full max-w-[700px] z-50 opacity-0 dark:bg-dark-background dark:bg-opacity-90"
+      class="bg-background/70 rounded-3xl shadow-lg w-full max-w-[700px] z-50 opacity-0 dark:bg-dark-background/80 dark:bg-opacity-80 shadow-background/40 dark:shadow-inner dark:shadow-background/30"
     >
       <div class="flex flex-col justify-center items-center text-center">
         <ImageComponent name="saborApp2" size="150" class="sm:size-150" />
