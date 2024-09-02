@@ -29,9 +29,11 @@ export const useAuthStore = defineStore("auth", () => {
   };
 
   const register = async (userData: {
+    full_name: string;
+    contact_phone: string;
     email: string;
     password: string;
-    name: string;
+    role_id: number;
   }) => {
     try {
       isLoading.value = true;
@@ -73,7 +75,7 @@ export const useAuthStore = defineStore("auth", () => {
         }
       } catch (error) {
         console.error("Error parsing stored user data:", error);
-        logout(); 
+        logout();
       }
     } else {
       logout();

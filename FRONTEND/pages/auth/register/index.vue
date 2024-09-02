@@ -2,7 +2,13 @@
   <div
     class="min-h-screen flex items-center justify-center p-4 bg-cover bgContent relative"
   >
-    <div class="absolute inset-0 bg-dark-background bg-opacity-60 dark:bg-dark-background/20"></div>
+    <!-- Loader Global -->
+    <div v-if="authStore.isLoading" class="global-loader">
+      <span></span>
+    </div>
+    <div
+      class="absolute inset-0 bg-dark-background bg-opacity-60 dark:bg-dark-background/20"
+    ></div>
     <div
       ref="container"
       class="bg-background/70 rounded-3xl shadow-lg w-full max-w-[700px] z-50 opacity-0 dark:bg-dark-background/80 dark:bg-opacity-80 shadow-background/40 dark:shadow-inner dark:shadow-background/30"
@@ -14,9 +20,11 @@
           Crea una cuenta en {{ appName }} y disfruta de nuestros servicios.
         </p>
       </div>
-      <form
-        @submit.prevent="registerUser"
+      <Form
+        @submit="handleSubmit"
         class="flex flex-col items-center p-3 sm:mt-5"
+        :validation-schema="schema"
+        v-slot="{ values, errors }"
       >
         <section class="grid grid-cols-1 sm:grid-cols-2 w-full pl-4 pr-4">
           <div class="mb-2">
@@ -35,10 +43,12 @@
               <InputComponent
                 name="full_name"
                 id="full_name"
-                v-model="user.full_name"
+                v-model="values.full_name"
                 placeholder="Nombre"
                 class="w-[full] pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary border-textVariant1 rounded text-sm sm:text-base"
                 required
+                :class="{ 'border-red-500': errors.full_name }"
+                :hasError="!!errors.full_name"
               />
             </div>
           </div>
@@ -58,9 +68,11 @@
               <InputComponent
                 name="contact_phone"
                 id="contact_phone"
-                v-model="user.contact_phone"
+                v-model="values.contact_phone"
                 placeholder="Contacto"
                 class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary border-textVariant1 rounded text-sm sm:text-base"
+                :class="{ 'border-red-500': errors.contact_phone }"
+                :hasError="!!errors.contact_phone"
               />
             </div>
           </div>
@@ -80,11 +92,13 @@
               <InputComponent
                 name="email"
                 id="email"
-                v-model="user.email"
+                v-model="values.email"
                 placeholder="Correo"
                 type="email"
                 class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary border-textVariant1 rounded text-sm sm:text-base"
                 required
+                :class="{ 'border-red-500': errors.email }"
+                :hasError="!!errors.email"
               />
             </div>
           </div>
@@ -104,10 +118,12 @@
               <InputComponent
                 name="password"
                 id="password"
-                v-model="user.password"
+                v-model="values.password"
                 placeholder="Contraseña"
                 type="password"
                 class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary border-textVariant1 rounded text-sm sm:text-base"
+                :class="{ 'border-red-500': errors.password }"
+                :hasError="!!errors.password"
                 required
               />
             </div>
@@ -131,7 +147,7 @@
             Registrarse
           </span>
         </Button>
-      </form>
+      </Form>
       <div
         class="flex justify-center sm:justify-end border-t pt-4 text-sm sm:text-base bg-contentButton p-5 rounded-b-3xl dark:bg-dark-background dark:bg-opacity-90"
       >
@@ -145,33 +161,63 @@
         </Link>
       </div>
     </div>
+    <!-- Alert -->
+    <Alert
+      v-if="showAlert"
+      type="error"
+      title="Error en el registro"
+      :content="alertMessage"
+      iconColor="white"
+      :isVisible="true"
+    />
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import * as yup from "yup";
+import { useAuthStore } from "@/stores/authStore";
 import ImageComponent from "@/components/atoms/ImageByName.vue";
 import InputComponent from "@/components/atoms/InputField.vue";
 import Button from "@/components/atoms/Button.vue";
 import Icon from "@/components/atoms/IconByName.vue";
 import Link from "@/components/atoms/Link.vue";
+import { Form } from "vee-validate";
+import Alert from "@/components/atoms/AlertComponent.vue";
 
 const router = useRouter();
-
 const appName = ref("SaborApp");
+const authStore = useAuthStore();
+const showAlert = ref(false);
+const alertMessage = ref("");
 
-const user = ref({
-  full_name: "",
-  contact_phone: "",
-  email: "",
-  password: "",
+const schema = yup.object({
+  full_name: yup.string().required("El nombre es obligatorio"),
+  contact_phone: yup.string().required("El teléfono es obligatorio"),
+  email: yup
+    .string()
+    .required("El correo electrónico es obligatorio")
+    .email("Debe ser un correo válido"),
+  password: yup.string().required("La contraseña es obligatoria"),
 });
 
-const registerUser = async (e) => {
-  e.preventDefault();
-  console.log(user.value);
-};
+async function handleSubmit(values) {
+  try {
+    showAlert.value = false;
+    await authStore.register({
+      full_name: values.full_name,
+      contact_phone: values.contact_phone,
+      email: values.email,
+      password: values.password,
+      role_id: 4,
+    });
+    router.push("/reservation");
+  } catch (error) {
+    alertMessage.value = error;
+    showAlert.value = true;
+  }
+}
 
 const container = ref(null);
 

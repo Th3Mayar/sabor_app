@@ -9,15 +9,16 @@ interface RegisterResponse {
 }
 
 export const registerUser = async (userData: {
+  full_name: string;
+  contact_phone: string;
   email: string;
   password: string;
-  name: string;
+  role_id: number;
 }): Promise<RegisterResponse> => {
-  const response = await fetch(`${urlAPI}/register`, {
+  const response = await fetch(`${urlAPI}/users`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.VUE_APP_API_KEY}`,
       "x-api-key": `${process.env.VUE_APP_API_KEY}`,
     },
     body: JSON.stringify(userData),

@@ -27,6 +27,7 @@
         'dark:border',
         'dark:border-background/20',
         'dark:placeholder-dark-textVariant1',
+        hasError ? 'border-red-500' : '',
       ]"
     />
     <ErrorMessage :name="name" class="text-red-600 mt-1" />
@@ -42,6 +43,7 @@ interface InputProps {
   label?: string;
   type?: string;
   value?: string | number;
+  hasError?: boolean;
 }
 
 const props = defineProps<InputProps>();
@@ -64,5 +66,13 @@ const model = computed({
 
 .input-field:focus {
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.input-field.border-red-500 {
+  box-shadow: 0px 4px 8px rgba(239, 83, 80, 0.5);
+}
+
+.input-field:focus.border-red-500 {
+  box-shadow: 0px 4px 12px rgba(239, 83, 80, 0.75);
 }
 </style>

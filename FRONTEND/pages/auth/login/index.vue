@@ -55,13 +55,15 @@
                 placeholder="Correo electrónico"
                 class="w-full pl-10 py-2 text-xs sm:text-sm md:text-base"
                 v-model="values.email"
+                :class="{ 'border-red-500': errors.password }"
+                :hasError="!!errors.email"
               />
             </div>
           </div>
           <div class="mb-4">
             <label
               for="password"
-              class="block flex items-center text-xs sm:text-sm md:text-base"
+              class="flex items-center text-xs sm:text-sm md:text-base"
             >
               Contraseña
               <Icon name="Asterisk" size="15" color="red" />
@@ -75,6 +77,8 @@
                 placeholder="Contraseña"
                 class="w-full pl-10 py-2 text-xs sm:text-sm md:text-base"
                 v-model="values.password"
+                :class="{ 'border-red-500': errors.password }"
+                :hasError="!!errors.password"
               />
             </div>
           </div>
@@ -133,7 +137,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { useAuthStore } from "@/stores/authStore"; // Pinia store import
+import { useAuthStore } from "@/stores/authStore";
 import * as yup from "yup";
 import ImageComponent from "@/components/atoms/ImageByName.vue";
 import InputComponent from "@/components/atoms/InputField.vue";
@@ -157,7 +161,7 @@ const authStore = useAuthStore();
 
 async function handleSubmit(values: { email: string; password: string }) {
   try {
-    iconMove.value = true; // Activar animación de ícono
+    iconMove.value = true; // Activate icon animation
     showAlert.value = false;
 
     await authStore.login({ email: values.email, password: values.password });
@@ -165,7 +169,7 @@ async function handleSubmit(values: { email: string; password: string }) {
   } catch (error) {
     alertMessage.value = error as string;
     showAlert.value = true;
-    iconMove.value = false; // Revertir animación de ícono en caso de error
+    iconMove.value = false; // Deactivate icon animation
   }
 }
 

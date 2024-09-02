@@ -2,7 +2,7 @@
   <div
     v-show="isAnimating"
     :class="[
-      'fixed rounded-3xl bottom-[1rem] p-4 right-[1rem] m-4 overflow-hidden',
+      'fixed rounded-3xl bottom-[1rem] p-4 right-[1rem] m-4 overflow-hidden z-50',
       typeClass,
       { 'toast-animation': visible && isAnimating, disappear: !visible },
     ]"
