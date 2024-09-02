@@ -40,7 +40,7 @@ const modelValue = useVModel(props, "modelValue", emits, {
       :placeholder="props.placeholder"
       :class="
         cn(
-          'rounded-[25px] min-h-20 w-full bg-background py-3 focus:shadow-lg px-4 shadow-md border-mainContent outline-none transition-shadow duration-300 placeholder-textVariant1',
+          'rounded-[25px] min-h-20 w-full bg-background py-3 focus:shadow-lg px-4 shadow-md border-mainContent outline-none transition-shadow duration-300 placeholder-textVariant1 dark:bg-dark-background/60 dark:border-dark-bg-background dark:placeholder-dark-textVariant1 dark:border dark:border-background/20',
           props.class
         )
       "

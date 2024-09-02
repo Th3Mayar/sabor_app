@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen flex flex-col p-4 content-alert">
     <!-- Loader Global -->
-    <div v-if="isLoading" class="global-loader">
+    <div v-if="authStore.isLoading" class="global-loader">
       <span></span>
     </div>
 
@@ -129,17 +129,15 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { useLoading } from "@/composables/useLoading";
+import { useAuthStore } from "@/stores/authStore"; // Pinia store import
 import * as yup from "yup";
 import ImageComponent from "@/components/atoms/ImageByName.vue";
 import InputComponent from "@/components/atoms/InputField.vue";
 import Button from "@/components/atoms/Button.vue";
 import Icon from "@/components/atoms/IconByName.vue";
 import Link from "@/components/atoms/Link.vue";
-import { authenticate } from "~/services/auth/authenticate";
 import { Form } from "vee-validate";
 import Alert from "@/components/atoms/AlertComponent.vue";
-import User from "@/types/User";
 
 const schema = yup.object({
   email: yup.string().required("El correo electrónico es obligatorio"),
@@ -151,37 +149,19 @@ const showAlert = ref(false);
 const alertMessage = ref("");
 const headerImage = ref(null);
 const iconMove = ref(false);
-
-const { isLoading, startLoading, stopLoading } = useLoading();
-const isAuthenticated = ref(false);
+const authStore = useAuthStore();
 
 async function handleSubmit(values: { email: string; password: string }) {
-  const user: User = {
-    email: values.email,
-    password: values.password,
-  };
-
   try {
-    iconMove.value = true;
-    startLoading();
+    iconMove.value = true; // Activar animación de ícono
     showAlert.value = false;
 
-    const minLoaderTime = new Promise<void>((resolve) =>
-      setTimeout(resolve, 1000)
-    );
-
-    const [response] = await Promise.all([authenticate(user), minLoaderTime]);
-
-    if (response) {
-      isAuthenticated.value = true;
-      router.push("/reservation");
-    }
+    await authStore.login({ email: values.email, password: values.password });
+    router.push("/reservation");
   } catch (error) {
     alertMessage.value = error as string;
     showAlert.value = true;
-    iconMove.value = false;
-  } finally {
-    stopLoading();
+    iconMove.value = false; // Revertir animación de ícono en caso de error
   }
 }
 

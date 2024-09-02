@@ -19,7 +19,7 @@
         class="flex flex-col items-center p-3 sm:mt-5"
       >
         <section class="grid grid-cols-1 sm:grid-cols-2 w-full pl-4 pr-4">
-          <div class="mb-4">
+          <div class="mb-2">
             <label
               for="full_name"
               class="block text-textVariant2 text-sm sm:text-base"
@@ -42,7 +42,7 @@
               />
             </div>
           </div>
-          <div class="mb-4">
+          <div class="mb-2">
             <label
               for="contact_phone"
               class="block text-textVariant2 text-sm sm:text-base"
@@ -64,7 +64,7 @@
               />
             </div>
           </div>
-          <div class="mb-4">
+          <div class="mb-2">
             <label
               for="email"
               class="block text-textVariant2 text-sm sm:text-base"
@@ -88,7 +88,7 @@
               />
             </div>
           </div>
-          <div class="mb-4">
+          <div class="mb-2">
             <label
               for="password"
               class="block text-textVariant2 text-sm sm:text-base"

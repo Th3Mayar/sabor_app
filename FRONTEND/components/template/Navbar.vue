@@ -4,9 +4,9 @@
     <div
       class="absolute left-4 z-50 cursor-pointer text-dark-background ml-5 top-5 lg:hidden toggle"
       @click="toggleMenu"
-      :isDark="isDark ? 'dark' : 'light'"
+      :class="{ 'text-white': isMenuVisible, 'text-black': !isMenuVisible }"
     >
-      <Icon name="Menu" size="24" class="icon-menu" />
+      <Icon :name="isMenuVisible ? 'X' : 'Menu'" size="24" />
     </div>
 
     <!-- Navigation Menu -->
@@ -77,7 +77,6 @@ import { useMenuVisibility } from "@/composables/useMenuVisibility";
 
 const { isMenuVisible, toggleMenu, closeMenu } = useMenuVisibility();
 const router = useRouter();
-const isDark = ref(false);
 const windowWidth = ref(window.innerWidth);
 
 const handleResize = () => {

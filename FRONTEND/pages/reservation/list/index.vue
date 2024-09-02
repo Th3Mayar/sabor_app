@@ -1,29 +1,32 @@
 <template>
   <div
-    class="bg-contentBackground p-6 rounded-lg shadow-lg h-[max-content]"
+    class="bg-contentBackground dark:bg-dark-contentBackground p-6 rounded-[28px] shadow-lg h-[max-content]"
   >
-    <!-- Título -->
-    <h1 class="text-left font-bold text-2xl mb-5 pl-2 font-poppins">
+    <!-- Title -->
+    <h1
+      class="text-left font-bold text-2xl mb-5 pl-2 font-poppins text-textPrimary dark:text-dark-textPrimary"
+    >
       Mis Reservas
     </h1>
 
-    <section class="">
-      <!-- Table para ver las reservas -->
-      <Table :columns="columns" :rows="rows" />
+    <section>
+      <!-- Table for view reservations -->
+      <ScrollArea class="overflow-x-auto overflow-y-auto rounded-lg">
+        <Table :columns="columns" :rows="rows" />
+      </ScrollArea>
     </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import Table from "@/components/template/Table.vue";
+import ScrollArea from "@/components/ui/scroll-area/ScrollArea.vue";
 import { ref, onMounted } from "vue";
 import { urlAPI } from "~/composables/api/url";
 
-// Definir filas de la tabla
 const columns = ref([]);
 const rows = ref([]);
 
-// Obtener data del backend cuando el componente se monta
 onMounted(async () => {
   try {
     const response = await fetch(`${urlAPI}/reservations`, {
@@ -37,8 +40,6 @@ onMounted(async () => {
 
     if (response.ok) {
       const data = await response.json();
-
-      // Asignar las columnas y las filas recibidas del backend
       columns.value = data.columns;
       rows.value = data.rows;
     } else {

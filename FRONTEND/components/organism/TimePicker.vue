@@ -1,48 +1,40 @@
 <template>
   <div class="flex flex-col">
-    <label :for="props.name" class="block font-semibold mb-2">
+    <label :for="props.name" class="block font-semibold mb-[6px]">
       {{ props.label }}
     </label>
     <div class="relative">
       <div
         @click="toggleDropdown"
-        class="cursor-pointer appearance-none rounded-[25px] bg-background py-3 border-mainContent focus:shadow-lg px-4 shadow-md outline-none transition-shadow duration-300 placeholder-textVariant1 flex items-center"
+        class="cursor-pointer appearance-none rounded-[25px] bg-background py-3 border-mainContent focus:shadow-lg px-4 shadow-md outline-none transition-shadow duration-300 placeholder-textVariant1 flex items-center dark:bg-dark-background/60 dark:border dark:border-background/20"
       >
         <span>{{ selectedTime }}</span>
         <div class="ml-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 text-textVariant1"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              clip-rule="evenodd"
-            />
-          </svg>
+          <Icon
+            class="h-5 text-dark-background dark:text-background"
+            :name="isOpen ? 'ChevronDown' : 'ChevronUp'"
+          />
         </div>
       </div>
 
       <div
         v-if="isOpen"
-        class="absolute z-10 mt-1 w-full bg-white rounded-md shadow-lg"
+        class="absolute z-10 mt-1 w-full bg-background rounded-[28px] shadow-lg dark:bg-dark-skeleton overflow-hidden"
       >
-        <ScrollArea class="h-72 w-full rounded-md border">
+        <ScrollArea class="h-72 w-full rounded-md p-1">
           <div class="p-2">
             <input
               v-model="searchQuery"
               type="text"
               placeholder="Buscar hora..."
-              class="w-full px-3 py-2 border-b border-gray-300 focus:outline-none"
+              class="mb-3 w-full px-3 py-2 border-b border-gray-300 focus:outline-none text-background dark:text-background dark:bg-dark-background/30 rounded-[28px]"
             />
 
-            <!-- Lista de opciones filtradas -->
+            <!-- List by option filter -->
             <div v-for="hour in filteredOptions" :key="hour">
               <div
                 @click="selectTime(hour)"
-                class="cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-buttonPrimary hover:text-white"
+                class="cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-buttonPrimary hover:text-background text-center"
               >
                 {{ hour }}
               </div>
@@ -66,6 +58,7 @@
 import { ref, computed, watch } from "vue";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
+import Icon from "@/components/atoms/IconByName.vue";
 
 const props = defineProps<{
   modelValue?: string | null;

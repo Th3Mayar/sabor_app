@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col lg:flex-row items-start justify-center w-full h-full bg-contentBackground p-4 sm:p-6 md:p-8 lg:p-10 rounded-t-[20px]"
+    class="flex flex-col lg:flex-row items-start justify-center w-full h-full bg-contentBackground dark:bg-dark-contentBackground p-4 sm:p-6 md:p-8 lg:p-10 rounded-t-[20px]"
   >
     <form
       class="flex flex-col w-full lg:w-[50%]"

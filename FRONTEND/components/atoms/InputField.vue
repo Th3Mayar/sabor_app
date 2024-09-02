@@ -23,6 +23,10 @@
         'duration-300',
         'placeholder-textVariant1',
         'focus:shadow-lg',
+        'dark:bg-dark-background/60',
+        'dark:border',
+        'dark:border-background/20',
+        'dark:placeholder-dark-textVariant1',
       ]"
     />
     <ErrorMessage :name="name" class="text-red-600 mt-1" />
@@ -59,6 +63,6 @@ const model = computed({
 }
 
 .input-field:focus {
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); 
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
 }
 </style>

@@ -16,6 +16,7 @@
 </template>
 
 <script setup lang="ts">
+import { emit } from "process";
 import { defineProps, computed } from "vue";
 
 interface SelectProps {

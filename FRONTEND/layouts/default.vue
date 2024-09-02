@@ -4,9 +4,9 @@
     class="flex flex-col lg:flex-row h-screen overflow-hidden navbar"
     v-if="isAuthenticated"
   >
-    <NavBar />
+    <NavBar class="dark:bg-dark-mainContent/50" />
     <main
-      class="relative bg-mainContent flex-1 mt-14 lg:mt-0 p-5 transition-opacity duration-300 ease-in-out"
+      class="relative bg-mainContent dark:bg-dark-mainContent/50 flex-1 mt-14 lg:mt-0 p-5 transition-opacity duration-300 ease-in-out"
     >
       <!-- Overlay -->
       <div

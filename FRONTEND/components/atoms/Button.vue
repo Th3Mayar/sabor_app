@@ -48,17 +48,17 @@ const buttonVariants = {
     orange: "bg-orange text-white hover:bg-orange/90",
     tableActionBg: "bg-tableActionBg text-white hover:bg-tableActionBg/90",
     whiteWithOrange:
-  "bg-background text-buttonPrimary border border-orange hover:bg-tableActionBg/40 hover:text-white hover:border-background transition-all duration-300 ease-in-out",
+      "bg-background text-buttonPrimary border border-orange hover:bg-tableActionBg/40 hover:text-white hover:border-background transition-all duration-300 ease-in-out",
   },
   size: {
     default: "h-10 px-4 py-2",
     sm: "h-9 px-3",
     lg: "h-11 px-8",
     icon: "w-10 h-10 inline-flex items-center justify-center",
-    xl: "h-12 px-10",        
-    xlWide: "h-12 px-16",       
-    full: "h-11 w-full px-4",       
-    wide: "h-11 px-20",             
+    xl: "h-12 px-10",
+    xlWide: "h-12 px-16",
+    full: "h-11 w-full px-4",
+    wide: "h-11 px-20",
   },
 };
 
@@ -68,10 +68,9 @@ const buttonClasses = computed(() => {
 
   return [
     "inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-    "rounded-[30px]", // Corner radius de 30px
+    "rounded-[30px]", 
     variantClass,
     sizeClass,
-    'dark:bg-dark-buttonPrimary dark:text-dark-textPrimary',
   ];
 });
 

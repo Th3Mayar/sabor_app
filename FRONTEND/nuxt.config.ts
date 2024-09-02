@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@vee-validate/nuxt",
     "@nuxtjs/color-mode",
+    "@pinia/nuxt",
   ],
   plugins: [{ src: "~/plugins/darkMode.ts", mode: "client" }],
   veeValidate: {
@@ -32,21 +33,27 @@ export default defineNuxtConfig({
     /**
      * Prefix for all the imported component
      */
-    prefix: '',
+    prefix: "",
     /**
      * Directory that the component lives in.
      * @default "./components/ui"
      */
-    componentDir: './components/ui'
-  }
+    componentDir: "./components/ui",
+  },
   // colorMode: {
-  //   classSuffix: '',
-  //   preference: 'system', // default value of $colorMode.preference
-  //   fallback: 'light', // fallback value if not system preference found
-  //   hid: 'nuxt-color-mode-script',
-  //   globalName: '__NUXT_COLOR_MODE__',
-  //   componentName: 'ColorScheme',
-  //   classPrefix: '',
-  //   storageKey: 'nuxt-color-mode'
-  // }
+  //   classSuffix: "",
+  //   preference: "light", // Default mode
+  //   fallback: "light",
+  //   storageKey: "theme", // Ensure it matches with your darkModeStore
+  // },
+  colorMode: {
+    classSuffix: '',
+    preference: 'system', // default value of $colorMode.preference
+    fallback: 'light', // fallback value if not system preference found
+    hid: 'nuxt-color-mode-script',
+    globalName: '__NUXT_COLOR_MODE__',
+    componentName: 'ColorScheme',
+    classPrefix: '',
+    storageKey: 'nuxt-color-mode'
+  }
 });

@@ -10,27 +10,30 @@ import { Label } from "@/components/ui/label";
 import { ref, watch } from "vue";
 import { cn } from "@/lib/utils";
 
-// Definir props y emitir eventos
+// Define props and emits
 const props = defineProps<{
   name?: string;
   label?: string;
   modelValue?: number;
 }>();
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(["update:modelValue"]);
 
-// Crear una referencia interna para manejar el valor
+// Create reference for internal value
 const internalValue = ref(props.modelValue ?? 0);
 
-// Sincronizar la referencia interna con el prop modelValue
-watch(() => props.modelValue, (newValue) => {
-  internalValue.value = newValue ?? 0;
-});
+// Watch for changes in the model value
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    internalValue.value = newValue ?? 0;
+  }
+);
 
-// Emitir el evento cuando el valor cambia
+// Emit the new value when it changes
 const updateValue = (value: number) => {
   internalValue.value = value;
-  emit('update:modelValue', value);
+  emit("update:modelValue", value);
 };
 </script>
 
@@ -48,9 +51,14 @@ const updateValue = (value: number) => {
       :min="0"
       @valueChange="updateValue"
     >
-      <NumberFieldContent class="w-[280px]">
+      <NumberFieldContent
+        class="w-[280px] dark:bg-dark-background/50 rounded-[25px] dark:border dark:border-background/20 mt-2"
+      >
         <NumberFieldDecrement @click="updateValue(internalValue - 1)" />
-        <NumberFieldInput :value="internalValue" @input="updateValue($event.target.value)" />
+        <NumberFieldInput
+          :value="internalValue"
+          @input="updateValue($event.target.value)"
+        />
         <NumberFieldIncrement @click="updateValue(internalValue + 1)" />
       </NumberFieldContent>
     </NumberField>

@@ -4,16 +4,16 @@
     :class="[
       'fixed rounded-3xl bottom-[1rem] p-4 right-[1rem] m-4 overflow-hidden',
       typeClass,
-      { 'toast-animation': visible && isAnimating, disappear: !visible }
+      { 'toast-animation': visible && isAnimating, disappear: !visible },
     ]"
     role="alert"
   >
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between text-wrap sm:text-xs">
       <div class="flex items-center">
         <Icon :name="iconName" size="40" class="mr-2" />
         <div>
-          <strong>{{ title }}</strong>
-          <p>{{ content }}</p>
+          <strong class="text-sm sm:text-sm md:text-base">{{ title }}</strong>
+          <p class="text-xs sm:text-sm md:text-base">{{ content }}</p>
         </div>
       </div>
       <Button type="button" variant="none" @click="closeAlert">
@@ -91,8 +91,8 @@ const iconName = computed(() => {
 function closeAlert() {
   visible.value = false;
   setTimeout(() => {
-    isAnimating.value = false; 
-  }, 400); 
+    isAnimating.value = false;
+  }, 400);
 }
 
 watch(

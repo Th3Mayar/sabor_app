@@ -25,6 +25,7 @@ export default {
         poppins: ["Poppins", "cursive"],
       },
       colors: {
+        // Light mode colors
         background: "#FFFFFF",
         mainContent: "#F0F4F8", // Light grayish blue
         buttonPrimary: "#EF6C00", // Original vibrant orange
@@ -47,7 +48,7 @@ export default {
         alertWarningEffect: "#F9A825", // Darker yellow
         shadow: "#424242", // Dark gray
         listOption: "#FF9800", // Orange
-        listOptionEffect: "#FEA33B", // Dark gray
+        listOptionEffect: "#FEA33B", // Darker orange
         orderSuccessBg: "#43A047", // Strong green
         tableCellBg: "#E0E0E0", // Light gray
         stateOptionBg: "#388E3C", // Green
@@ -74,6 +75,22 @@ export default {
         "dark-alertInfoBg": "#42A5F5", // Light blue
         "dark-alertWarningBg": "#FFA726", // Light orange
         "dark-shadow": "#000000", // Black
+        "dark-skeleton": "#2A2A2A", // Lighter gray for skeleton loaders in dark mode
+        "dark-listOption": "#FFA726", // Light orange
+        "dark-listOptionEffect": "#FFB74D", // Darker orange
+        "dark-orderSuccessBg": "#43A047", // Green
+        "dark-tableCellBg": "#424242", // Dark gray
+        "dark-stateOptionBg": "#43A047", // Green
+        "dark-tableActionBg": "#455A64", // Blue-gray
+        "dark-buttonVariantSecondary": "#FFEB3B", // Bright yellow
+        "dark-textVariant3": "#303F9F", // Indigo
+        "dark-textVariant4": "#E0E0E0", // Light gray
+        "dark-stateVariant": "#8E24AA", // Purple
+        "dark-buttonVariantTertiary": "#0288D1", // Light blue
+        "dark-contentButton": "#2A2A2A", // Darker gray for buttons in dark mode
+        "dark-mainContent/50": "rgb(103 102 102)", // Darker main content with 50% opacity
+        
+        // Additional color mappings for CSS variables
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -142,8 +159,8 @@ export default {
           "linear-gradient(to right, var(--tw-gradient-stops))",
       },
       boxShadow: {
-        '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
-      }
+        "3xl": "0 35px 60px -15px rgba(0, 0, 0, 0.3)",
+      },
     },
   },
   plugins: [animate],

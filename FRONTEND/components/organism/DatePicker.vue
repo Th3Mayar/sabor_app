@@ -68,7 +68,7 @@ const formattedValue = computed(() => {
         variant="outline"
         :class="
           cn(
-            'rounded-[25px] bg-background w-[280px] py-3 justify-start text-left font-normal gap-2 border-mainContent focus:shadow-lg px-4 shadow-md outline-none transition-shadow duration-300 placeholder-textVariant1 h-12',
+            'rounded-[25px] bg-background w-[280px] py-3 justify-start text-left font-normal gap-2 border-mainContent focus:shadow-lg px-4 shadow-md outline-none transition-shadow duration-300 placeholder-textVariant1 h-12 dark:bg-dark-background/60 dark:border-background/20 dark:placeholder-dark-textVariant1',
             !value && 'text-muted-foreground'
           )
         "
@@ -77,7 +77,9 @@ const formattedValue = computed(() => {
         {{ formattedValue }}
       </Button>
     </PopoverTrigger>
-    <PopoverContent class="w-auto p-0">
+    <PopoverContent
+      class="w-auto p-0 bg-background text-dark-background dark:bg-dark-skeleton dark:text-background rounded-[28px]"
+    >
       <Calendar v-model="value" initial-focus />
     </PopoverContent>
   </Popover>

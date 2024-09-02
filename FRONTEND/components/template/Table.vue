@@ -5,15 +5,17 @@
       :columnCount="columns?.length || 5"
       :rowCount="5"
     />
-    <div v-else class="overflow-x-auto">
-      <table class="min-w-full bg-background rounded-lg shadow-md">
+    <div v-else class="overflow-x-auto overflow-y-auto">
+      <table
+        class="min-w-full bg-background dark:bg-dark-background rounded-lg shadow-md"
+      >
         <thead>
           <tr>
             <th
               v-for="(column, index) in columns"
               :key="column.field"
               :class="[
-                'relative px-6 py-3 bg-buttonSecondary text-left text-xs sm:text-sm font-semibold text-background uppercase tracking-wider first:rounded-tl-2xl cursor-pointer',
+                'relative px-6 py-3 bg-buttonSecondary dark:bg-dark-buttonSecondary text-left text-xs sm:text-sm font-semibold text-background uppercase tracking-wider first:rounded-tl-2xl cursor-pointer',
                 draggedColumnIndex === index ? 'bg-listOptionEffect' : '',
                 selectedColumnIndex === index ? 'bg-buttonPrimary' : '',
               ]"
@@ -39,7 +41,7 @@
               </div>
             </th>
             <th
-              class="px-6 py-3 bg-buttonSecondary text-left text-xs sm:text-sm font-semibold text-background uppercase tracking-wider rounded-tr-lg"
+              class="px-6 py-3 bg-buttonSecondary dark:bg-dark-buttonSecondary text-left text-xs sm:text-sm font-semibold text-background uppercase tracking-wider rounded-tr-lg"
             >
               <div class="flex items-center space-x-2">
                 <Icon name="Pin" size="16" color="white" />
@@ -52,22 +54,21 @@
           <tr
             v-for="(row, rowIndex) in filteredRows"
             :key="rowIndex"
-            class="bg-background border-b border-mainContent hover:bg-textPrimary hover:bg-opacity-10"
+            class="bg-background dark:bg-dark-background border-b border-mainContent dark:border-dark-shadow hover:bg-textPrimary hover:bg-opacity-10 dark:hover:bg-dark-textPrimary dark:hover:bg-opacity-10"
           >
             <td
               v-for="(column, colIndex) in columns"
               :key="column.field"
-              class="px-6 py-4 text-xs sm:text-sm text-textPrimary whitespace-nowrap"
+              class="px-6 py-4 text-xs sm:text-sm text-textPrimary dark:text-dark-textPrimary whitespace-nowrap"
             >
-              <div
-                v-if="column.field === 'status'"
-                :class="getStatusClass(row[column.field])"
-              >
-                {{ row[column.field] }}
+              <div v-if="column.field === 'status'">
+                <Badge :variant="getBadgeVariant(row[column.field])">
+                  {{ row[column.field] }}
+                </Badge>
               </div>
               <div
                 v-else-if="column.field === 'additional_comments'"
-                class="relative"
+                class="relative bg-mainContent dark:bg-dark-contentBackground rounded-[30px] px-4 py-2"
               >
                 <Tooltip>
                   <TooltipTrigger>
@@ -84,12 +85,15 @@
                   </TooltipContent>
                 </Tooltip>
               </div>
-              <div v-else class="bg-mainContent rounded-[30px] px-4 py-2">
+              <div
+                v-else
+                class="bg-mainContent dark:bg-dark-contentBackground rounded-[30px] px-4 py-2"
+              >
                 {{ row[column.field] }}
               </div>
             </td>
             <td
-              class="px-6 py-4 text-xs sm:text-sm text-textPrimary whitespace-nowrap flex justify-center items-center space-x-2"
+              class="px-6 py-4 text-xs sm:text-sm text-textPrimary dark:text-dark-textPrimary whitespace-nowrap flex justify-center items-center space-x-2"
             >
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -99,6 +103,10 @@
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuLabel>Acciones</DropdownMenuLabel>
+                  <DropdownMenuItem @click="deleteRow(row)">
+                    <Icon name="Info" size="16" />
+                    <span class="ml-2">Mas detalle</span>
+                  </DropdownMenuItem>
                   <DropdownMenuItem @click="editRow(row)">
                     <Icon name="Edit3" size="16" />
                     <span class="ml-2">Editar</span>
@@ -151,6 +159,7 @@ import {
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 import FilterModal from "@/components/organism/Modals/FilterModal.vue";
+import Badge from "@/components/ui/badge/Badge.vue";
 
 // State management
 const isLoading = ref(true);
@@ -189,7 +198,7 @@ const openFilterModal = (column) => {
   console.log("Opening filter modal for column:", column);
   selectedColumnHeader.value = column.headerName;
   selectedColumnField.value = column.field;
-  isModalOpen.value = true; 
+  isModalOpen.value = true;
   console.log("isModalOpen set to true:", isModalOpen.value);
 };
 
@@ -244,23 +253,24 @@ onMounted(async () => {
   isLoading.value = false;
 });
 
-const getStatusClass = (status: string) => {
+// Mapping statuses to the corresponding badge variants
+const getBadgeVariant = (status: string) => {
   switch (status) {
     case "Pendiente":
-      return "bg-alertWarningBg text-white px-4 py-2 rounded-[30px] text-center";
+      return "pending";
     case "Atendido":
-      return "bg-buttonSuccess text-white px-4 py-2 rounded-[30px] text-center";
+      return "attended";
     case "Cancelado":
-      return "bg-buttonDanger text-white px-4 py-2 rounded-[30px] text-center";
+      return "canceled";
     case "Activo":
-      return "bg-buttonPrimary text-white px-4 py-2 rounded-[30px] text-center";
+      return "active";
     case "Inactivo":
-      return "bg-buttonSecondary text-white px-4 py-2 rounded-[30px] text-center";
+      return "inactive";
     case "En revision":
     case "En revisión":
-      return "bg-buttonWarning text-white px-4 py-2 rounded-[30px] text-center";
+      return "in_revision";
     default:
-      return "bg-mainContent text-dark-background px-4 py-2 rounded-[30px] text-center";
+      return "default";
   }
 };
 
