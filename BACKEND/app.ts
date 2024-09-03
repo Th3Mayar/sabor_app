@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 app.use("/api", authRoutes);
 
 // Routes protected by authentication
-app.use("/api", authenticateJWT, userRoutes);
+app.use("/api", userRoutes);
 app.use("/api", authenticateJWT, roleRoutes);
 app.use("/api", authenticateJWT, stateRoutes);
 app.use("/api", authenticateJWT, reservationRoutes);

@@ -13,7 +13,14 @@ export async function getAllReservations(
   res: Response
 ): Promise<void> {
   try {
-    const reservations = await findAllReservations();
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const offset = (page - 1) * limit;
+
+    const { reservations, totalCount } = await findAllReservations(
+      limit,
+      offset
+    );
 
     const columns = await getUserColumnOrder(
       Number(req.user ? req.user.id : 0)
@@ -36,7 +43,12 @@ export async function getAllReservations(
       };
     });
 
-    res.status(200).json({ columns, rows });
+    res.status(200).json({
+      columns,
+      rows,
+      totalPages: Math.ceil(totalCount / limit),
+      currentPage: page,
+    });
   } catch (error) {
     res.status(500).json({ message: "Failed to retrieve reservations", error });
   }

@@ -44,6 +44,8 @@ export const useAuthStore = defineStore("auth", () => {
 
       sessionStorage.setItem("authToken", data.token);
       sessionStorage.setItem("user", JSON.stringify(data.user));
+
+      return data.token;
     } catch (error) {
       logout();
       return Promise.reject(error);

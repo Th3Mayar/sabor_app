@@ -205,16 +205,22 @@ const schema = yup.object({
 async function handleSubmit(values) {
   try {
     showAlert.value = false;
-    await authStore.register({
+
+    // Register user and get token
+    const token = await authStore.register({
       full_name: values.full_name,
       contact_phone: values.contact_phone,
       email: values.email,
       password: values.password,
       role_id: 4,
     });
+
+    console.log("Token recibido:", token);
+
+    // Redirect to reservation page
     router.push("/reservation");
   } catch (error) {
-    alertMessage.value = error;
+    alertMessage.value = error.message || "Error en el registro";
     showAlert.value = true;
   }
 }

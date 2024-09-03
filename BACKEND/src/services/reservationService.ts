@@ -7,8 +7,11 @@ import {
   deleteReservation,
 } from "../repositories/reservationRepository.js";
 
-export async function findAllReservations(): Promise<Reservation[]> {
-  return getAllReservations();
+export async function findAllReservations(
+  limit: number,
+  offset: number
+): Promise<{ reservations: Reservation[]; totalCount: number }> {
+  return getAllReservations(limit, offset);
 }
 
 export async function findReservationById(

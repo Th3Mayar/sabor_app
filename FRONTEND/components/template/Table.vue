@@ -126,6 +126,12 @@
         </tbody>
       </table>
     </div>
+    <!-- Pagination -->
+    <Paginator
+      :total-pages="totalPages"
+      :current-page="currentPage"
+      @pageChange="handlePageChange"
+    />
     <!-- Modal for filtering -->
     <FilterModal
       :isModalOpen="isModalOpen"
@@ -160,16 +166,27 @@ import {
 } from "@/components/ui/dropdown-menu";
 import FilterModal from "@/components/organism/Modals/FilterModal.vue";
 import Badge from "@/components/ui/badge/Badge.vue";
+import Paginator from "@/components/organism/Paginator.vue";
 
 // State management
 const isLoading = ref(true);
 const selectedColumnIndex = ref<number | null>(null);
-const activeFilterColumn = ref<string | null>(null);
+// const activeFilterColumn = ref<string | null>(null);
 
 // Modal state
 const isModalOpen = ref(false);
 const selectedColumnHeader = ref("");
 const selectedColumnField = ref("");
+
+// Define pagination state
+const currentPage = ref(1);
+const totalPages = ref(1);
+// const columns = ref<LocalTableColumn[]>([]);
+// const rows = ref<LocalTableRow[]>([]);
+
+// Filter management
+const filters = ref<{ [key: string]: { type: string; value: string } }>({});
+const showFilterIndex = ref<number | null>(null);
 
 // Define props
 const props = defineProps<{
@@ -178,8 +195,6 @@ const props = defineProps<{
 }>();
 
 let draggedColumnIndex = ref<number | null>(null);
-const filters = ref<{ [key: string]: { type: string; value: string } }>({});
-const showFilterIndex = ref<number | null>(null);
 
 const toggleFilter = (index: number) => {
   showFilterIndex.value = showFilterIndex.value === index ? null : index;
@@ -195,11 +210,9 @@ const deselectColumn = () => {
 
 // Open the modal to apply the filter
 const openFilterModal = (column) => {
-  console.log("Opening filter modal for column:", column);
   selectedColumnHeader.value = column.headerName;
   selectedColumnField.value = column.field;
   isModalOpen.value = true;
-  console.log("isModalOpen set to true:", isModalOpen.value);
 };
 
 const closeFilterModal = () => {
@@ -226,7 +239,7 @@ const drop = (index: number) => {
   }
 };
 
-const saveColumnOrder = async (columns, index) => {
+const saveColumnOrder = async (columns, index: number) => {
   try {
     const response = await fetch(`${urlAPI}/column-order`, {
       method: "POST",
@@ -241,14 +254,52 @@ const saveColumnOrder = async (columns, index) => {
       throw new Error("Failed to save column order");
     }
 
-    const data = await response.json();
-    console.log("Column order saved successfully:", data);
   } catch (error) {
     console.error("Error:", error);
   }
 };
 
+async function fetchReservations() {
+  try {
+    isLoading.value = true;
+    const page = currentPage.value;
+    const limit = 10;
+
+    const response = await fetch(
+      `${urlAPI}/reservations?page=${page}&limit=${limit}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": `${process.env.VUE_APP_API_KEY}`,
+          Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
+        },
+      }
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      props.columns.values = data.columns;
+      props.rows.values = data.rows;
+      totalPages.value = data.totalPages || 1;
+      currentPage.value = data.currentPage;
+    } else {
+      console.error("Error en la respuesta del servidor:", response.statusText);
+    }
+  } catch (error) {
+    console.error("Error al obtener las reservas:", error);
+  } finally {
+    isLoading.value = false;
+  }
+}
+
+function handlePageChange(newPage) {
+  currentPage.value = newPage;
+  fetchReservations();
+}
+
 onMounted(async () => {
+  await fetchReservations();
   await new Promise((resolve) => setTimeout(resolve, 2000));
   isLoading.value = false;
 });

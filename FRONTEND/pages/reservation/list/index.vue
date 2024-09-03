@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-contentBackground dark:bg-dark-contentBackground p-6 rounded-[28px] shadow-lg h-[max-content]"
+    class="bg-contentBackground dark:bg-dark-contentBackground p-6 rounded-[28px] shadow-lg h-[max-content] overflow-hidden"
   >
     <!-- Title -->
     <h1
