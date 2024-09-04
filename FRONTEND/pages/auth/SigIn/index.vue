@@ -24,25 +24,32 @@
         </p>
       </div>
       <section class="p-8">
-        <form>
+        <Form
+          @submit="handleSubmit"
+          :validation-schema="schema"
+          v-slot="{ values, errors }"
+        >
           <div class="mb-4">
             <label
               for="username"
               class="block text-textVariant2 dark:text-dark-textPrimary"
-              >Nombre de Usuario</label
+              >Correo Electrónico</label
             >
             <div class="relative">
               <Icon
                 name="User"
                 size="20"
-                color="gray"
                 class="absolute left-3 top-1/2 transform -translate-y-1/2"
               />
               <InputComponent
-                name="username"
-                id="username"
-                placeholder="Nombre de Usuario"
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Correo electrónico"
+                v-model="values.email"
                 class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary dark:focus:ring-dark-buttonPrimary border-textVariant1 dark:border-dark-textPrimary/20 rounded text-textPrimary dark:text-dark-textPrimary"
+                :class="{ 'border-red-500': errors.email }"
+                :hasError="!!errors.email"
               />
             </div>
           </div>
@@ -56,7 +63,6 @@
               <Icon
                 name="Lock"
                 size="20"
-                color="gray"
                 class="absolute left-3 top-1/2 transform -translate-y-1/2"
               />
               <InputComponent
@@ -64,18 +70,34 @@
                 id="password"
                 type="password"
                 placeholder="Contraseña"
+                v-model="values.password"
                 class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary dark:focus:ring-dark-buttonPrimary border-textVariant1 dark:border-dark-textPrimary/20 rounded text-textPrimary dark:text-dark-textPrimary"
+                :class="{ 'border-red-500': errors.password }"
+                :hasError="!!errors.password"
               />
             </div>
           </div>
           <Button
             type="submit"
             variant="default"
-            class="w-full mt-6 bg-buttonVariantTertiary dark:bg-dark-buttonVariantTertiary text-background dark:text-dark-background hover:bg-buttonPrimary dark:hover:bg-dark-buttonPrimary py-2 rounded-lg"
+            size="full"
+            class="max-w-[500px] flex items-center justify-center space-x-2 group relative overflow-hidden"
           >
-            Ingresar
+            <Icon
+              name="LogIn"
+              size="23"
+              color="white"
+              class="transform transition-transform duration-500 ease-in-out mr-4"
+              :class="{
+                'translate-x-full': iconMove,
+                '-translate-x-0': !iconMove,
+              }"
+            />
+            <span class="transition duration-300 ease-in-out ml-8">
+              Ingresar
+            </span>
           </Button>
-        </form>
+        </Form>
       </section>
       <div class="flex justify-end items-end text-sm pr-5">
         <Link
@@ -97,29 +119,61 @@
           class="hover:underline flex items-center gap-2 text-textPrimary dark:text-dark-textPrimary p-2"
         >
           Crea tu cuenta aquí
-          <Icon
-            name="ArrowRight"
-            size="20"
-            color="textPrimary dark:text-dark-textPrimary"
-          />
+          <Icon name="ArrowRight" size="20" />
         </Link>
       </div>
     </div>
+    <!-- Footer -->
+    <Alert
+      v-if="showAlert"
+      type="error"
+      title="Error al iniciar sesión"
+      :content="alertMessage"
+      iconColor="white"
+      :isVisible="true"
+    />
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useRouter } from "vue-router";
 import { ref, onMounted } from "vue";
+import { useAuthStore } from "@/stores/authStore";
+import * as yup from "yup";
 import ImageComponent from "@/components/atoms/ImageByName.vue";
 import InputComponent from "@/components/atoms/InputField.vue";
 import Button from "@/components/atoms/Button.vue";
 import Icon from "@/components/atoms/IconByName.vue";
 import Link from "@/components/atoms/Link.vue";
+import { Form } from "vee-validate";
+import Alert from "@/components/atoms/AlertComponent.vue";
 
 const name = ref("SaborApp");
 const container = ref(null);
 const router = useRouter();
+const showAlert = ref(false);
+const alertMessage = ref("");
+const iconMove = ref(false);
+const authStore = useAuthStore();
+
+const schema = yup.object({
+  email: yup.string().required("El correo electrónico es obligatorio"),
+  password: yup.string().required("La contraseña es obligatoria"),
+});
+
+async function handleSubmit(values: { email: string; password: string }) {
+  try {
+    iconMove.value = true; // Activate icon animation
+    showAlert.value = false;
+
+    await authStore.login({ email: values.email, password: values.password });
+    router.push("/reservation");
+  } catch (error) {
+    alertMessage.value = error as string;
+    showAlert.value = true;
+    iconMove.value = false; // Deactivate icon animation
+  }
+}
 
 onMounted(() => {
   if (container.value) {
@@ -128,7 +182,7 @@ onMounted(() => {
 });
 
 definePageMeta({
-  layout: "authLayout",
+  layout: "auth-layout",
 });
 </script>
 

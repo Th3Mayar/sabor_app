@@ -152,8 +152,8 @@
         class="flex justify-center sm:justify-end border-t pt-4 text-sm sm:text-base bg-contentButton p-5 rounded-b-3xl dark:bg-dark-background dark:bg-opacity-90"
       >
         <Link
-          href="/auth/login"
-          @click="() => router.push('/auth/login')"
+          href="/auth/SigIn"
+          @click="() => router.push('/auth/SigIn')"
           variant="default"
           class="hover:underline flex gap-2 text-textPrimary"
         >
