@@ -263,7 +263,7 @@ async function fetchReservations() {
   try {
     isLoading.value = true;
     const page = currentPage.value;
-    const limit = 10;
+    const limit = 9;
 
     const response = await fetch(
       `${urlAPI}/reservations?page=${page}&limit=${limit}`,
@@ -291,7 +291,7 @@ async function fetchReservations() {
   } finally {
     isLoading.value = false;
   }
-}
+};
 
 function handlePageChange(newPage) {
   currentPage.value = newPage;

@@ -5,7 +5,7 @@
     ref="modalContent"
   >
     <div
-      class="modal-enter bg-background rounded-lg p-6 max-w-lg w-80 shadow-[10px_10px_0px_-1px_rgba(0,0,0,0.5)] shadow-buttonPrimary/50"
+      class="modal-enter bg-background dark:bg-dark-background rounded-lg p-6 max-w-lg w-80 shadow-[10px_10px_0px_-1px_rgba(0,0,0,0.5)] shadow-buttonPrimary/50"
     >
       <h2 class="text-lg font-semibold mb-4">
         Filtrar {{ selectedColumnHeader }}

@@ -42,7 +42,7 @@
                 name="username"
                 id="username"
                 placeholder="Nombre de Usuario"
-                class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary dark:focus:ring-dark-buttonPrimary border-textVariant1 dark:border-dark-textPrimary rounded text-textPrimary dark:text-dark-textPrimary"
+                class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary dark:focus:ring-dark-buttonPrimary border-textVariant1 dark:border-dark-textPrimary/20 rounded text-textPrimary dark:text-dark-textPrimary"
               />
             </div>
           </div>
@@ -64,7 +64,7 @@
                 id="password"
                 type="password"
                 placeholder="Contraseña"
-                class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary dark:focus:ring-dark-buttonPrimary border-textVariant1 dark:border-dark-textPrimary rounded text-textPrimary dark:text-dark-textPrimary"
+                class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary dark:focus:ring-dark-buttonPrimary border-textVariant1 dark:border-dark-textPrimary/20 rounded text-textPrimary dark:text-dark-textPrimary"
               />
             </div>
           </div>

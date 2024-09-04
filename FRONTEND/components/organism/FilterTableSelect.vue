@@ -2,18 +2,18 @@
   <div class="flex items-center gap-2">
     <Select v-model="selectedFilter">
       <SelectTrigger
-        class="flex w-44 cursor-pointer appearance-none rounded-[25px] bg-background py-3 border-mainContent focus:shadow-lg px-4 shadow-md outline-none transition-shadow duration-300 placeholder-textVariant1 items-center"
+        class="flex w-44 cursor-pointer appearance-none rounded-[25px] bg-background py-3 border-mainContent/20 focus:shadow-lg px-4 shadow-md outline-none transition-shadow duration-300 placeholder-textVariant1 items-center"
       >
         <SelectValue :placeholder="placeholder" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent class="rounded-[28px] dark:bg-dark-skeleton">
         <ScrollArea class="w-full rounded-md">
           <SelectGroup>
             <SelectItem
               v-for="option in filterOptions"
               :key="option.value"
               :value="option.value"
-              class="cursor-pointer select-none relative hover:bg-buttonPrimary hover:text-white h-max-content"
+              class="cursor-pointer select-none relative hover:bg-buttonPrimary hover:text-background h-max-content rounded-[28px]"
             >
               {{ option.label }}
             </SelectItem>

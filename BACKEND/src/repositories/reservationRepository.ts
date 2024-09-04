@@ -17,7 +17,7 @@ export async function getAllReservations(
   offset: number
 ): Promise<{ reservations: Reservation[]; totalCount: number }> {
   const countResult = await pool.query("SELECT COUNT(*) FROM reservations");
-  const totalCount = parseInt(countResult.rows[0].count, 10);
+  const totalCount = parseInt(countResult.rows[0].count, 9);
 
   const result = await pool.query<Reservation>(
     "SELECT * FROM reservations ORDER BY creation_date ASC LIMIT $1 OFFSET $2",
