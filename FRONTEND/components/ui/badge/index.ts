@@ -14,12 +14,18 @@ export const badgeVariants = cva(
         destructive:
           "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
         outline: "text-foreground",
-        pending: "bg-alertWarningBg text-white dark:bg-dark-alertWarningBg hover:bg-alertWarningBg/80",
-        attended: "bg-buttonSuccess text-white dark:bg-dark-alertSuccessBg hover:bg-buttonSuccess/80",
-        canceled: "bg-buttonDanger text-white dark:bg-dark-alertErrorBg hover:bg-buttonDanger/80",
-        active: "bg-buttonPrimary text-white dark:bg-dark-buttonPrimary hover:bg-buttonPrimary/80",
-        inactive: "bg-buttonSecondary text-white dark:bg-dark-buttonSecondary hover:bg-buttonSecondary/80",
-        in_revision: "bg-buttonWarning text-white dark:bg-dark-buttonWarning hover:bg-buttonWarning/80",
+        pending:
+          "bg-alertWarningBg text-white dark:bg-dark-alertWarningBg hover:bg-alertWarningBg/80 dark:text-dark-background",
+        attended:
+          "bg-buttonSuccess text-white dark:bg-dark-alertSuccessBg hover:bg-buttonSuccess/80",
+        canceled:
+          "bg-buttonDanger text-white dark:bg-dark-alertErrorBg hover:bg-buttonDanger/80",
+        active:
+          "bg-buttonPrimary text-white dark:bg-dark-buttonPrimary hover:bg-buttonPrimary/80",
+        inactive:
+          "bg-buttonSecondary text-white dark:bg-dark-buttonSecondary hover:bg-buttonSecondary/80",
+        in_revision:
+          "bg-buttonWarning text-white dark:bg-dark-buttonWarning hover:bg-buttonWarning/80",
       },
     },
     defaultVariants: {
