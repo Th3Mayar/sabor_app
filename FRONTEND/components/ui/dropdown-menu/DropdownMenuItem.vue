@@ -25,7 +25,7 @@ const forwardedProps = useForwardProps(delegatedProps);
     v-bind="forwardedProps"
     :class="
       cn(
-        'relative flex cursor-default select-none items-center rounded-[20px] px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-buttonPrimary hover:text-background dropdownMenu',
+        'relative flex cursor-default select-none items-center rounded-[20px] px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hoverCustom hover:text-background dropdownMenu',
         inset && 'pl-8',
         props.class
       )
@@ -34,3 +34,10 @@ const forwardedProps = useForwardProps(delegatedProps);
     <slot />
   </DropdownMenuItem>
 </template>
+
+<style scoop>
+.hoverCustom:hover {
+  background-color: var(--button-primary);
+  color: var(--shadow);
+}
+</style>
