@@ -15,7 +15,7 @@ export const badgeVariants = cva(
           "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
         outline: "text-foreground",
         pending:
-          "bg-alertWarningBg text-white dark:bg-dark-alertWarningBg hover:bg-alertWarningBg/80 dark:text-dark-background",
+          "bg-alertWarningBg text-white dark:bg-dark-alertWarningBg hover:bg-alertWarningBg/80 text-dark-background",
         attended:
           "bg-buttonSuccess text-white dark:bg-dark-alertSuccessBg hover:bg-buttonSuccess/80",
         canceled:
