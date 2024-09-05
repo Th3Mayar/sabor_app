@@ -104,7 +104,7 @@ const navigateTo = (route: string) => {
 
 const logout = () => {
   sessionStorage.removeItem("authToken");
-  router.push("/auth/login");
+  router.push("/auth/SigIn");
 };
 
 // Computed property to check if it's desktop view

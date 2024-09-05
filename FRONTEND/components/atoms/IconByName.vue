@@ -13,16 +13,16 @@ const colorClasses = {
   primary: "text-primary",
   secondary: "text-secondary",
   neutral: "text-neutral-300",
-  white: "text-white",  
+  white: "text-white",
   red: "text-buttonDanger",
 };
 
 interface IconProps {
-  name: string;
+  name: keyof typeof icons;
   size?: number | string;
-  strokeWidth?: number | string;
-  defaultClass?: string;
-  color?: keyof typeof colorClasses;
+  strokeWidth?: number | string; 
+  defaultClass?: string; 
+  color?: keyof typeof colorClasses; 
   className?: string;
 }
 

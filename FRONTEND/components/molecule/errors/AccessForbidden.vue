@@ -29,7 +29,7 @@ const props = defineProps<{
 }>();
 
 const loginPage = () => {
-  router.push("auth/login");
+  router.push("auth/SigIn");
 };
 </script>
 

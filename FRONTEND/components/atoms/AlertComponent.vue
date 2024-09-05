@@ -28,31 +28,20 @@ import { ref, defineProps, computed, watch } from "vue";
 import Icon from "@/components/atoms/IconByName.vue";
 import Button from "@/components/atoms/Button.vue";
 
-const props = defineProps({
-  type: {
-    type: String,
-    default: "info",
-  },
-  title: {
-    type: String,
-    required: true,
-  },
-  content: {
-    type: String,
-    required: true,
-  },
-  iconColor: {
-    type: String,
-    default: "white",
-  },
-  isVisible: {
-    type: Boolean,
-    default: false,
-  },
-  autoHideDuration: {
-    type: Number,
-    default: 3000,
-  },
+interface AlertProps {
+  type?: "success" | "error" | "warning" | "info";
+  title: string;
+  content: string;
+  iconColor?: string;
+  isVisible?: boolean;
+  autoHideDuration?: number | 3000;
+}
+
+const props = withDefaults(defineProps<AlertProps>(), {
+  type: "info",
+  iconColor: "white",
+  isVisible: false,
+  autoHideDuration: 3000,
 });
 
 const visible = ref(false);

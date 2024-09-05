@@ -4,23 +4,24 @@
   </a>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from "vue";
 
-const props = defineProps({
-  href: {
-    type: String,
-    required: true,
-  },
-  variant: {
-    type: String,
-    default: "default", // Default to 'default' variant
-  },
-  external: {
-    type: Boolean,
-    default: false,
-  },
-});
+interface LinkProps {
+  href: string;
+  variant?:
+    | "primary"
+    | "secondary"
+    | "success"
+    | "danger"
+    | "variant"
+    | "variantSecondary"
+    | "variantTertiary"
+    | "default";
+  external?: boolean;
+}
+
+const props = defineProps<LinkProps>();
 
 const computedClass = computed(() => {
   switch (props.variant) {
@@ -45,7 +46,7 @@ const computedClass = computed(() => {
   }
 });
 
-const handleClick = (event) => {
+const handleClick = (event: MouseEvent) => {
   if (props.external) {
     return;
   }

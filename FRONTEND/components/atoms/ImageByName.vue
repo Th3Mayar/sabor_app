@@ -3,10 +3,10 @@ import { defineProps, computed } from "vue";
 import { routes } from "@/public/routeImg";
 
 interface ImageProps {
-  name: string;
+  name: keyof typeof routes.logos | keyof typeof routes.images; 
   size?: number | string;
   strokeWidth?: number | string;
-  className?: string;
+  className?: string; 
 }
 
 const props = defineProps<ImageProps>();
@@ -15,12 +15,10 @@ const imageSrc = computed(() => {
   const imageName = props.name;
   const modifyUrl = "/";
 
-  if (routes.logos[imageName as keyof typeof routes.logos]) {
-    return modifyUrl + routes.logos[imageName as keyof typeof routes.logos];
-  } else if (routes.images[imageName as keyof typeof routes.images]) {
-    return (
-      modifyUrl + routes.images[imageName as keyof typeof routes.images]
-    );
+  if (routes.logos[imageName]) {
+    return modifyUrl + routes.logos[imageName];
+  } else if (routes.images[imageName]) {
+    return modifyUrl + routes.images[imageName];
   } else {
     console.error(`Image not found for name: ${imageName}`);
     return "";

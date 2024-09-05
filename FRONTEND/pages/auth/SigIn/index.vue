@@ -14,20 +14,20 @@
       ref="container"
     >
       <div
-        class="flex flex-col justify-center items-center text-center mb-6 pl-8 pr-8"
+        class="flex flex-col justify-center items-center text-center pl-8 pr-8"
       >
         <ImageComponent name="saborApp2" size="150" />
         <h2
-          class="text-3xl font-bold mt-4 text-textPrimary dark:text-dark-textPrimary"
+          class="text-3xl font-bold text-textPrimary dark:text-dark-textPrimary"
         >
           Iniciar Sesión
         </h2>
         <p class="mt-2 text-textVariant2 dark:text-dark-textPrimary">
-          ¡Ingresa a nuestra ventana de login y déjanos llevarte a un viaje
-          gastronómico inolvidable en Restaurante <b>{{ name }}!</b>
+          ¡Ingresa y déjanos llevarte a un viaje gastronómico inolvidable en
+          Restaurante <b>{{ name }}!</b>
         </p>
       </div>
-      <section class="p-8">
+      <section class="pl-8 pr-8 pt-6">
         <Form
           @submit="handleSubmit"
           :validation-schema="schema"
@@ -51,7 +51,7 @@
                 id="email"
                 placeholder="Correo electrónico"
                 v-model="values.email"
-                class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary dark:focus:ring-dark-buttonPrimary border-textVariant1 dark:border-dark-textPrimary/20 rounded text-textPrimary dark:text-dark-textPrimary"
+                class="w-full pl-10 focus:outline-none focus:ring-2 focus:ring-buttonPrimary dark:focus:ring-dark-buttonPrimary border-textVariant1 dark:border-dark-textPrimary/20 rounded text-textPrimary dark:text-dark-textPrimary"
                 :class="{ 'border-red-500': errors.email }"
                 :hasError="!!errors.email"
               />
@@ -75,7 +75,7 @@
                 type="password"
                 placeholder="Contraseña"
                 v-model="values.password"
-                class="w-full pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-buttonPrimary dark:focus:ring-dark-buttonPrimary border-textVariant1 dark:border-dark-textPrimary/20 rounded text-textPrimary dark:text-dark-textPrimary"
+                class="w-full pl-10 focus:outline-none focus:ring-2 focus:ring-buttonPrimary dark:focus:ring-dark-buttonPrimary border-textVariant1 dark:border-dark-textPrimary/20 rounded text-textPrimary dark:text-dark-textPrimary"
                 :class="{ 'border-red-500': errors.password }"
                 :hasError="!!errors.password"
               />
@@ -85,7 +85,7 @@
             type="submit"
             variant="default"
             size="full"
-            class="max-w-[500px] flex items-center justify-center space-x-2 group relative overflow-hidden"
+            class="max-w-[500px] flex items-center justify-center space-x-2 group relative overflow-hidden mb-4"
           >
             <Icon
               name="LogIn"
@@ -105,16 +105,16 @@
       </section>
       <div class="flex justify-end items-end text-sm pr-5">
         <Link
-          href="/forgot-password"
-          @click="() => router.push('/forgot-password')"
+          href="/auth/forgot-password"
+          @click="() => router.push('/auth/forgot-password')"
           variant="default"
-          class="hover:underline text-textVariant2 dark:text-dark-textPrimary"
+          class="text-textVariant2 dark:text-dark-textPrimary"
         >
           ¿Olvidó su contraseña?
         </Link>
       </div>
       <div
-        class="flex justify-between items-center mt-6 border-t p-3 text-sm bg-contentButton dark:bg-dark-contentBackground rounded-b-3xl"
+        class="flex justify-between items-center mt-4 border-t p-3 text-sm bg-contentButton dark:bg-dark-contentBackground rounded-b-3xl"
       >
         <Link
           href="/auth/register"
