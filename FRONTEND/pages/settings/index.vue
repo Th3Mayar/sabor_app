@@ -1,6 +1,6 @@
 <template>
   <div
-    class="max-w-4xl mx-auto p-6 bg-background dark:bg-dark-background shadow-md rounded-lg transition-all duration-300 ease-in-out"
+    class="max-w-4xl mx-auto p-6 bg-background dark:bg-dark-mainContent shadow-md md:rounded-[28px] transition-all duration-300 ease-in-out h-[100vh]"
   >
     <h1
       class="text-2xl font-bold mb-6 text-textPrimary dark:text-dark-textPrimary"
@@ -49,18 +49,24 @@
           class="w-12 h-12 border rounded-lg p-1 cursor-pointer transition-all duration-300 transform hover:scale-105"
         />
       </div>
+
       <div class="flex items-center">
         <label class="block text-textVariant2 dark:text-dark-textPrimary mr-4">
           Seleccione un tema:
         </label>
-        <select
-          v-model="$colorMode.preference"
-          class="form-select text-textVariant2 dark:text-dark-background"
-        >
-          <option value="system">System</option>
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
-        </select>
+
+        <Select v-model="$colorMode.preference">
+          <SelectTrigger class="w-[130px] border-background/20">
+            <SelectValue placeholder="Seleccione un tema" />
+          </SelectTrigger>
+          <SelectContent
+            class="border border-background/20 rounded-[28px] dark:bg-dark-skeleton p-2"
+          >
+            <SelectItem value="system">Sistema</SelectItem>
+            <SelectItem value="light">Claro</SelectItem>
+            <SelectItem value="dark">Oscuro</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
     </div>
 
@@ -134,6 +140,13 @@ import Button from "@/components/atoms/Button.vue";
 import TagsInput from "@/components/ui/tags-input/TagsInput.vue";
 import Dialog from "@/components/ui/dialog/Dialog.vue";
 import Sonner from "@/components/ui/sonner/Sonner.vue";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 
 // State for theme color
 const themeColor = ref("#4f46e5");

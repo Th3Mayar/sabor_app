@@ -2,6 +2,10 @@
   <div
     class="min-h-screen flex items-center justify-center p-4 bg-cover bgContent relative"
   >
+    <!-- Loader Global -->
+    <div v-if="authStore.isLoading" class="global-loader">
+      <span></span>
+    </div>
     <div
       class="absolute inset-0 bg-dark-background bg-opacity-60 dark:bg-dark-background/20"
     ></div>
