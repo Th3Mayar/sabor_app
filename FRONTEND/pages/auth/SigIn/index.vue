@@ -17,15 +17,23 @@
         class="flex flex-col justify-center items-center text-center pl-8 pr-8"
       >
         <ImageComponent name="saborApp2" size="150" />
-        <h2
-          class="text-3xl font-bold text-textPrimary dark:text-dark-textPrimary"
+        <Typography
+          as="h1"
+          variant="poppins"
+          color="darkBackground"
+          caseType="capital"
+          class="font-semibold mt-4"
+          >Iniciar Sesión</Typography
         >
-          Iniciar Sesión
-        </h2>
-        <p class="mt-2 text-textVariant2 dark:text-dark-textPrimary">
-          ¡Ingresa y déjanos llevarte a un viaje gastronómico inolvidable en
-          Restaurante <b>{{ name }}!</b>
-        </p>
+        <Typography
+          as="p"
+          variant="poppins"
+          color="darkBackground"
+          caseType="capital"
+          class="mt-2 text-textVariant2 dark:text-dark-textPrimary"
+          >¡Ingresa y déjanos llevarte a un viaje gastronómico inolvidable en
+          Restaurante <b>{{ name }}!</b></Typography
+        >
       </div>
       <section class="pl-8 pr-8 pt-6">
         <Form
@@ -37,7 +45,14 @@
             <label
               for="username"
               class="block text-textVariant2 dark:text-dark-textPrimary"
-              >Correo Electrónico</label
+            >
+              <Typography
+                as="h4"
+                variant="poppins"
+                color="darkBackground"
+                caseType="capital"
+                >Correo Electrónico</Typography
+              ></label
             >
             <div class="relative">
               <Icon
@@ -61,7 +76,14 @@
             <label
               for="password"
               class="block text-textVariant2 dark:text-dark-textPrimary"
-              >Contraseña</label
+            >
+              <Typography
+                as="h4"
+                variant="poppins"
+                color="darkBackground"
+                caseType="capital"
+                >Contraseña</Typography
+              ></label
             >
             <div class="relative">
               <Icon
@@ -97,9 +119,14 @@
                 '-translate-x-0': !iconMove,
               }"
             />
-            <span class="transition duration-300 ease-in-out ml-8">
-              Ingresar
-            </span>
+            <Typography
+              as="span"
+              variant="poppins"
+              color="darkBackground"
+              caseType="capital"
+              class="transition duration-300 ease-in-out ml-8 fixColor"
+              >Ingresar</Typography
+            >
           </Button>
         </Form>
       </section>
@@ -151,6 +178,7 @@ import Icon from "@/components/atoms/IconByName.vue";
 import Link from "@/components/atoms/Link.vue";
 import { Form } from "vee-validate";
 import Alert from "@/components/atoms/AlertComponent.vue";
+import Typography from "@/components/atoms/Typography.vue";
 
 const name = ref("SaborApp");
 const container = ref(null);
@@ -198,6 +226,10 @@ definePageMeta({
   background-repeat: no-repeat;
   height: 100vh;
   animation: moveBackground 15s infinite linear;
+}
+
+.fixColor {
+  color: var(--color-textPrimary);
 }
 
 @keyframes moveBackground {

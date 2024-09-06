@@ -11,7 +11,7 @@
 
     <Select v-model="selectedDomain">
       <SelectTrigger
-        class="flex w-44 cursor-pointer appearance-none rounded-[25px] bg-background py-3 border-mainContent focus:shadow-lg px-4 shadow-md outline-none transition-shadow duration-300 placeholder-textVariant1 items-center mt-1 dark:bg-dark-background/60 dark:border-background/20"
+        class="flex w-44 cursor-pointer appearance-none rounded-[25px] bg-background py-3 border-mainContent focus:shadow-lg px-4 shadow-md outline-none transition-shadow duration-300 placeholder-textVariant1 items-center mt-1 dark:bg-dark-background/60 dark:border-background/20 gap-2"
       >
         <SelectValue :placeholder="selectedDomain" />
       </SelectTrigger>

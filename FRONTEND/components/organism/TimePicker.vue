@@ -6,10 +6,10 @@
     <div class="relative">
       <div
         @click="toggleDropdown"
-        class="cursor-pointer appearance-none rounded-[25px] bg-background py-3 border-mainContent focus:shadow-lg px-4 shadow-md outline-none transition-shadow duration-300 placeholder-textVariant1 flex items-center dark:bg-dark-background/60 dark:border dark:border-background/20"
+        class="cursor-pointer appearance-none rounded-[25px] bg-background py-3 border-mainContent focus:shadow-lg px-4 shadow-md outline-none transition-shadow duration-300 placeholder-textVariant1 flex items-center dark:bg-dark-background/60 dark:border dark:border-background/20 gap-2"
       >
         <span>{{ selectedTime }}</span>
-        <div class="ml-4">
+        <div class="ml-auto">
           <Icon
             class="h-5 text-dark-background dark:text-background"
             :name="isOpen ? 'ChevronDown' : 'ChevronUp'"
@@ -31,10 +31,14 @@
             />
 
             <!-- List by option filter -->
-            <div v-for="hour in filteredOptions" :key="hour">
+            <div
+              v-for="hour in filteredOptions"
+              :key="hour"
+              class="justify-center items-center flex flex-col text-center"
+            >
               <div
                 @click="selectTime(hour)"
-                class="cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-buttonPrimary hover:text-background text-center"
+                class="cursor-pointer select-none relative pl-5 pr-5 hover:bg-buttonPrimary hover:text-background text-center rounded-[28px] flex p-2"
               >
                 {{ hour }}
               </div>
@@ -95,19 +99,19 @@ watch(selectedTime, (newValue) => {
   emit("update:modelValue", newValue);
 });
 
-// Función para alternar el estado del dropdown
+// Function to toggle dropdown
 const toggleDropdown = () => {
   isOpen.value = !isOpen.value;
 };
 
-// Función para seleccionar una hora
+// Function to select time
 const selectTime = (hour: string) => {
   selectedTime.value = hour;
   isOpen.value = false;
-  searchQuery.value = ""; // Resetea el buscador al seleccionar
+  searchQuery.value = ""; // Reset search query
 };
 
-// Filtrar opciones basadas en la consulta de búsqueda
+// Filter search query
 const filteredOptions = computed(() => {
   return timeOptions.value.filter((hour) =>
     hour.toLowerCase().includes(searchQuery.value.toLowerCase())

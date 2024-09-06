@@ -15,29 +15,34 @@
     >
       <div class="flex flex-col justify-center items-center text-center">
         <ImageComponent name="saborApp2" size="150" class="sm:size-150" />
-        <Typography as="h5" variant="poppins" color="shadow" caseType="capital"
+        <Typography
+          as="h2"
+          variant="poppins"
+          color="darkBackground"
+          caseType="capital"
+          class="font-bold mt-2 text-2xl sm:text-3xl"
           >Restablecer Contraseña</Typography
         >
       </div>
       <Form
         @submit="handleSubmit"
-        class="flex flex-col items-center p-3"
+        class="flex flex-col items-center p-5"
         :validation-schema="schema"
         v-slot="{ values, errors }"
       >
         <div class="flex flex-col mb-4 w-full p-2">
           <label for="email" class="flex items-center">
             <Typography
-              as="span"
+              as="h4"
               variant="poppins"
-              color="shadow"
+              color="darkBackground"
               caseType="capital"
               >Correo electrónico</Typography
             >
             <Icon name="Asterisk" size="15" color="red" />
           </label>
           <div class="relative flex justify-center items-center">
-            <Icon name="User" size="20" class="absolute left-3" />
+            <Icon name="Mail" size="20" class="absolute left-3" />
             <InputComponent
               type="email"
               name="email"
@@ -65,9 +70,9 @@
           <Typography
             as="p"
             variant="poppins"
-            color="background"
+            color="darkBackground"
             caseType="capital"
-            class="transition duration-300 ease-in-out"
+            class="transition duration-300 ease-in-out fixColor"
             >Restablecer</Typography
           >
         </Button>
@@ -76,7 +81,7 @@
         class="flex justify-center sm:justify-end border-t pt-4 gap-3 bg-contentButton p-5 rounded-b-3xl dark:bg-dark-background dark:bg-opacity-90"
       >
         <Typography
-          as="p"
+          as="h4"
           variant="poppins"
           color="darkBackground"
           caseType="capital"
@@ -86,9 +91,12 @@
           href="/auth/SigIn"
           @click="() => router.push('/auth/SigIn')"
           variant="primary"
-          class="hover:underline flex gap-2"
+          class="underline flex justify-center items-center gap-1 text-buttonPrimary dark:text-dark-buttonPrimary"
         >
-          Sign up now
+          <Typography as="h4" variant="poppins" color="bu" caseType="capital"
+            >Sign up now</Typography
+          >
+          <Icon name="LogIn" size="20" color="buttonPrimary" />
         </Link>
       </div>
     </div>
@@ -144,6 +152,10 @@ definePageMeta({
   background-repeat: no-repeat;
   height: 100vh;
   animation: moveBackground 15s infinite linear;
+}
+
+.fixColor {
+  color: var(--color-textPrimary);
 }
 
 @keyframes moveBackground {

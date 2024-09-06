@@ -15,10 +15,23 @@
     >
       <div class="flex flex-col justify-center items-center text-center">
         <ImageComponent name="saborApp2" size="150" class="sm:size-150" />
-        <h2 class="text-2xl sm:text-3xl font-bold mt-4">Registro</h2>
-        <p class="mt-2 text-sm sm:text-base text-textVariant2">
-          Crea una cuenta en {{ appName }} y disfruta de nuestros servicios.
-        </p>
+        <Typography
+          as="h0"
+          variant="poppins"
+          color="darkBackground"
+          caseType="capital"
+          class="font-bold mt-2 text-2xl sm:text-3xl"
+          >Registro</Typography
+        >
+        <Typography
+          as="p"
+          variant="poppins"
+          color="darkBackground"
+          caseType="capital"
+          class="mt-2 text-textVariant2"
+          >Crea una cuenta en {{ appName }} y disfruta de nuestros
+          servicios.</Typography
+        >
       </div>
       <Form
         @submit="handleSubmit"
@@ -31,7 +44,14 @@
             <label
               for="full_name"
               class="block text-textVariant2 text-sm sm:text-base"
-              >Nombre Completo</label
+            >
+              <Typography
+                as="h4"
+                variant="poppins"
+                color="darkBackground"
+                caseType="capital"
+                >Nombre Completo</Typography
+              ></label
             >
             <div class="relative">
               <Icon
@@ -56,7 +76,14 @@
             <label
               for="contact_phone"
               class="block text-textVariant2 text-sm sm:text-base"
-              >Teléfono de Contacto</label
+            >
+              <Typography
+                as="h4"
+                variant="poppins"
+                color="darkBackground"
+                caseType="capital"
+                >Teléfono de Contacto</Typography
+              ></label
             >
             <div class="relative">
               <Icon
@@ -80,7 +107,13 @@
             <label
               for="email"
               class="block text-textVariant2 text-sm sm:text-base"
-              >Correo Electrónico</label
+              ><Typography
+                as="h4"
+                variant="poppins"
+                color="darkBackground"
+                caseType="capital"
+                >Correo Electrónico</Typography
+              ></label
             >
             <div class="relative">
               <Icon
@@ -106,7 +139,13 @@
             <label
               for="password"
               class="block text-textVariant2 text-sm sm:text-base"
-              >Contraseña</label
+              ><Typography
+                as="h4"
+                variant="poppins"
+                color="darkBackground"
+                caseType="capital"
+                >Contraseña</Typography
+              ></label
             >
             <div class="relative">
               <Icon
@@ -141,11 +180,14 @@
             color="white"
             class="absolute left-3 top-1/2 transform -translate-y-1/2 text-buttonVariantTertiary group-hover:text-background transition duration-300 ease-in-out font-bold"
           />
-          <span
+          <Typography
+            as="h4"
+            variant="poppins"
+            color="buttonPrimary"
+            caseType="capital"
             class="group-hover:text-background transition duration-300 ease-in-out"
+            >Registrarse</Typography
           >
-            Registrarse
-          </span>
         </Button>
       </Form>
       <div
@@ -155,9 +197,10 @@
           href="/auth/SigIn"
           @click="() => router.push('/auth/SigIn')"
           variant="default"
-          class="hover:underline flex gap-2 text-textPrimary"
+          class="flex gap-2 text-textPrimary"
         >
-          ¿Ya tienes una cuenta? Inicia sesión
+          ¿Ya tienes una cuenta?
+          <b>Inicia sesión</b>
         </Link>
       </div>
     </div>

@@ -8,7 +8,7 @@
 import { computed } from "vue";
 
 interface TypographyProps {
-  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "p" | "div" | "span";
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "p" | "div" | "span" | "sm" | "md" | "lg" | "h0";
   variant?: "Arial" | "poppins" | "default";
   color?: keyof typeof colorClasses;
   className?: string;
@@ -22,18 +22,19 @@ const variantClasses = {
 };
 
 const colorClasses = {
-  background: "text-background",
-  mainContent: "text-mainContent",
-  buttonPrimary: "text-buttonPrimary",
-  buttonSecondary: "text-buttonSecondary",
-  dropdownButton: "text-dropdownButton",
-  contentBackground: "text-contentBackground",
-  buttonVariant: "text-buttonVariant",
-  buttonSuccess: "text-buttonSuccess",
-  buttonDanger: "text-buttonDanger",
-  textVariant1: "text-textVariant1",
-  textVariant2: "text-textVariant2",
-  textPrimary: "text-textPrimary",
+  background: "text-background dark:text-dark-background",
+  darkBackground: "text-dark-background dark:text-background",
+  mainContent: "text-mainContent dark:text-dark-mainContent",
+  buttonPrimary: "text-buttonPrimary dark:text-dark-buttonPrimary",
+  buttonSecondary: "text-buttonSecondary dark:text-dark-buttonSecondary",
+  dropdownButton: "text-dropdownButton dark:text-dark-dropdownButton",
+  contentBackground: "text-contentBackground dark:text-dark-contentBackground",
+  buttonVariant: "text-buttonVariant dark:text-dark-textPrimary",
+  buttonSuccess: "text-buttonSuccess dark:text-dark-alertSuccessBg",
+  buttonDanger: "text-buttonDanger dark:text-dark-alertErrorBg",
+  textVariant1: "text-textVariant1 dark:text-dark-alertInfoBg",
+  textVariant2: "text-textVariant2 dark:text-dark-alertWarningBg",
+  textPrimary: "text-textPrimary dark:text-dark-shadow",
   alertSuccessBg: "text-alertSuccessBg",
   alertSuccessEffect: "text-alertSuccessEffect",
   alertErrorBg: "text-alertErrorBg",
@@ -54,30 +55,21 @@ const colorClasses = {
   textVariant4: "text-textVariant4",
   stateVariant: "text-stateVariant",
   buttonVariantTertiary: "text-buttonVariantTertiary",
-
-  darkBackground: "text-dark-background",
-  darkMainContent: "text-dark-mainContent",
-  darkButtonPrimary: "text-dark-buttonPrimary",
-  darkButtonSecondary: "text-dark-buttonSecondary",
-  darkDropdownButton: "text-dark-dropdownButton",
-  darkContentBackground: "text-dark-contentBackground",
-  darkTextPrimary: "text-dark-textPrimary",
-  darkAlertSuccessBg: "text-dark-alertSuccessBg",
-  darkAlertErrorBg: "text-dark-alertErrorBg",
-  darkAlertInfoBg: "text-dark-alertInfoBg",
-  darkAlertWarningBg: "text-dark-alertWarningBg",
-  darkShadow: "text-dark-shadow",
 };
 
 const tagClasses = {
-  h1: "text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl",
-  h2: "text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl",
-  h3: "text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl",
-  h4: "text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl",
-  h5: "text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl",
-  p: "text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl",
-  div: "text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl",
-  span: "text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl",
+  sm: "text-sm",
+  md: "text-2xl",
+  lg: "text-4xl",
+  h0: "text-3xl",
+  h1: "text-2xl",
+  h2: "text-xl",
+  h3: "text-lg",
+  h4: "text-base",
+  h5: "text-sm",
+  p: "text-base",
+  div: "text-xs",
+  span: "text-md",
 };
 
 const caseTypeClasses = {

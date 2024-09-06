@@ -37,7 +37,7 @@
               <Typography
                 as="h6"
                 variant="poppins"
-                color="shadow"
+                color="darkBackground"
                 caseType="capital"
                 class="font-semibold"
                 >Correo Electrónico:</Typography
@@ -90,9 +90,9 @@
           <Typography
             as="h6"
             variant="poppins"
-            color="shadow"
+            color="darkBackground"
             caseType="capital"
-            class="font-semibold"
+            class="font-semibold text-background fixColor"
             >Cancelar Reserva</Typography
           >
         </Button>
@@ -100,9 +100,9 @@
           <Typography
             as="h6"
             variant="poppins"
-            color="shadow"
+            color="darkBackground"
             caseType="capital"
-            class="font-semibold"
+            class="font-semibold fixColor"
             >Enviar Reserva</Typography
           >
         </Button>
@@ -291,3 +291,9 @@ const submitForm = async () => {
   }
 };
 </script>
+
+<style scoop>
+.fixColor {
+  color: var(--color-textPrimary);
+}
+</style>
