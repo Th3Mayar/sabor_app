@@ -2,6 +2,7 @@ import pool from "../config/db.js";
 import jwt from "jsonwebtoken";
 
 export interface User {
+  resetPasswordExpires: number;
   user_id: number;
   full_name: string;
   contact_phone: string | null;
