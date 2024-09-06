@@ -80,7 +80,7 @@ const formattedValue = computed(() => {
     <PopoverContent
       class="w-auto p-0 bg-background text-dark-background dark:bg-dark-skeleton dark:text-background rounded-[28px]"
     >
-      <Calendar :v-model="value" initial-focus />
+      <Calendar v-model="value" initial-focus />
     </PopoverContent>
   </Popover>
 </template>
