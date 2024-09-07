@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
 
 export async function sendResetEmail(email, resetUrl) {
   const transporter = nodemailer.createTransport({
@@ -16,5 +17,11 @@ export async function sendResetEmail(email, resetUrl) {
     html: `<p>You requested a password reset. Click <a href="${resetUrl}">here</a> to reset your password.</p>`,
   };
 
-  return transporter.sendMail(mailOptions);
+  transporter.sendMail(mailOptions, (error: any, info: any) => {
+    if (error) {
+      console.log("Error al enviar el correo:", error);
+    } else {
+      console.log("Correo enviado:", info.response);
+    }
+  });
 }

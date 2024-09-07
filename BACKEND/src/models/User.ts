@@ -5,4 +5,6 @@ export interface User {
   email: string;
   password: string;
   role_id: number | null;
+  resetPasswordExpires: number | null;
+  token?: string | null;
 }

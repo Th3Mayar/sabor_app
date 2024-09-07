@@ -114,6 +114,14 @@ export async function updateUser(
     fields.push(`password = $${index++}`);
     values.push(user.password);
   }
+  if (user.resetPasswordToken) {
+    fields.push(`reset_password_token = $${index++}`);
+    values.push(user.resetPasswordToken);
+  }
+  if (user.resetPasswordExpires !== undefined) {
+    fields.push(`reset_password_expires = $${index++}`);
+    values.push(user.resetPasswordExpires);
+  }
   if (user.role_id !== undefined) {
     fields.push(`role_id = $${index++}`);
     values.push(user.role_id);

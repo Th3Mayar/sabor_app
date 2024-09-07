@@ -135,14 +135,14 @@ export async function requestPasswordReset(
 
     const token = crypto.randomBytes(32).toString("hex");
     const resetPasswordToken = token;
-    const resetPasswordExpires = Date.now() + 3600000; // 1 hora
+    const resetPasswordExpires = new Date(Date.now() + 3600000);
 
     await modifyUser(user.user_id, {
-      resetPasswordToken,
+      resetPasswordToken: token,
       resetPasswordExpires,
     });
 
-    const resetUrl = `http://frontend-url/reset-password/${token}`;
+    const resetUrl = `http://localhost:3000/auth/reset-password/${token}`;
     await sendResetEmail(user.email, resetUrl);
 
     res.status(200).json({ message: "Password reset link sent to email" });

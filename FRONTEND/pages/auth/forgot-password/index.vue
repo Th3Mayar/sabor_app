@@ -133,6 +133,27 @@ const showAlert = ref(false);
 const alertMessage = ref("");
 const container = ref(null);
 
+const schema = yup.object({
+  email: yup
+    .string()
+    .email("Debe ser un correo válido")
+    .required("Correo es requerido"),
+});
+
+const handleSubmit = async (values) => {
+  try {
+    showAlert.value = false;
+
+    await authStore.requestPasswordResetAction(values.email);
+    alertMessage.value =
+      "Se ha enviado un enlace de restablecimiento a tu correo";
+    showAlert.value = true;
+  } catch (error) {
+    alertMessage.value = "Error al enviar el correo de restablecimiento";
+    showAlert.value = true;
+  }
+};
+
 onMounted(() => {
   if (container.value) {
     container.value.classList.add("fade-in-slide-down");

@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { authenticate } from "@/services/auth/authenticate";
 import { registerUser } from "@/services/auth/register";
+import { requestPasswordReset } from "@/services/auth/resetPassword";
 import User from "@/types/User";
 
 export const useAuthStore = defineStore("auth", () => {
@@ -84,6 +85,17 @@ export const useAuthStore = defineStore("auth", () => {
     }
   };
 
+  const requestPasswordResetAction = async (email: string) => {
+    try {
+      isLoading.value = true;
+      await requestPasswordReset(email);
+    } catch (error) {
+      return Promise.reject(error);
+    } finally {
+      isLoading.value = false;
+    }
+  };
+
   return {
     isAuthenticated,
     user,
@@ -93,5 +105,6 @@ export const useAuthStore = defineStore("auth", () => {
     register,
     logout,
     checkAuth,
+    requestPasswordResetAction,
   };
 });
