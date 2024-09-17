@@ -104,7 +104,7 @@
     <Alert
       v-if="showAlert"
       type="error"
-      title="Error en el registro"
+      title="Error al restablecer contraseña"
       :content="alertMessage"
       iconColor="white"
       :isVisible="true"

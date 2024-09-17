@@ -22,7 +22,6 @@
         </button>
       </Form>
 
-      <!-- Mostrar alerta si hay un error -->
       <p v-if="error" class="text-red-500 mt-4">{{ error }}</p>
     </div>
   </div>
