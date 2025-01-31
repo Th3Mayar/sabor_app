@@ -1,5 +1,3 @@
-Aquí tienes un ejemplo de `README.md` para tu proyecto **saborApp**:
-
 # saborApp
 
 **saborApp** es una aplicación de reservas de restaurantes construida como un monorepo que contiene tanto el frontend como el backend. El frontend está desarrollado con Nuxt 3, Vue.js, y Tailwind CSS, mientras que el backend está construido con Node.js, Express y PostgreSQL.
