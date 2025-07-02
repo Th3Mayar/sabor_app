@@ -33,7 +33,7 @@ export const config = {
   useRemoteDb: process.env.USE_REMOTE_DB === "true",
 };
 
-console.log(config);
+console.log("db config ", config);
 
 const { Pool } = pkg;
 

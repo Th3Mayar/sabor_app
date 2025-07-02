@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import * as authService from "../services/authService.js";
-import * as userRepository from "../repositories/userRepository.js";
+import * as authService from "../services/index.js";
+import * as userRepository from "../repositories/index.js";
 
 export const loginUser = async (req: Request, res: Response) => {
   try {
@@ -46,6 +46,7 @@ export const registerUser = async (req: Request, res: Response) => {
       email,
       password: hashedPassword,
       role_id,
+      resetPasswordExpires: 0
     });
 
     res.status(201).json(newUser);

@@ -1,0 +1,12 @@
+export { default as authRoutes } from './authRoutes';
+export { default as availabilityRoutes } from './availabilityRoutes';
+export { default as categoryRoutes } from './categoryRoutes';
+export { default as companyRoutes } from './companyRoutes';
+export { default as configurationRoutes } from './configurationRoutes';
+export { default as dishRoutes } from './dishRoutes';
+export { default as menuRoutes } from './menuRoutes';
+export { default as reservationRoutes } from './reservationRoutes';
+export { default as reservationScheduleRoutes } from './reservationScheduleRoutes';
+export { default as roleRoutes } from './roleRoutes';
+export { default as stateRoutes } from './stateRoutes';
+export { default as userRoutes } from './userRoutes';

@@ -4,12 +4,13 @@ export default defineNuxtRouteMiddleware((to, from) => {
   if (process.client) {
     const token = sessionStorage.getItem('authToken')
 
-    if (!token && to.path !== '/auth/login') {
-      return navigateTo('/error')
-    }
+    // if (!token && to.path !== '/auth/login') {
+    //   // return navigateTo('/error')
+    // }
 
     if (token && to.path === '/auth/login') {
       return navigateTo('/reservation')
     }
+    return navigateTo('/reservation')
   }
 })

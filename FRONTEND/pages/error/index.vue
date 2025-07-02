@@ -9,7 +9,7 @@
 <script setup>
 import AccessForbidden from "@/components/molecule/errors/AccessForbidden.vue";
 
-definePageMeta({
-  layout: "auth-layout",
-});
+// definePageMeta({
+//   layout: "auth-layout",
+// });
 </script>

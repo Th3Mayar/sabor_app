@@ -2,7 +2,6 @@
   <div
     :class="{ 'overlay-active': isMenuVisible }"
     class="flex flex-col lg:flex-row h-screen overflow-hidden navbar dark:bg-dark-mainContent/30"
-    v-if="isAuthenticated"
   >
     <NavBar class="dark:bg-dark-mainContent/50" />
     <main
@@ -34,12 +33,12 @@ const { isAuthenticated } = useAuth();
 const { isMenuVisible } = useMenuVisibility();
 const router = useRouter();
 
-onMounted(() => {
-  if (!isAuthenticated.value) {
-    console.log("User is not authenticated");
-    router.push("/error");
-  }
-});
+// onMounted(() => {
+//   if (!isAuthenticated.value) {
+//     console.log("User is not authenticated");
+//     router.push("/error");
+//   }
+// });
 </script>
 
 <style scoped>

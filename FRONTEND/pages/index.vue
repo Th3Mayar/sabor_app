@@ -77,12 +77,12 @@ country.value = "Colombia";
 name.value = "SaborApp";
 
 const reservation = () => {
-  if (!validationToken.value) return router.push("/auth/register");
+  // if (!validationToken.value) return router.push("/auth/register");
   router.push("/reservation");
 };
 
 const viewletter = () => {
-  if (!validationToken.value) return router.push("/auth/register");
+  // if (!validationToken.value) return router.push("/auth/register");
   router.push("/letter");
 };
 

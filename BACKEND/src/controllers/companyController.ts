@@ -5,7 +5,7 @@ import {
   addCompany,
   modifyCompany,
   removeCompany,
-} from "../services/companyService.js";
+} from "../services/index.js";
 
 export async function getAllCompanies(
   req: Request,
