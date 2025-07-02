@@ -46,7 +46,7 @@ export const registerUser = async (req: Request, res: Response) => {
       email,
       password: hashedPassword,
       role_id,
-      resetPasswordExpires: 0
+      resetPasswordExpires: null
     });
 
     res.status(201).json(newUser);
