@@ -10,14 +10,5 @@
     "outDir": "./dist"
   },
   "include": ["**/*.ts"],
-  "files": [
-    "src/config/db.ts",
-    "src/controllers/index.ts",
-    "src/middlewares/index.ts",
-    "src/models/index.ts",
-    "src/repositories/index.ts",
-    "src/routes/index.ts",
-    "src/services/index.ts",
-  ],
   "exclude": [".dist", "node_modules"]
 }
