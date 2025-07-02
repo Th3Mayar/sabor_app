@@ -9,5 +9,3 @@ export interface User {
   resetPasswordToken?: string | null;
   token?: string | null;
 }
-
-export type userPasswordReset = Omit<User, "user_id">;

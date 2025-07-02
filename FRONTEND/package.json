@@ -13,7 +13,6 @@
   "dependencies": {
     "@nuxt/image": "^1.7.0",
     "@pinia/nuxt": "^0.5.3",
-    "@types/nodemailer": "^6.4.17",
     "@vee-validate/nuxt": "^4.13.2",
     "@vee-validate/zod": "^4.13.2",
     "@vueuse/core": "^11.0.3",
@@ -22,7 +21,6 @@
     "clsx": "^2.1.1",
     "install": "^0.13.0",
     "lucide-vue-next": "^0.428.0",
-    "nodemailer": "^7.0.4",
     "nuxt": "^3.12.4",
     "pinia": "^2.2.2",
     "radix-vue": "^1.9.4",
