@@ -190,7 +190,9 @@ const progress = computed(() => {
   return (completedSections / 7) * 100;
 });
 
-const updateProgress = () => {};
+const updateProgress = () => {
+  console.log(`Form progress: ${progress.value}%`);
+};
 const cancelReservation = () => {};
 
 const incrementPeopleCount = () => {
