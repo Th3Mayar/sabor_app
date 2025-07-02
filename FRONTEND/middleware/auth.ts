@@ -11,6 +11,10 @@ export default defineNuxtRouteMiddleware((to, from) => {
     if (token && to.path === '/auth/login') {
       return navigateTo('/reservation')
     }
-    return navigateTo('/reservation')
+    if (!token && to.path !== '/auth/login') {
+      return navigateTo('/error')
+    }
+    // Allow navigation to other routes if no conditions are met
+    return
   }
 })
