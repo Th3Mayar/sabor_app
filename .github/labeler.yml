@@ -1,0 +1,56 @@
+# Frontend related files
+# Triggers when modifying JavaScript, TypeScript, Vue or frontend PHP files
+frontend:
+  - "**/*.vue"
+  - "FRONTEND/**/*.ts"
+  - "FRONTEND/**/*.js"
+
+# Style related files
+# Triggers when modifying any styling files (CSS, SCSS, LESS)
+style:
+  - "**/*.css"
+  - "**/*.scss"
+  - "**/*.less"
+
+# Backend related files
+# Triggers when modifying PHP application files, routes or tests
+backend:
+  - "BACKEND/**/*.ts"
+
+# Documentation related files
+# Triggers when modifying any documentation files
+documentation:
+  - "docs/**/*"
+  - "phpDoc/**/*"
+  - "**/*.md"
+
+# Tests related files
+# Triggers when modifying any test files
+test:
+  - ".env.testing"
+  - "phpunit.xml"
+  - "jest.config.js"
+  - "tests/**/*"
+  - "**/*.test.{js,ts}"
+  - "**/*.spec.{js,ts}"
+
+# CI/CD Configuration files
+# Triggers when modifying any configuration, environment or Docker related files
+ci-cd:
+  - ".github/workflows/**"
+  - "package.json"
+  - "**/*.example"
+  - ".env.example"
+  - "**/*.yml"
+  - "**/*.yaml"
+
+# NPM Dependencies
+# Triggers when files that require 'npm install' are modified
+deps-npm:
+  - "package.json"
+
+# NPM Build
+# Triggers when files that require 'npm run build' are modified
+build-npm:
+  - "tsconfig.json"
+  - "**/*.vue"
