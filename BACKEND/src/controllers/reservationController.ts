@@ -5,8 +5,8 @@ import {
   addReservation,
   modifyReservation,
   removeReservation,
-} from "../services/reservationService.js";
-import { getUserColumnOrder } from "../repositories/columnOrderRepository.js";
+} from "../services/index.js";
+import { getUserColumnOrder } from "../repositories/index.js";
 
 export async function getAllReservations(
   req: Request,

@@ -66,11 +66,6 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import FilterTableSelect from "@/components/organism/FilterTableSelect.vue"; // Adjust the import path as necessary
-import Button from "@/components/atoms/Button.vue";
-import InputComponent from "@/components/atoms/InputField.vue";
-import Icon from "@/components/atoms/IconByName.vue";
-import Modal from "@/components/organism/Modal.vue";
 
 const props = defineProps({
   isModalOpen: Boolean,

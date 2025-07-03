@@ -5,7 +5,7 @@ import {
   addConfiguration,
   modifyConfiguration,
   removeConfiguration,
-} from "../services/configurationService.js";
+} from "../services/index.js";
 
 export async function getAllConfigurations(
   req: Request,

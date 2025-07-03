@@ -2,7 +2,7 @@
   <div
     class="flex flex-col lg:flex-row items-start justify-center w-full h-full bg-contentBackground dark:bg-dark-contentBackground p-4 sm:p-6 md:p-8 lg:p-10 md:rounded-[28px]"
   >
-    <form
+    <Form
       class="flex flex-col w-full lg:w-[50%]"
       @input="updateProgress"
       @submit.prevent="submitForm"
@@ -150,6 +150,8 @@ import { useForm } from "vee-validate";
 import * as Yup from "yup";
 import { urlAPI } from "~/composables/api/url";
 
+const currentDate = new Date();
+
 // State for management form
 const form = ref({
   fullName: "",
@@ -164,8 +166,6 @@ const form = ref({
 const showAlert = ref(false);
 const alertMessage = ref("");
 const isSubmitting = ref(false); // State for management request
-
-const currentDate = new Date();
 
 const dateSelected = computed(() => {
   const selectedDate = form.value.reservationDate
@@ -190,8 +190,9 @@ const progress = computed(() => {
   return (completedSections / 7) * 100;
 });
 
-const updateProgress = () => {};
-
+const updateProgress = () => {
+  console.log(`Form progress: ${progress.value}%`);
+};
 const cancelReservation = () => {};
 
 const incrementPeopleCount = () => {

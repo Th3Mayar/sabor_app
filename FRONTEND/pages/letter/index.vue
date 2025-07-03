@@ -67,6 +67,6 @@ const categoriesData = [
 ];
 
 definePageMeta({
-  middleware: "auth",
+  // middleware: "auth",
 });
 </script>

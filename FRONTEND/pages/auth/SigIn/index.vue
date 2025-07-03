@@ -213,9 +213,9 @@ onMounted(() => {
   }
 });
 
-definePageMeta({
-  layout: "auth-layout",
-});
+// definePageMeta({
+//   layout: "auth-layout",
+// });
 </script>
 
 <style scoped>

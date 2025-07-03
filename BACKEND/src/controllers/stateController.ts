@@ -5,7 +5,7 @@ import {
   addState,
   modifyState,
   removeState,
-} from "../services/stateService.js";
+} from "../services/index.js";
 
 export async function getAllStates(req: Request, res: Response): Promise<void> {
   try {

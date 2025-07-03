@@ -181,10 +181,10 @@ onMounted(() => {
   }
 });
 
-definePageMeta({
-  layout: "auth-layout",
-  middleware: "auth",
-});
+// definePageMeta({
+//   layout: "auth-layout",
+//   middleware: "auth",
+// });
 </script>
 
 <style scoped>

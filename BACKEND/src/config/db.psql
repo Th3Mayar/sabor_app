@@ -1,0 +1,100 @@
+CREATE TABLE availability (
+    availability_id SERIAL PRIMARY KEY,
+    date DATE NOT NULL,
+    time VARCHAR(10) NOT NULL,
+    table_count INTEGER NOT NULL
+);
+
+CREATE TABLE company (
+    company_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    address TEXT NOT NULL,
+    tax_id VARCHAR(50) NOT NULL,
+    phone VARCHAR(20),
+    email VARCHAR(255),
+    website VARCHAR(255),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE configuration (
+    config_id SERIAL PRIMARY KEY,
+    key VARCHAR(255) NOT NULL,
+    value JSONB NOT NULL
+);
+
+CREATE TABLE dishes (
+    dish_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    image TEXT,
+    price NUMERIC(10, 2) NOT NULL,
+    section VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE states (
+    state_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    description TEXT
+);
+
+CREATE TABLE menus (
+    menu_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    image TEXT NOT NULL,
+    state_id INTEGER REFERENCES states(state_id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE menu_dishes (
+    menu_dish_id SERIAL PRIMARY KEY,
+    menu_id INTEGER NOT NULL REFERENCES menus(menu_id) ON DELETE CASCADE,
+    dish_id INTEGER NOT NULL REFERENCES dishes(dish_id),
+    price NUMERIC(10, 2) NOT NULL
+);
+
+CREATE TABLE roles (
+    role_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    contact_phone VARCHAR(20),
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password TEXT NOT NULL,
+    role_id INTEGER REFERENCES roles(role_id),
+    resetPasswordExpires BIGINT,
+    resetPasswordToken TEXT,
+    token TEXT
+);
+
+CREATE TABLE reservation_schedules (
+    schedule_id SERIAL PRIMARY KEY,
+    date DATE NOT NULL,
+    time VARCHAR(10) NOT NULL,
+    table_count INTEGER NOT NULL
+);
+
+CREATE TABLE reservations (
+    reservation_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(user_id),
+    reservation_details JSONB NOT NULL,
+    state_id INTEGER NOT NULL REFERENCES states(state_id),
+    creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE reservation_dishes (
+    id SERIAL PRIMARY KEY,
+    reservation_id INTEGER REFERENCES reservations(reservation_id) ON DELETE CASCADE,
+    dish_id INTEGER REFERENCES dishes(dish_id),
+    quantity INTEGER NOT NULL
+);
+
+CREATE TABLE user_column_order (
+    user_id INTEGER PRIMARY KEY REFERENCES users(user_id) ON DELETE CASCADE,
+    column_order JSONB
+);

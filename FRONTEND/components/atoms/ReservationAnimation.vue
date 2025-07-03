@@ -6,7 +6,7 @@
       class="bg-background rounded-2xl p-6 sm:p-8 shadow-lg w-full max-w-md sm:max-w-xl relative dark:bg-dark-background/30"
     >
       <div class="absolute top-4 right-4">
-        <ImageComponent name="saborApp2" size="50" class="sm:size-70" />
+        <ImageComponent name="default-image" size="50" class="sm:size-70" />
       </div>
       <h1
         class="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-5 text-buttonPrimary"

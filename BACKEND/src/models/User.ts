@@ -6,5 +6,6 @@ export interface User {
   password: string;
   role_id: number | null;
   resetPasswordExpires: number | null;
+  resetPasswordToken?: string | null;
   token?: string | null;
 }

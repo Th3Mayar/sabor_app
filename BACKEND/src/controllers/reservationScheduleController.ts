@@ -5,7 +5,7 @@ import {
   addReservationSchedule,
   modifyReservationSchedule,
   removeReservationSchedule,
-} from "../services/reservationScheduleService.js";
+} from "../services/index.js";
 
 export async function getAllReservationSchedules(
   req: Request,

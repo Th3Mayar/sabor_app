@@ -5,7 +5,7 @@ import {
   addDish,
   modifyDish,
   removeDish,
-} from "../services/dishService.js";
+} from "../services/index.js";
 
 export async function getAllDishes(req: Request, res: Response): Promise<void> {
   try {

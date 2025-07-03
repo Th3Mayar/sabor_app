@@ -7,7 +7,7 @@ import {
   removeUser,
   findUserByEmail,
   findUserByResetToken,
-} from "../services/userService.js";
+} from "../services/index.js";
 
 import crypto from "crypto";
 import bcrypt from "bcrypt";
@@ -134,11 +134,11 @@ export async function requestPasswordReset(
     }
 
     const token = crypto.randomBytes(32).toString("hex");
-    const resetPasswordToken = token;
-    const resetPasswordExpires = new Date(Date.now() + 3600000);
+    const resetPasswordToken = token as string;
+    const resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
     await modifyUser(user.user_id, {
-      resetPasswordToken: token,
+      resetPasswordToken,
       resetPasswordExpires,
     });
 

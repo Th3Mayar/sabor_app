@@ -1,4 +1,4 @@
-interface ReservationDetails {
+export interface ReservationDetails {
   date: string; 
   time: string; 
   table_number: number;
